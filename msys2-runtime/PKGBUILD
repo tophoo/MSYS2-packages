@@ -4,7 +4,7 @@
 pkgbase=msys2-runtime
 pkgname=('msys2-runtime' 'msys2-runtime-devel')
 pkgver=3.0.1
-pkgrel=1
+pkgrel=2
 pkgdesc="Cygwin POSIX emulation engine"
 arch=('i686' 'x86_64')
 url="https://www.cygwin.com/"
@@ -75,7 +75,8 @@ source=('msys2-runtime'::git://sourceware.org/git/newlib-cygwin.git#tag=cygwin-$
         0049-Handle-ORIGINAL_PATH-just-like-PATH.patch
         0050-Fix-incorrect-path-conversion-trailing-slash.patch
         0051-Add-a-helper-to-obtain-a-function-s-address-in-kerne.patch
-        0052-srandomdev-avoid-warning-about-uninitialized-use.patch)
+        0052-srandomdev-avoid-warning-about-uninitialized-use.patch
+        0053-fixup-Add-functionality-for-changing-OS-name-via-MSY.patch)
 sha256sums=('SKIP'
             '8ed011ffc9f8d6179603a681756af4461d081543bf4d2707846a41807d99469e'
             'cd6ab779b18367432b3a1ea3155ff0dd6276a9b4f78e6de70c0f6dbd60f8b33e'
@@ -128,7 +129,8 @@ sha256sums=('SKIP'
             '5cebd750fde3b09e53fd3066f37a689341a340e1ae30699e7c3ebaded5b39eaa'
             'bbf3f4a80ed2bd5dfee63bdb09b4b2c653d47d8fe90f6a64024a052145fd3573'
             '45134f530796b98b62a0e6ac8d3e0ba7408021cf0428e360cac4a86990f36655'
-            'f3661ad1e11275f28cab7fa29633b2441c5d4068e0c778a26b226cbcf35752b1')
+            'f3661ad1e11275f28cab7fa29633b2441c5d4068e0c778a26b226cbcf35752b1'
+            '52968280ee8a3ce93b95631b8eb7f310be694d812a60f25e4b27b696d98586b5')
 
 # Helper macro to help make tasks easier #
 del_file_exists() {
@@ -196,6 +198,7 @@ prepare() {
   git am --committer-date-is-author-date "${srcdir}"/0050-Fix-incorrect-path-conversion-trailing-slash.patch
   git am --committer-date-is-author-date "${srcdir}"/0051-Add-a-helper-to-obtain-a-function-s-address-in-kerne.patch
   git am --committer-date-is-author-date "${srcdir}"/0052-srandomdev-avoid-warning-about-uninitialized-use.patch
+  git am --committer-date-is-author-date "${srcdir}"/0053-fixup-Add-functionality-for-changing-OS-name-via-MSY.patch
 }
 
 build() {
