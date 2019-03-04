@@ -1,0 +1,15 @@
+diff --git a/configure.ac b/configure.ac
+index 2a8372f..daefbc1 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -641,6 +641,10 @@ use_ldapwrapper=yes
+ mmap_needed=yes
+ require_pipe_to_unblock_pselect=yes
+ case "${host}" in
++    *-msys*)
++        AC_DEFINE(HAVE_DRIVE_LETTERS,1,
++                  [Defined if the OS supports drive letters.])
++        ;;
+     *-mingw32*)
+         # special stuff for Windoze NT
+         ac_cv_have_dev_random=no
