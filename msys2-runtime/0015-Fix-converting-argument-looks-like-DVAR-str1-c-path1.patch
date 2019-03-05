@@ -1,4 +1,4 @@
-From e94cbfec4c84d3ecd41d151e3c4f9a9b99faae6f Mon Sep 17 00:00:00 2001
+From fb30fe4730ff9fd0e210e1a817ce7b4dbb86bd57 Mon Sep 17 00:00:00 2001
 From: Alexpux <alexey.pawlow@gmail.com>
 Date: Fri, 20 Mar 2015 14:09:29 +0300
 Subject: [PATCH 15/N] Fix converting argument looks like

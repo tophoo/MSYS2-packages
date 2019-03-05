@@ -1,4 +1,4 @@
-From b3b5aa029c2d0eeaa37a5b8328934b933a97339d Mon Sep 17 00:00:00 2001
+From 6fe420184df3797c6e9efca0a5ae4e2f622e8612 Mon Sep 17 00:00:00 2001
 From: Alexpux <alexey.pawlow@gmail.com>
 Date: Thu, 12 Mar 2015 13:58:27 +0300
 Subject: [PATCH 03/N] Add functionality for converting UNIX paths in

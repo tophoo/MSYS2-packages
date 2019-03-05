@@ -1,4 +1,4 @@
-From 09fe40a2e04a884cd504070af75ad087c91e6459 Mon Sep 17 00:00:00 2001
+From e565f83dcee852906d72354dc4e6ee617bb35f39 Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Tue, 24 Mar 2015 14:09:29 +0300
 Subject: [PATCH 07/N] Automatically rewrite TERM=msys to TERM=cygwin

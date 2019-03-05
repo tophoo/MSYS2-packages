@@ -1,4 +1,4 @@
-From 217322efcffe9b1f7648b99b11fc34fd98440713 Mon Sep 17 00:00:00 2001
+From 582c106e0c3a202c594b9eeefa8a71eabee82377 Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Mon, 27 Apr 2015 11:58:08 +0200
 Subject: [PATCH 43/N] Allow overriding the home directory via the HOME
@@ -24,10 +24,10 @@ Signed-off-by: Johannes Schindelin <johannes.schindelin@gmx.de>
  2 files changed, 51 insertions(+), 1 deletion(-)
 
 diff --git a/winsup/cygwin/cygheap.h b/winsup/cygwin/cygheap.h
-index be088b2..6edd53e 100644
+index 8877cc3..ced50a1 100644
 --- a/winsup/cygwin/cygheap.h
 +++ b/winsup/cygwin/cygheap.h
-@@ -408,7 +408,8 @@ public:
+@@ -403,7 +403,8 @@ public:
      NSS_SCHEME_UNIX,
      NSS_SCHEME_DESC,
      NSS_SCHEME_PATH,
@@ -38,7 +38,7 @@ index be088b2..6edd53e 100644
    struct nss_scheme_t {
      nss_scheme_method	method;
 diff --git a/winsup/cygwin/uinfo.cc b/winsup/cygwin/uinfo.cc
-index 07ae7bc..11e9b73 100644
+index 4da0570..3c53319 100644
 --- a/winsup/cygwin/uinfo.cc
 +++ b/winsup/cygwin/uinfo.cc
 @@ -808,6 +808,8 @@ cygheap_pwdgrp::nss_init_line (const char *line)

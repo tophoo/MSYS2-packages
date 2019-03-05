@@ -1,4 +1,4 @@
-From 08583397e1e8d11ec46d66e9ee463fdd2ac6c7ec Mon Sep 17 00:00:00 2001
+From 0119125ac35306b15c7e55174a436c5c26f6fb9c Mon Sep 17 00:00:00 2001
 From: Alexpux <alexey.pawlow@gmail.com>
 Date: Thu, 12 Mar 2015 13:58:27 +0300
 Subject: [PATCH 04/N] Add functionality for changing OS name via MSYSTEM
@@ -8,8 +8,8 @@ Subject: [PATCH 04/N] Add functionality for changing OS name via MSYSTEM
  winsup/cygserver/cygserver-config   |  4 ++--
  winsup/cygwin/environ.cc            | 36 +++++++++++++++++++++++++----
  winsup/cygwin/include/sys/utsname.h |  2 +-
- winsup/cygwin/uname.cc              |  6 +++++
- 4 files changed, 41 insertions(+), 7 deletions(-)
+ winsup/cygwin/uname.cc              |  8 ++++++-
+ 4 files changed, 42 insertions(+), 8 deletions(-)
 
 diff --git a/winsup/cygserver/cygserver-config b/winsup/cygserver/cygserver-config
 index 373bfd2..c902857 100755
@@ -147,9 +147,18 @@ index d6b3be9..730cb73 100644
    char release[_UTSNAME_LENGTH];
    char version[_UTSNAME_LENGTH];
 diff --git a/winsup/cygwin/uname.cc b/winsup/cygwin/uname.cc
-index 306cdee..2df6e9a 100644
+index 306cdee..a55f719 100644
 --- a/winsup/cygwin/uname.cc
 +++ b/winsup/cygwin/uname.cc
+@@ -76,7 +76,7 @@ uname_x (struct utsname *name)
+ /* Old entrypoint for applications up to API 334 */
+ struct old_utsname
+ {
+-  char sysname[20];
++  char sysname[21];
+   char nodename[20];
+   char release[20];
+   char version[20];
 @@ -92,7 +92,13 @@ uname (struct utsname *in_name)
        char *snp = strstr  (cygwin_version.dll_build_date, "SNP");
  

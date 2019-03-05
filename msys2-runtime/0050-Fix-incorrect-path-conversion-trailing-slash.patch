@@ -1,4 +1,4 @@
-From 8038ec39483d19f8175b9192b47e0faff82badc7 Mon Sep 17 00:00:00 2001
+From 472d65e13eb79ed0b59fb7f5dfae3a7bb414bfba Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Wed, 14 Mar 2018 17:04:19 +0100
 Subject: [PATCH 50/N] Fix incorrect path conversion (trailing slash)

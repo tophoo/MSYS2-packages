@@ -1,4 +1,4 @@
-From 8bd766c1371671705a0870d058c541e8cf1a277e Mon Sep 17 00:00:00 2001
+From b6354284d7b17d770611d7f3ea2b01a1fd3adca4 Mon Sep 17 00:00:00 2001
 From: Alexpux <alexey.pawlow@gmail.com>
 Date: Tue, 5 Apr 2016 10:15:20 +0300
 Subject: [PATCH 02/N] Rename DLL from cygwin to msys
@@ -720,7 +720,7 @@ index 56b4363..6bc948a 100644
  
  #endif /* __CYGWIN_CYGWIN_DLL_H__ */
 diff --git a/winsup/cygwin/include/cygwin/version.h b/winsup/cygwin/include/cygwin/version.h
-index d865f29..5d12ab1 100644
+index 97bc0ae..e7fd02f 100644
 --- a/winsup/cygwin/include/cygwin/version.h
 +++ b/winsup/cygwin/include/cygwin/version.h
 @@ -526,7 +526,11 @@ details. */
@@ -875,10 +875,10 @@ index c250fdc..a230b35 100644
    va_list args;
  
 diff --git a/winsup/cygwin/sec_auth.cc b/winsup/cygwin/sec_auth.cc
-index beff327..783eade 100644
+index a76f453..b3cf00a 100644
 --- a/winsup/cygwin/sec_auth.cc
 +++ b/winsup/cygwin/sec_auth.cc
-@@ -787,7 +787,7 @@ verify_token (HANDLE token, cygsid &usersid, user_groups &groups, bool *pintern)
+@@ -848,7 +848,7 @@ verify_token (HANDLE token, cygsid &usersid, user_groups &groups, bool *pintern)
        if (!NT_SUCCESS (status))
  	debug_printf ("NtQueryInformationToken(), %y", status);
        else
@@ -887,7 +887,7 @@ index beff327..783eade 100644
      }
    /* Verify usersid */
    cygsid tok_usersid (NO_SID);
-@@ -931,7 +931,7 @@ create_token (cygsid &usersid, user_groups &new_groups)
+@@ -992,7 +992,7 @@ create_token (cygsid &usersid, user_groups &new_groups)
    TOKEN_DEFAULT_DACL dacl = {};
    TOKEN_SOURCE source;
    TOKEN_STATISTICS stats;
@@ -896,7 +896,7 @@ index beff327..783eade 100644
    source.SourceIdentifier.HighPart = 0;
    source.SourceIdentifier.LowPart = 0x0101;
  
-@@ -1090,7 +1090,7 @@ lsaauth (cygsid &usersid, user_groups &new_groups)
+@@ -1151,7 +1151,7 @@ lsaauth (cygsid &usersid, user_groups &new_groups)
    push_self_privilege (SE_TCB_PRIVILEGE, true);
  
    /* Register as logon process. */
@@ -905,7 +905,7 @@ index beff327..783eade 100644
    status = LsaRegisterLogonProcess (&name, &lsa_hdl, &sec_mode);
    if (status != STATUS_SUCCESS)
      {
-@@ -1113,10 +1113,10 @@ lsaauth (cygsid &usersid, user_groups &new_groups)
+@@ -1174,10 +1174,10 @@ lsaauth (cygsid &usersid, user_groups &new_groups)
      goto out;
  
    /* Create origin. */
@@ -919,10 +919,10 @@ index beff327..783eade 100644
    ts.SourceIdentifier.LowPart = 0x0103;
  
 diff --git a/winsup/cygwin/syscalls.cc b/winsup/cygwin/syscalls.cc
-index c3a9244..d2fc8dc 100644
+index a914ae8..240777b 100644
 --- a/winsup/cygwin/syscalls.cc
 +++ b/winsup/cygwin/syscalls.cc
-@@ -326,7 +326,7 @@ try_to_bin (path_conv &pc, HANDLE &fh, ACCESS_MASK access, ULONG flags)
+@@ -327,7 +327,7 @@ try_to_bin (path_conv &pc, HANDLE &fh, ACCESS_MASK access, ULONG flags)
      }
    else
      {
@@ -931,7 +931,7 @@ index c3a9244..d2fc8dc 100644
  	 transposed into the Unicode low surrogate area (U+dc00) on file
  	 systems supporting Unicode (except Samba), followed by the inode
  	 number in hex, followed by a path hash in hex.  The combination
-@@ -334,7 +334,7 @@ try_to_bin (path_conv &pc, HANDLE &fh, ACCESS_MASK access, ULONG flags)
+@@ -335,7 +335,7 @@ try_to_bin (path_conv &pc, HANDLE &fh, ACCESS_MASK access, ULONG flags)
        RtlAppendUnicodeToString (&recycler,
  				(pc.fs_flags () & FILE_UNICODE_ON_DISK
  				 && !pc.fs_is_samba ())

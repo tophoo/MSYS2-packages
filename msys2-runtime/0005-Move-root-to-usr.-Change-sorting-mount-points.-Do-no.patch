@@ -1,4 +1,4 @@
-From 462dd6094ab68fb87c42ab0d17def8a115413656 Mon Sep 17 00:00:00 2001
+From 416b6ee94ebe00e5e5ee7b38cb27d01c6d3d2b2c Mon Sep 17 00:00:00 2001
 From: Alexpux <alexey.pawlow@gmail.com>
 Date: Thu, 12 Mar 2015 14:09:29 +0300
 Subject: [PATCH 05/N] - Move root to /usr. - Change sorting mount points. -
@@ -400,10 +400,10 @@ index 122a679..c447381 100644
   public:
    void init (bool);
 diff --git a/winsup/cygwin/uinfo.cc b/winsup/cygwin/uinfo.cc
-index 53efc21..07ae7bc 100644
+index bfcce00..4da0570 100644
 --- a/winsup/cygwin/uinfo.cc
 +++ b/winsup/cygwin/uinfo.cc
-@@ -2796,7 +2796,7 @@ pwdgrp::fetch_account_from_windows (fetch_user_arg_t &arg, cyg_ldap *pldap)
+@@ -2791,7 +2791,7 @@ pwdgrp::fetch_account_from_windows (fetch_user_arg_t &arg, cyg_ldap *pldap)
  		     dom, name,
  		     sid.string ((char *) sidstr),
  		     home ?: "/home/", home ? L"" : name,

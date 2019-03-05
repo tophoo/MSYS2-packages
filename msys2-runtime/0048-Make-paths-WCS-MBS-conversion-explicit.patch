@@ -1,4 +1,4 @@
-From 7b6f9d2bf9b9cdccf30d468e648ea8951f11eb95 Mon Sep 17 00:00:00 2001
+From d1029bdbde7519fc9d37c1cc4ede97bed81e8f69 Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Fri, 18 Dec 2015 20:19:57 +0100
 Subject: [PATCH 48/N] Make paths' WCS->MBS conversion explicit
@@ -252,10 +252,10 @@ index 79cbae7..1dd192b 100644
  	  ep.version = EXTERNAL_PINFO_VERSION;
  
 diff --git a/winsup/cygwin/fhandler_disk_file.cc b/winsup/cygwin/fhandler_disk_file.cc
-index 5a8463e..5f20f3d 100644
+index 1931927..9ebb209 100644
 --- a/winsup/cygwin/fhandler_disk_file.cc
 +++ b/winsup/cygwin/fhandler_disk_file.cc
-@@ -2138,7 +2138,7 @@ fhandler_disk_file::readdir_helper (DIR *dir, dirent *de, DWORD w32_err,
+@@ -2145,7 +2145,7 @@ fhandler_disk_file::readdir_helper (DIR *dir, dirent *de, DWORD w32_err,
  	  char *p = stpcpy (file, pc.get_posix ());
  	  if (p[-1] != '/')
  	    *p++ = '/';
@@ -264,7 +264,7 @@ index 5a8463e..5f20f3d 100644
  			fname->Buffer, fname->Length / sizeof (WCHAR));
  	  path_conv fpath (file, PC_SYM_NOFOLLOW);
  	  if (fpath.issymlink ())
-@@ -2159,7 +2159,7 @@ fhandler_disk_file::readdir_helper (DIR *dir, dirent *de, DWORD w32_err,
+@@ -2166,7 +2166,7 @@ fhandler_disk_file::readdir_helper (DIR *dir, dirent *de, DWORD w32_err,
  	}
      }
  
@@ -566,7 +566,7 @@ index e0a4c71..30e30e2 100644
  {
    return sys_wcstombs_alloc (dst_p, type, src, nwc, false);
 diff --git a/winsup/cygwin/uinfo.cc b/winsup/cygwin/uinfo.cc
-index 07ae7bc..d93fe5c 100644
+index 4da0570..69ae2ac 100644
 --- a/winsup/cygwin/uinfo.cc
 +++ b/winsup/cygwin/uinfo.cc
 @@ -416,12 +416,12 @@ cygheap_user::ontherange (homebodies what, struct passwd *pw)
