@@ -1,4 +1,4 @@
-From 166ab5092bd369c6e4282fdd8c3863feb8fcee72 Mon Sep 17 00:00:00 2001
+From a69b58daaee82499285a3083b6e260ad71c3adda Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Mon, 2 Mar 2015 14:09:29 +0300
 Subject: [PATCH 09/N] convert(): be more careful to stay within the buffer

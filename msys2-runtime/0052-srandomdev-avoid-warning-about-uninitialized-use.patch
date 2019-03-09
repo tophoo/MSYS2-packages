@@ -1,4 +1,4 @@
-From 24eb7c03338f315ca8c1920c7152a3a9d7952f23 Mon Sep 17 00:00:00 2001
+From f4797ecec9dba7fcbf4a149f5a54424502afcfcf Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Mon, 23 Apr 2018 11:58:47 +0200
 Subject: [PATCH 52/N] srandomdev(): avoid warning about "uninitialized use"

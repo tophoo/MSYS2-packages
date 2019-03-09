@@ -1,4 +1,4 @@
-From 033e9d199508762d3a43bae9ceaaca1f944469e9 Mon Sep 17 00:00:00 2001
+From d0faedc6029617fd2e7ebdeeec38654bc87417c1 Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Wed, 18 Feb 2015 12:32:17 +0000
 Subject: [PATCH 25/N] Pass environment variables with empty values

@@ -1,4 +1,4 @@
-From b6354284d7b17d770611d7f3ea2b01a1fd3adca4 Mon Sep 17 00:00:00 2001
+From 94f714173ed36c13c76d0cd36b173c4b93592d81 Mon Sep 17 00:00:00 2001
 From: Alexpux <alexey.pawlow@gmail.com>
 Date: Tue, 5 Apr 2016 10:15:20 +0300
 Subject: [PATCH 02/N] Rename DLL from cygwin to msys
@@ -720,7 +720,7 @@ index 56b4363..6bc948a 100644
  
  #endif /* __CYGWIN_CYGWIN_DLL_H__ */
 diff --git a/winsup/cygwin/include/cygwin/version.h b/winsup/cygwin/include/cygwin/version.h
-index 97bc0ae..e7fd02f 100644
+index 2526e4e..e7fd85c 100644
 --- a/winsup/cygwin/include/cygwin/version.h
 +++ b/winsup/cygwin/include/cygwin/version.h
 @@ -526,7 +526,11 @@ details. */

@@ -1,4 +1,4 @@
-From d1029bdbde7519fc9d37c1cc4ede97bed81e8f69 Mon Sep 17 00:00:00 2001
+From c77a222ea5703551fd2139e71bad706bb65ebe80 Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Fri, 18 Dec 2015 20:19:57 +0100
 Subject: [PATCH 48/N] Make paths' WCS->MBS conversion explicit

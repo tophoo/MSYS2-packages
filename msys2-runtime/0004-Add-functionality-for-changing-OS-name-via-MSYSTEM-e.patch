@@ -1,4 +1,4 @@
-From 0119125ac35306b15c7e55174a436c5c26f6fb9c Mon Sep 17 00:00:00 2001
+From eb1b8a2697e475a70822510107a00321f071de9c Mon Sep 17 00:00:00 2001
 From: Alexpux <alexey.pawlow@gmail.com>
 Date: Thu, 12 Mar 2015 13:58:27 +0300
 Subject: [PATCH 04/N] Add functionality for changing OS name via MSYSTEM

@@ -1,4 +1,4 @@
-From cc3d0268eb40e6440fd47a03ec0b6d644881fff7 Mon Sep 17 00:00:00 2001
+From 8c268e492908b043540c06f78eaeb5fc97aad0d9 Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Sun, 15 Feb 2015 11:45:48 +0000
 Subject: [PATCH 31/N] Leave arguments starting with a tilde or quote alone

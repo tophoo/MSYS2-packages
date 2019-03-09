@@ -1,4 +1,4 @@
-From 0491aa7b52be8aaae0559e4a3637c229e9a3607c Mon Sep 17 00:00:00 2001
+From 91c4de8fb3d242bd439fc6ab8604ccee22fb4dad Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Sun, 22 Feb 2015 18:28:02 +0100
 Subject: [PATCH 30/N] Avoid unnecessary recursion in

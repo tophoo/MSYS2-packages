@@ -1,4 +1,4 @@
-From b867fd9256dc2f6e0a24744f7fda163ff9fb664d Mon Sep 17 00:00:00 2001
+From 6ec9df5e62700d989d2116c31a0107e1405680c8 Mon Sep 17 00:00:00 2001
 From: Ray Donnelly <mingw.android@gmail.com>
 Date: Mon, 24 Aug 2015 00:48:06 +0100
 Subject: [PATCH 18/N] dcrt0.cc (globify): Don't quote literal strings

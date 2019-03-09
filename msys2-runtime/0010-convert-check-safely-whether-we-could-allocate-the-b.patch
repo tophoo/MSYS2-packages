@@ -1,4 +1,4 @@
-From 146a5a9e9e40248902024f136a6a9f2d6d435ea9 Mon Sep 17 00:00:00 2001
+From 8c0edccd6575031103b968b04570d397e66c4bdb Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Mon, 2 Mar 2015 14:09:29 +0300
 Subject: [PATCH 10/N] convert(): check safely whether we could allocate the
