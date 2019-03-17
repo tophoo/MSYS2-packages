@@ -1,4 +1,4 @@
-From 5859b3026ed1df2864814761be6b7fe57c939eae Mon Sep 17 00:00:00 2001
+From 4c18e6e2d0dee386b486e91995bfbe8b13db5c38 Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Mon, 2 Mar 2015 14:09:29 +0300
 Subject: [PATCH 12/N] convert(): plug potential memory leak

@@ -1,4 +1,4 @@
-From 4a607a17db49d3975b682e81939d017794bbbce1 Mon Sep 17 00:00:00 2001
+From 2a3af2b8f1c6c3d8454c8a3c8e1a23f94f8c1d69 Mon Sep 17 00:00:00 2001
 From: Karsten Blees <blees@dcon.de>
 Date: Wed, 15 Apr 2015 21:05:42 +0200
 Subject: [PATCH 24/N] Pass the TZ variable to non-msys programs if it is

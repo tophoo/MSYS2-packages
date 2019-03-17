@@ -1,4 +1,4 @@
-From 9a0668f4669f6cc3879037078e039aeb648bb027 Mon Sep 17 00:00:00 2001
+From 1524b27d20472b32d2520805c26c99b97e1b8a82 Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Wed, 18 Feb 2015 11:07:17 +0000
 Subject: [PATCH 35/N] Skip posix-to-windows conversion when '::' is seen

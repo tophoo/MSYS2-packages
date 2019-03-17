@@ -1,4 +1,4 @@
-From 94f714173ed36c13c76d0cd36b173c4b93592d81 Mon Sep 17 00:00:00 2001
+From f6b650e2e8edeefa0efa0dd1199055d714d4d09d Mon Sep 17 00:00:00 2001
 From: Alexpux <alexey.pawlow@gmail.com>
 Date: Tue, 5 Apr 2016 10:15:20 +0300
 Subject: [PATCH 02/N] Rename DLL from cygwin to msys
@@ -609,7 +609,7 @@ index 7fe46eb..81618b1 100644
    master_ctl = CreateNamedPipe (buf, PIPE_ACCESS_DUPLEX
  				     | FILE_FLAG_FIRST_PIPE_INSTANCE,
 diff --git a/winsup/cygwin/fork.cc b/winsup/cygwin/fork.cc
-index 7ae0404..ff49efd 100644
+index 74ee9ac..70e723c 100644
 --- a/winsup/cygwin/fork.cc
 +++ b/winsup/cygwin/fork.cc
 @@ -164,7 +164,7 @@ frok::child (volatile char * volatile here)
@@ -720,7 +720,7 @@ index 56b4363..6bc948a 100644
  
  #endif /* __CYGWIN_CYGWIN_DLL_H__ */
 diff --git a/winsup/cygwin/include/cygwin/version.h b/winsup/cygwin/include/cygwin/version.h
-index 2526e4e..e7fd85c 100644
+index da134be..afcd118 100644
 --- a/winsup/cygwin/include/cygwin/version.h
 +++ b/winsup/cygwin/include/cygwin/version.h
 @@ -526,7 +526,11 @@ details. */
@@ -849,7 +849,7 @@ index b2db73c..ee99dd0 100755
    "END_CYGWIN_VERSION_INFO\n\0";
  cygwin_version_info cygwin_version =
 diff --git a/winsup/cygwin/pinfo.cc b/winsup/cygwin/pinfo.cc
-index 064299e..14f6346 100644
+index 453861c..655e06e 100644
 --- a/winsup/cygwin/pinfo.cc
 +++ b/winsup/cygwin/pinfo.cc
 @@ -188,7 +188,7 @@ pinfo::maybe_set_exit_code_from_windows ()

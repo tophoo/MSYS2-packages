@@ -1,4 +1,4 @@
-From 85b7acfcc8a4787bc99d0a700d450be571bfce81 Mon Sep 17 00:00:00 2001
+From b1f32ad8132a59933d3ce7d7445508769025d23f Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Mon, 2 Mar 2015 14:09:29 +0300
 Subject: [PATCH 11/N] convert(): use the elegant realloc() call

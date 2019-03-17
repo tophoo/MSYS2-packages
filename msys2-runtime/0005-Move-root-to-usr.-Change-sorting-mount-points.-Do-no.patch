@@ -1,4 +1,4 @@
-From a17751745098765af999bfb35c6db8646a7ec393 Mon Sep 17 00:00:00 2001
+From 2acad65cc92970f3da30c57eef192e1415a2cbd6 Mon Sep 17 00:00:00 2001
 From: Alexpux <alexey.pawlow@gmail.com>
 Date: Thu, 12 Mar 2015 14:09:29 +0300
 Subject: [PATCH 05/N] - Move root to /usr. - Change sorting mount points. -
