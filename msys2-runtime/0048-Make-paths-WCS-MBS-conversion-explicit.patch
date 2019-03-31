@@ -1,4 +1,4 @@
-From 30e03934016385a3abf2954df67f542885333e83 Mon Sep 17 00:00:00 2001
+From f0bcaf090094fd59cc8823520c431bcc8c5e2c85 Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Fri, 18 Dec 2015 20:19:57 +0100
 Subject: [PATCH 48/N] Make paths' WCS->MBS conversion explicit
@@ -239,7 +239,7 @@ index d75aa7f..1216872 100644
        DestroyEnvironmentBlock (cwinenv);
        /* Eliminate variables which are already available in envp, as well as
 diff --git a/winsup/cygwin/external.cc b/winsup/cygwin/external.cc
-index 79cbae7..1dd192b 100644
+index ffeafcb..54d06f4 100644
 --- a/winsup/cygwin/external.cc
 +++ b/winsup/cygwin/external.cc
 @@ -92,7 +92,7 @@ fillout_pinfo (pid_t pid, int winpid)
@@ -410,10 +410,10 @@ index bff33ff..af483cb 100644
  	  mount_flags |= MOUNT_USER_TEMP;
  	  int res = mount_table->add_item (mb_tmp, posix_path, mount_flags);
 diff --git a/winsup/cygwin/nlsfuncs.cc b/winsup/cygwin/nlsfuncs.cc
-index 5bf7d22..ec389cf 100644
+index 455afb4..6184da4 100644
 --- a/winsup/cygwin/nlsfuncs.cc
 +++ b/winsup/cygwin/nlsfuncs.cc
-@@ -1555,7 +1555,7 @@ internal_setlocale ()
+@@ -1558,7 +1558,7 @@ internal_setlocale ()
    if (w_path)
      {
        char *c_path = tp.c_get ();

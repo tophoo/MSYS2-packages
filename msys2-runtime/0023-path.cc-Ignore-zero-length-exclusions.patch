@@ -1,4 +1,4 @@
-From 55d72a8040b294806b4f0696a781910c2ff7313d Mon Sep 17 00:00:00 2001
+From e70b8cafca851e211841f73fa57dd697db2a5d9c Mon Sep 17 00:00:00 2001
 From: Ray Donnelly <mingw.android@gmail.com>
 Date: Sun, 15 May 2016 09:31:51 +0100
 Subject: [PATCH 23/N] path.cc: Ignore zero-length exclusions

@@ -1,4 +1,4 @@
-From fd98898a22bbcc47a7c64fa71bcb047bd0319e1e Mon Sep 17 00:00:00 2001
+From f6129e475fd832224be50bfa5fad43852f4b0780 Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Wed, 18 Feb 2015 11:07:17 +0000
 Subject: [PATCH 37/N] Arguments starting with '@@' are no paths

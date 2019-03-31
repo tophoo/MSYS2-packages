@@ -1,4 +1,4 @@
-From 5b2efcefeda0eef3b3295602f9800e3cf3a044f1 Mon Sep 17 00:00:00 2001
+From 8629a96748d263e2feeee8e354719a9c89a828db Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Wed, 18 Feb 2015 11:07:17 +0000
 Subject: [PATCH 32/N] Leave Git's :name and :/message arguments alone, please
