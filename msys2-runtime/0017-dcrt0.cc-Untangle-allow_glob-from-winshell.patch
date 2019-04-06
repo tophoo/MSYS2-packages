@@ -1,4 +1,4 @@
-From bb4f9bfcf17fb94e4b20e57c87f720316eebfeb3 Mon Sep 17 00:00:00 2001
+From b07b845d0fb2ffc3cd161ac6774825bd815a072a Mon Sep 17 00:00:00 2001
 From: Ray Donnelly <mingw.android@gmail.com>
 Date: Fri, 21 Aug 2015 12:52:09 +0100
 Subject: [PATCH 17/N] dcrt0.cc: Untangle allow_glob from winshell

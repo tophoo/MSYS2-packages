@@ -1,4 +1,4 @@
-From f8ba43b3432caf73885ff3f07d3ff97686b833e0 Mon Sep 17 00:00:00 2001
+From 1eeb3c9484fcc75ca3ecc1259c8a8f964b41d6ad Mon Sep 17 00:00:00 2001
 From: Ray Donnelly <mingw.android@gmail.com>
 Date: Sun, 23 Aug 2015 20:47:30 +0100
 Subject: [PATCH 19/N] strace.cc: Don't set MSYS=noglob

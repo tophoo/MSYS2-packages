@@ -1,4 +1,4 @@
-From 2116a7d899927d85518a8ddf61b9390a7c841dfc Mon Sep 17 00:00:00 2001
+From 51fa9678bf4b0caa806413a803785f8b39aa7b30 Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Mon, 2 Mar 2015 14:09:29 +0300
 Subject: [PATCH 14/N] arg_heuristic(): be better prepared to handle path

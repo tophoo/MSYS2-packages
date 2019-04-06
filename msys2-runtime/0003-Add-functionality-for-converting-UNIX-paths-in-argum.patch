@@ -1,4 +1,4 @@
-From ee685bda5cb0125ade97e9844b11a795332d530c Mon Sep 17 00:00:00 2001
+From 74553a1a645da8955e0c7780a896781c113d42b5 Mon Sep 17 00:00:00 2001
 From: Alexpux <alexey.pawlow@gmail.com>
 Date: Thu, 12 Mar 2015 13:58:27 +0300
 Subject: [PATCH 03/N] Add functionality for converting UNIX paths in
@@ -987,7 +987,7 @@ index 158f1e5..5db4bd9 100644
  
  /* Cover functions to the path conversion routines.
 diff --git a/winsup/cygwin/spawn.cc b/winsup/cygwin/spawn.cc
-index 4e549f7..a26fea4 100644
+index 579b3c9..e5c20fb 100644
 --- a/winsup/cygwin/spawn.cc
 +++ b/winsup/cygwin/spawn.cc
 @@ -260,6 +260,27 @@ child_info_spawn::worker (const char *prog_arg, const char *const *argv,

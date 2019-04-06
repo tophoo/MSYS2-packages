@@ -1,4 +1,4 @@
-From 79b120b81ed3bbcaa396f179053dcd7a421008dd Mon Sep 17 00:00:00 2001
+From 463a995a6cec61f886821961bac4ae712c9877c5 Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Thu, 7 Jan 2016 15:54:27 +0000
 Subject: [PATCH 45/N] Respect the `db_home: env` setting under more

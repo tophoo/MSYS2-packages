@@ -1,4 +1,4 @@
-From 2f221c5b843d5369c759d476d1ab2e13325bdca2 Mon Sep 17 00:00:00 2001
+From 19ababdb2ccc99c684987dd58000e5c8c98a2568 Mon Sep 17 00:00:00 2001
 From: Alexpux <alexey.pawlow@gmail.com>
 Date: Fri, 6 Mar 2015 14:09:29 +0300
 Subject: [PATCH 08/N] Do not convert environment for strace
@@ -11,7 +11,7 @@ debugging msys2 software with strace very tricky.
  1 file changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/winsup/cygwin/spawn.cc b/winsup/cygwin/spawn.cc
-index a26fea4..6dcb26f 100644
+index e5c20fb..2e9f204 100644
 --- a/winsup/cygwin/spawn.cc
 +++ b/winsup/cygwin/spawn.cc
 @@ -538,11 +538,13 @@ child_info_spawn::worker (const char *prog_arg, const char *const *argv,
