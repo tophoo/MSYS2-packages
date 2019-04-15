@@ -1,5 +1,6 @@
-From b838287bb7a32cbadf4d5a9e54f67d24f9a7885a Mon Sep 17 00:00:00 2001
-From: Alexpux <alexey.pawlow@gmail.com>
+From 6852015fbbc83fff1c67cc72908683a2f2c40406 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?=D0=90=D0=BB=D0=B5=D0=BA=D1=81=D0=B5=D0=B8=CC=86=20=D0=9F?=
+ =?UTF-8?q?=D0=B0=D0=B2=D0=BB=D0=BE=D0=B2?= <alexey.pawlow@gmail.com>
 Date: Thu, 12 Mar 2015 14:09:29 +0300
 Subject: [PATCH 06/N] Do not create cygwin symlinks. Instead use deep copy of
  files/folders.
@@ -9,7 +10,7 @@ Subject: [PATCH 06/N] Do not create cygwin symlinks. Instead use deep copy of
  1 file changed, 147 insertions(+)
 
 diff --git a/winsup/cygwin/path.cc b/winsup/cygwin/path.cc
-index 5db4bd9..37c791a 100644
+index 1fb65ca..c3f011c 100644
 --- a/winsup/cygwin/path.cc
 +++ b/winsup/cygwin/path.cc
 @@ -1667,6 +1667,86 @@ conv_path_list (const char *src, char *dst, size_t size,

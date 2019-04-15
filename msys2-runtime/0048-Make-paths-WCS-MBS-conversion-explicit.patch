@@ -1,4 +1,4 @@
-From 80923442fd53f8cddbcbf4e31b18fb4265f06f3f Mon Sep 17 00:00:00 2001
+From 68aa1dd8c7475b84904e7d57fac562808d8ae859 Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Fri, 18 Dec 2015 20:19:57 +0100
 Subject: [PATCH 48/N] Make paths' WCS->MBS conversion explicit
@@ -199,7 +199,7 @@ index 98b7e26..2f8ef06 100644
  	}
  
 diff --git a/winsup/cygwin/environ.cc b/winsup/cygwin/environ.cc
-index d75aa7f..1216872 100644
+index c16a010..8e1c657 100644
 --- a/winsup/cygwin/environ.cc
 +++ b/winsup/cygwin/environ.cc
 @@ -904,7 +904,7 @@ win32env_to_cygenv (PWCHAR rawenv, bool posify)
@@ -370,7 +370,7 @@ index e2aebd5..591ae1c 100644
  	  de->d_ino = hash_path_name (get_ino (), de->d_name);
  	  if (RtlEqualUnicodeString (&f.dbi.ObjectTypeName, &ro_u_natdir,
 diff --git a/winsup/cygwin/mount.cc b/winsup/cygwin/mount.cc
-index bff33ff..af483cb 100644
+index 1d54763..e088a89 100644
 --- a/winsup/cygwin/mount.cc
 +++ b/winsup/cygwin/mount.cc
 @@ -441,7 +441,7 @@ fs_info::update (PUNICODE_STRING upath, HANDLE in_vol)
@@ -391,7 +391,7 @@ index bff33ff..af483cb 100644
    assert (*native_root != '\0');
    if (add_item (native_root, "/",
  		MOUNT_SYSTEM | MOUNT_IMMUTABLE | MOUNT_AUTOMATIC | MOUNT_NOACL)
-@@ -848,7 +848,7 @@ mount_info::conv_to_posix_path (PWCHAR src_path, char *posix_path,
+@@ -846,7 +846,7 @@ mount_info::conv_to_posix_path (PWCHAR src_path, char *posix_path,
      }
    tmp_pathbuf tp;
    char *buf = tp.c_get ();
@@ -400,7 +400,7 @@ index bff33ff..af483cb 100644
    int ret = conv_to_posix_path (buf, posix_path, ccp_flags);
    if (changed)
      src_path[0] = L'C';
-@@ -1179,7 +1179,7 @@ mount_info::from_fstab_line (char *line, bool user)
+@@ -1177,7 +1177,7 @@ mount_info::from_fstab_line (char *line, bool user)
  	{
  	  tmp_pathbuf tp;
  	  char *mb_tmp = tp.c_get ();
