@@ -11,26 +11,26 @@ groups=('net-utils')
 depends=('heimdal' 'libedit' 'libcrypt' 'openssl')
 makedepends=('heimdal-devel' 'libedit-devel' 'libcrypt-devel' 'openssl-devel')
 source=("https://cloudflare.cdn.openbsd.org/pub/OpenBSD/OpenSSH/portable/${pkgname}-${pkgver}.tar.gz"{,.asc}
-        openssh-7.3p1-msys2.patch
-        openssh-7.3p1-msys2-setkey.patch
-        openssh-7.3p1-msys2-skip-privsep-tests.patch
-        openssh-7.3p1-msys2-drive-name-in-path.patch)
+        0001-Forward-port-MSys2-patches.patch
+        0002-openssh-work-around-Cygwin-declaring-setkey.patch
+        0003-openssh-skip-privilege-separation-tests.patch
+        0004-Allow-scp-to-copy-files-that-start-with-a-Windows-dr.patch)
 sha256sums=('6b4b3ba2253d84ed3771c8050728d597c91cfce898713beb7b64a305b6f11aad'
             'SKIP'
-            'ab54293758c908bfdcd95b338bad5eb35290291e957dc99bc09fae4f906987fc'
-            '25079cf4a10c1ab70d60302bccaabee513762520dffd7c35285f7aae3ea36087'
-            '729aa8ef3723a223afbd1bda678a7deaca75b5c3b42a74b1a8c396f95f8677b5'
-            '903b3eee51e492a125cab9c724ad967450307d53e457f025e4432b81cb145af5')
+            'a58e15676be4f16362aa183bc142f2d3dd97b054085e9462733902da4cb3c58f'
+            '24cb7db3408987a37a78299e5f057008b47803d11fa03d70005ec7efed15e8a8'
+            'f45c7cd23586f186918f061e13bfcdb1c8f0f02236e3b23f28fa4f7c0c0dcf3c'
+            '8c151edc01effa71afe054140af7eed54acdc504e1457556609c98f5aeaece50')
 validpgpkeys=('59C2118ED206D927E667EBE3D3E5F56B6D920D30')
 
 backup=('etc/ssh/ssh_config' 'etc/ssh/sshd_config')
 
 prepare() {
   cd "${srcdir}/${pkgname}-${pkgver}"
-  patch -p1 -i ${srcdir}/openssh-7.3p1-msys2.patch
-  patch -p1 -i ${srcdir}/openssh-7.3p1-msys2-setkey.patch
-  patch -p1 -i ${srcdir}/openssh-7.3p1-msys2-skip-privsep-tests.patch
-  patch -p1 -i ${srcdir}/openssh-7.3p1-msys2-drive-name-in-path.patch
+  patch -p1 -i ${srcdir}/0001-Forward-port-MSys2-patches.patch
+  patch -p1 -i ${srcdir}/0002-openssh-work-around-Cygwin-declaring-setkey.patch
+  patch -p1 -i ${srcdir}/0003-openssh-skip-privilege-separation-tests.patch
+  patch -p1 -i ${srcdir}/0004-Allow-scp-to-copy-files-that-start-with-a-Windows-dr.patch
   autoreconf -fvi
 }
 
