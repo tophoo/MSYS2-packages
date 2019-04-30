@@ -1,4 +1,4 @@
-From 30168044ddebcfabef1735cdfb81f0d0d9c624e7 Mon Sep 17 00:00:00 2001
+From 9dcd6bbf5f244dae7d4441b1167b3c281d02b919 Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Wed, 14 Mar 2018 17:04:19 +0100
 Subject: [PATCH 22/N] Fix incorrect path conversion (trailing slash)

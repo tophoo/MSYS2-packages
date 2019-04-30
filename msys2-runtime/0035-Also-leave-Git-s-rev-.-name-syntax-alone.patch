@@ -1,4 +1,4 @@
-From e9b98f9223abadf7557032e4b7ca58443525d7ab Mon Sep 17 00:00:00 2001
+From cc4c77ac6bb1816641b52e078ba42eb02fe6c05e Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Wed, 18 Feb 2015 11:07:17 +0000
 Subject: [PATCH 35/N] Also leave Git's <rev>:./<name> syntax alone

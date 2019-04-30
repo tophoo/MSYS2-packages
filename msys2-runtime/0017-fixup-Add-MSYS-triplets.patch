@@ -1,4 +1,4 @@
-From d8cbb8cc48b7f2b8754ad34ba49a53d0af189c9b Mon Sep 17 00:00:00 2001
+From 3b05f7a6eb98569f4f3cbc1065ca1c882cb47deb Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Mon, 15 Apr 2019 10:04:56 +0200
 Subject: [PATCH 17/N] fixup??? Add MSYS triplets.

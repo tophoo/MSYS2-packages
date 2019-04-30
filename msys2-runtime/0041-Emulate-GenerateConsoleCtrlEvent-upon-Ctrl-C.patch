@@ -1,4 +1,4 @@
-From 26d66c55eeec5b942bd91177ac7a5c60f20c9eb0 Mon Sep 17 00:00:00 2001
+From 9db62c60ea8df077416192eb5d7135ecd6777dca Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Fri, 20 Mar 2015 09:56:28 +0000
 Subject: [PATCH 41/N] Emulate GenerateConsoleCtrlEvent() upon Ctrl+C

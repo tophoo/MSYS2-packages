@@ -1,4 +1,4 @@
-From beba32f1e1e457dd5d72e545df9f7da2500792e0 Mon Sep 17 00:00:00 2001
+From a942cdb213fcc4063768a089fd49a33e32337499 Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Mon, 16 Apr 2018 14:59:39 +0200
 Subject: [PATCH 40/N] Add a helper to obtain a function's address in

@@ -1,4 +1,4 @@
-From 628c98bb1f2f973095f8cee0298ffddedacfe30a Mon Sep 17 00:00:00 2001
+From aa2461cbbd937534febc6c8e46eb372ec8484c9a Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Mon, 23 Nov 2015 20:03:11 +0100
 Subject: [PATCH 47/N] POSIX-ify the SHELL variable
