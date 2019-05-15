@@ -1,8 +1,8 @@
 # Maintainer: Alexey Pavlov <alexpux@gmail.com>
 
 pkgname=gawk
-pkgver=4.2.1
-pkgrel=2
+pkgver=5.0.0
+pkgrel=0
 pkgdesc="GNU version of awk"
 arch=('i686' 'x86_64')
 url="https://www.gnu.org/software/gawk/"
@@ -13,19 +13,17 @@ makedepends=('gettext-devel' 'mpfr-devel' 'libreadline-devel')
 provides=('awk')
 install=gawk.install
 source=(https://ftp.gnu.org/pub/gnu/${pkgname}/${pkgname}-${pkgver}.tar.gz{,.sig}
-        0001-Support-building-in-MSYS2.patch
-        0002-Revert-Update-posix-gawkmisc.c-remove-cygwin-code.patch)
-sha256sums=('2b23d51503b2df9a41aa6fddc6002ad7ebf2a386ac19dc1b6be0dd48b0acf6db'
+        0001-Support-building-in-MSYS2.patch)
+sha256sums=('2d686c9a5b7ba292bc3fa56bc84a1959d721a9d57970a76413156d4b8f1fc67d'
             'SKIP'
-            '779f410c62df48d55aae5fbefd2ab616b8e489c4d9c462ea4065d7dacda1e71a'
-            '4880e93bc5f81ab6c5579a0116c9567f067eda9099f0cce841f6cd8623b465d7')
+            '295806ef3dd010584c2fff55f438fffea905b8b03420d23565ae41a8345b22d9')
 validpgpkeys=('D1967C63788713177D861ED7DF597815937EC0D2')
 
 prepare() {
   cd ${srcdir}/${pkgname}-${pkgver}
   patch -p1 -i ${srcdir}/0001-Support-building-in-MSYS2.patch
-  patch -p1 -i ${srcdir}/0002-Revert-Update-posix-gawkmisc.c-remove-cygwin-code.patch
-  autoreconf -fiv
+  # Prevent autopoint from overriding our patched config.rpath
+  AUTOPOINT=true autoreconf -fiv
 }
 
 build() {
