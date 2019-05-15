@@ -13,21 +13,18 @@ makedepends=('gettext-devel' 'mpfr-devel' 'libreadline-devel')
 provides=('awk')
 install=gawk.install
 source=(https://ftp.gnu.org/pub/gnu/${pkgname}/${pkgname}-${pkgver}.tar.gz{,.sig}
-        gawk-4.2.1-msysize.patch
-        gawk-4.2.1-autotools.patch
-        fix-cr.patch)
+        0001-Support-building-in-MSYS2.patch
+        0002-Revert-Update-posix-gawkmisc.c-remove-cygwin-code.patch)
 sha256sums=('2b23d51503b2df9a41aa6fddc6002ad7ebf2a386ac19dc1b6be0dd48b0acf6db'
             'SKIP'
-            '8a91f2c369303ae678d72f9d9d7cd1f102d7b1af521aa3df3132ce631004e1e7'
-            '8c52a882e4e9f020c34610a8e1729ce60a688533504b5ac38ac9289a92a42d80'
-            'd217538ce260b588854cc5882e3cc9e95c715ae212f016ff27449db637e69093')
+            '779f410c62df48d55aae5fbefd2ab616b8e489c4d9c462ea4065d7dacda1e71a'
+            '4880e93bc5f81ab6c5579a0116c9567f067eda9099f0cce841f6cd8623b465d7')
 validpgpkeys=('D1967C63788713177D861ED7DF597815937EC0D2')
 
 prepare() {
   cd ${srcdir}/${pkgname}-${pkgver}
-  patch -p1 -i ${srcdir}/gawk-4.2.1-msysize.patch
-  patch -p1 -i ${srcdir}/gawk-4.2.1-autotools.patch
-  patch -p1 -i ${srcdir}/fix-cr.patch
+  patch -p1 -i ${srcdir}/0001-Support-building-in-MSYS2.patch
+  patch -p1 -i ${srcdir}/0002-Revert-Update-posix-gawkmisc.c-remove-cygwin-code.patch
   autoreconf -fiv
 }
 
