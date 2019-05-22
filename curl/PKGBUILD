@@ -2,7 +2,7 @@
 
 pkgbase=curl
 pkgname=('curl' 'libcurl' 'libcurl-devel')
-pkgver=7.64.1
+pkgver=7.65.0
 pkgrel=1
 pkgdesc="Multi-protocol file transfer utility"
 arch=('i686' 'x86_64')
@@ -14,7 +14,7 @@ makedepends=('heimdal-devel' 'libcrypt-devel' 'libidn2-devel' 'libmetalink-devel
 options=('!libtool' 'strip' '!debug')
 source=("https://curl.haxx.se/download/${pkgname}-${pkgver}.tar.bz2"{,.asc}
         curl-7.58.0-msys2.patch)
-sha256sums=('4cc7c738b35250d0680f29e93e0820c4cb40035f43514ea3ec8d60322d41a45d'
+sha256sums=('ea47c08f630e88e413c85793476e7e5665647330b6db35f5c19d72b3e339df5c'
             'SKIP'
             '26083b3fdeb1fb82f704160ea184060e69254b9b05e25a25ca94d0b306b51060')
 validpgpkeys=('27EDEAF22F3ABCEB50DB9A125CC908FDB71E12C2'   # Daniel Stenberg
