@@ -24,7 +24,8 @@ sha256sums=('5c557b023230413dfb0756f3137a13e6d726838ccd1430888ad15bfb2b43ea4b'
             '9a4e721ab9fb9c693d0a6bbc3ae0d71456857f83febc1c8412bfdf323e4d69e2'
             'a83dcfeec646724f081f8ff89beccee83c962758aa74d724f263138aa21b2438'
             '79765cc10799691ae47880556255287c64b8c1f26ea3907ad2e0add97bc9f1fc')
-validpgpkeys=('8657ABB260F056B1E5190839D9C4D26D0E604491')
+validpgpkeys=('8657ABB260F056B1E5190839D9C4D26D0E604491'
+              '7953AC1FBC3DC8B3B292393ED5E9E43F7DF9EE8C')
 
 prepare() {
   [[ -d ${srcdir}/${pkgname}-${_ver} ]] || tar -xzvf ${srcdir}/${pkgname}-${_ver}.tar.gz -C ${srcdir}
