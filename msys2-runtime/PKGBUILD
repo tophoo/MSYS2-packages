@@ -4,7 +4,7 @@
 pkgbase=msys2-runtime
 pkgname=('msys2-runtime' 'msys2-runtime-devel')
 pkgver=3.0.7
-pkgrel=1
+pkgrel=2
 pkgdesc="Cygwin POSIX emulation engine"
 arch=('i686' 'x86_64')
 url="https://www.cygwin.com/"
@@ -72,7 +72,8 @@ source=('msys2-runtime'::git://sourceware.org/git/newlib-cygwin.git#tag=cygwin-$
         0046-Allow-native-symlinks-to-non-existing-targets-in-nat.patch
         0047-POSIX-ify-the-SHELL-variable.patch
         0048-Make-paths-WCS-MBS-conversion-explicit.patch
-        0049-Handle-ORIGINAL_PATH-just-like-PATH.patch)
+        0049-Handle-ORIGINAL_PATH-just-like-PATH.patch
+        0050-fixup-Pass-environment-variables-with-empty-values.patch)
 sha256sums=('SKIP'
             'e0d035187f4bc83cfca16c04275fac8e3dc8cfca06f7044853afc68d28abc3e2'
             '7636f3264bcf904a1bb26678b74eb9c42c581e036527524e73c7a9ac35ff5111'
@@ -122,7 +123,8 @@ sha256sums=('SKIP'
             '078b4856b7a75109dd8f78dff5bac18d6dd1f034f9c5a2ec1ab3007115ea66e7'
             '2ead8e17abac253ad7a77f5fd35a35373dab9f83ab4deb672f7e0a64d9a6c0d2'
             '6c0f5b3448af0973cf9043ca0d78e2107fde014b8b4b7901466cc426b3ac8306'
-            'bc2c1fccefbade667ddc849b06b41d305ba648700d2f0db519cb5a4898d7a0b6')
+            'bc2c1fccefbade667ddc849b06b41d305ba648700d2f0db519cb5a4898d7a0b6'
+            '219667befe0a762f875be7f90134d75a08dd7eec935dd7e52e47bb1a3dc7d429')
 
 # Helper macro to help make tasks easier #
 del_file_exists() {
@@ -187,6 +189,7 @@ prepare() {
   git am --committer-date-is-author-date "${srcdir}"/0047-POSIX-ify-the-SHELL-variable.patch
   git am --committer-date-is-author-date "${srcdir}"/0048-Make-paths-WCS-MBS-conversion-explicit.patch
   git am --committer-date-is-author-date "${srcdir}"/0049-Handle-ORIGINAL_PATH-just-like-PATH.patch
+  git am --committer-date-is-author-date "${srcdir}"/0050-fixup-Pass-environment-variables-with-empty-values.patch
 }
 
 build() {
