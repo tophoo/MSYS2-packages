@@ -11,11 +11,13 @@ groups=('base')
 depends=('sh')
 url="https://mintty.github.io"
 source=(${pkgname}-${pkgver}.tar.gz::https://github.com/mintty/mintty/archive/${pkgver}.tar.gz
-        0002-add-msys2-launcher.patch
-        0003-fix-current-dir-inheritance-for-alt-f2-on-msys2.patch)
+        0001-add-msys2-launcher.patch
+        0002-fix-current-dir-inheritance-for-alt-f2-on-msys2.patch
+        0003-Fix-compile-issues-with-GCC-v9.x.patch)
 sha256sums=('e67fcbb7f8543cb44e05409956046db1d7c1a1c024764b8d3ebe891f8b8d1ac8'
-            '2206240168fa481e54346406e96820a1e0a678a9cc21076bd8fac4c97c527dd4'
-            'd2398c8586c8eaa04dc2f49d663855f420a17feec918f6ac63a8b975037cd86c')
+            '787a452e4a0447cf14fbf45a4d6b9126b730d6d653b21e3e595df7e81872d54c'
+            '7bb0e10364a67e836069be08eeffde368e34102ad4f9b41f0a2755ae42e9b272'
+            'd4ec5517914d33f2867225ae294767ae99fd5a9c627c1717b120ae7d46fbbc6e')
 
 del_file_exists() {
   for _fname in "$@"
@@ -29,8 +31,9 @@ del_file_exists() {
 prepare() {
   cd "${srcdir}/${pkgname}-${pkgver}"
   del_file_exists src/launcher.c src/launcher.h
-  patch -p1 -i ${srcdir}/0002-add-msys2-launcher.patch
-  patch -p1 -i ${srcdir}/0003-fix-current-dir-inheritance-for-alt-f2-on-msys2.patch
+  patch -p1 -i ${srcdir}/0001-add-msys2-launcher.patch
+  patch -p1 -i ${srcdir}/0002-fix-current-dir-inheritance-for-alt-f2-on-msys2.patch
+  patch -p1 -i ${srcdir}/0003-Fix-compile-issues-with-GCC-v9.x.patch
 }
 
 build() {
