@@ -1,4 +1,4 @@
-From 9ff65a840078e241cc6ea8814553564e77ecb843 Mon Sep 17 00:00:00 2001
+From 3b41376789ee9b3dff1d4eeaf81597a4f7556364 Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Mon, 22 Aug 2016 09:17:42 +0200
 Subject: [PATCH 1/4] Forward-port MSys2 patches
@@ -29,10 +29,10 @@ index c4bd827..f03849d 100755
  	echo powerpcle-unknown-cygwin
  	exit ;;
 diff --git a/configure.ac b/configure.ac
-index 30be6c1..0ccf8b0 100644
+index 3e93c02..2b96348 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -611,7 +611,7 @@ case "$host" in
+@@ -612,7 +612,7 @@ case "$host" in
  	AC_DEFINE([DISABLE_UTMP], [1], [Define if you don't want to use utmp])
  	AC_DEFINE([DISABLE_WTMP], [1], [Define if you don't want to use wtmp])
  	;;
@@ -94,7 +94,7 @@ index 2192456..151514e 100644
  verbose "test reexec fallback"
  
 diff --git a/regress/test-exec.sh b/regress/test-exec.sh
-index b8e2009..55421ec 100644
+index 508b932..34cdca8 100644
 --- a/regress/test-exec.sh
 +++ b/regress/test-exec.sh
 @@ -15,6 +15,9 @@ OSF1*)
@@ -108,5 +108,5 @@ index b8e2009..55421ec 100644
  
  if [ ! -z "$TEST_SSH_PORT" ]; then
 -- 
-2.21.0
+2.23.0
 

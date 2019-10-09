@@ -1,4 +1,4 @@
-From 4dbe84ce5a781db2768c70ff4e957b70032c77f9 Mon Sep 17 00:00:00 2001
+From 0efe958010fdc121116d4ec4a7b46fac46f5d8e3 Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Mon, 22 Aug 2016 17:47:05 +0200
 Subject: [PATCH 3/4] openssh: skip privilege separation tests
@@ -8,21 +8,35 @@ special-purpose 'sshd' user account and also no easy way to make one.
 
 Signed-off-by: Johannes Schindelin <johannes.schindelin@gmx.de>
 ---
+ Makefile.in      | 2 +-
  regress/Makefile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
+diff --git a/Makefile.in b/Makefile.in
+index adb1977..6a3b0d2 100644
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -595,7 +595,7 @@ regress-unit-binaries: regress-prep $(REGRESSLIBS) \
+ 	regress/unittests/utf8/test_utf8$(EXEEXT) \
+ 	regress/misc/kexfuzz/kexfuzz$(EXEEXT)
+ 
+-tests:	file-tests t-exec interop-tests unit
++tests:	file-tests interop-tests unit
+ 	echo all tests passed
+ 
+ unit: regress-unit-binaries
 diff --git a/regress/Makefile b/regress/Makefile
-index 925edf7..6eff8d9 100644
+index 34c47e8..91c2f96 100644
 --- a/regress/Makefile
 +++ b/regress/Makefile
 @@ -1,6 +1,6 @@
- #	$OpenBSD: Makefile,v 1.100 2019/01/20 23:24:19 djm Exp $
+ #	$OpenBSD: Makefile,v 1.104 2019/09/03 08:37:45 djm Exp $
  
--REGRESS_TARGETS=	unit t1 t2 t3 t4 t5 t6 t7 t8 t9 t10 t11 t12 t-exec
-+REGRESS_TARGETS=	unit t1 t2 t3 t4 t5 t6 t7 t8 t9 t10 t11 t12
- tests:		prep $(REGRESS_TARGETS)
+-tests:		prep file-tests t-exec unit
++tests:		prep file-tests unit
  
- # Interop tests are not run by default
+ REGRESS_TARGETS=	t1 t2 t3 t4 t5 t6 t7 t8 t9 t10 t11 t12
+ 
 -- 
-2.21.0
+2.23.0
 
