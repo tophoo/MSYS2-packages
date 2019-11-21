@@ -4,7 +4,7 @@
 pkgbase=msys2-runtime
 pkgname=('msys2-runtime' 'msys2-runtime-devel')
 pkgver=3.0.7
-pkgrel=3
+pkgrel=4
 pkgdesc="Cygwin POSIX emulation engine"
 arch=('i686' 'x86_64')
 url="https://www.cygwin.com/"
@@ -74,7 +74,14 @@ source=('msys2-runtime'::git://sourceware.org/git/newlib-cygwin.git#tag=cygwin-$
         0048-Make-paths-WCS-MBS-conversion-explicit.patch
         0049-Handle-ORIGINAL_PATH-just-like-PATH.patch
         0050-fixup-Pass-environment-variables-with-empty-values.patch
-        0051-mkdir-always-check-for-existence.patch)
+        0051-mkdir-always-check-for-existence.patch
+        0052-sec_auth-rename-MSYS.1-token-to-MSYS.2.patch
+        0053-Fix-GCC8-errors.patch
+        0054-Cygwin-avoid-GCC-8.3-errors-with-Werror-stringop-tru.patch
+        0055-Fix-compilation-with-GCC-v9.x.patch
+        0056-QueryUnbiasedInterruptTime-must-be-load-from-kernel3.patch
+        0057-Use-MB_CUR_MAX-6-by-default.patch
+        0058-i686-no-longer-claim-that-esp-is-clobbered.patch)
 sha256sums=('SKIP'
             'e0d035187f4bc83cfca16c04275fac8e3dc8cfca06f7044853afc68d28abc3e2'
             '7636f3264bcf904a1bb26678b74eb9c42c581e036527524e73c7a9ac35ff5111'
@@ -126,7 +133,14 @@ sha256sums=('SKIP'
             '6c0f5b3448af0973cf9043ca0d78e2107fde014b8b4b7901466cc426b3ac8306'
             'bc2c1fccefbade667ddc849b06b41d305ba648700d2f0db519cb5a4898d7a0b6'
             '219667befe0a762f875be7f90134d75a08dd7eec935dd7e52e47bb1a3dc7d429'
-            'a0efa03b562c839824112ab898acd698d8cc9d953a692299ef088d1f3adfe54c')
+            'a0efa03b562c839824112ab898acd698d8cc9d953a692299ef088d1f3adfe54c'
+            'c02742ce0b825d5c01dbbec616cacee98aedbb81825cbbf16e381ed667c4e9d8'
+            '8bce86d5e8347e32b9a51823562a5e19d606510770e108b5e3718587c83ae5b2'
+            '9f227586b296251017452ecd9526afbd9c82442a8ba5d33c7121901fa36cef72'
+            '783a2a98821921494cffb899f73ee953d8602cf5285e9d58397b2c22b9209f45'
+            'ba302cbd7f49f5ef9a8db92babe46328d68a6ba4e5d6c80c7a1622ca75852544'
+            '761c6a7d0f4af2490a2e9af4dee0493150c46e7224d3cbcd699a82d4515f77b1'
+            '6758552579d331fc5e60655f8b9363f7ff3bc1fd04b4e17f011af42384dfa80a')
 
 # Helper macro to help make tasks easier #
 del_file_exists() {
@@ -193,6 +207,13 @@ prepare() {
   git am --committer-date-is-author-date "${srcdir}"/0049-Handle-ORIGINAL_PATH-just-like-PATH.patch
   git am --committer-date-is-author-date "${srcdir}"/0050-fixup-Pass-environment-variables-with-empty-values.patch
   git am --committer-date-is-author-date "${srcdir}"/0051-mkdir-always-check-for-existence.patch
+  git am --committer-date-is-author-date "${srcdir}"/0052-sec_auth-rename-MSYS.1-token-to-MSYS.2.patch
+  git am --committer-date-is-author-date "${srcdir}"/0053-Fix-GCC8-errors.patch
+  git am --committer-date-is-author-date "${srcdir}"/0054-Cygwin-avoid-GCC-8.3-errors-with-Werror-stringop-tru.patch
+  git am --committer-date-is-author-date "${srcdir}"/0055-Fix-compilation-with-GCC-v9.x.patch
+  git am --committer-date-is-author-date "${srcdir}"/0056-QueryUnbiasedInterruptTime-must-be-load-from-kernel3.patch
+  git am --committer-date-is-author-date "${srcdir}"/0057-Use-MB_CUR_MAX-6-by-default.patch
+  git am --committer-date-is-author-date "${srcdir}"/0058-i686-no-longer-claim-that-esp-is-clobbered.patch
 }
 
 build() {
