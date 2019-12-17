@@ -1,4 +1,4 @@
-From 86b255a9000a560138020d5dfa1f8147b8ae577b Mon Sep 17 00:00:00 2001
+From 7d04ebc529ef3dfff306f0a7884624d4a300b87d Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?=D0=90=D0=BB=D0=B5=D0=BA=D1=81=D0=B5=D0=B8=CC=86=20=D0=9F?=
  =?UTF-8?q?=D0=B0=D0=B2=D0=BB=D0=BE=D0=B2?= <alexey.pawlow@gmail.com>
 Date: Thu, 12 Mar 2015 14:09:29 +0300
@@ -10,10 +10,10 @@ Subject: [PATCH 06/N] Do not create cygwin symlinks. Instead use deep copy of
  1 file changed, 147 insertions(+)
 
 diff --git a/winsup/cygwin/path.cc b/winsup/cygwin/path.cc
-index 1fb65ca..c3f011c 100644
+index 8207c49..b483ae7 100644
 --- a/winsup/cygwin/path.cc
 +++ b/winsup/cygwin/path.cc
-@@ -1667,6 +1667,86 @@ conv_path_list (const char *src, char *dst, size_t size,
+@@ -1657,6 +1657,86 @@ conv_path_list (const char *src, char *dst, size_t size,
  
  /********************** Symbolic Link Support **************************/
  
@@ -100,7 +100,7 @@ index 1fb65ca..c3f011c 100644
  /* Create a symlink from FROMPATH to TOPATH. */
  
  extern "C" int
-@@ -2095,6 +2175,73 @@ symlink_worker (const char *oldpath, const char *newpath, bool isdevice)
+@@ -2085,6 +2165,73 @@ symlink_worker (const char *oldpath, const char *newpath, bool isdevice)
  	}
        else
  	{

@@ -1,4 +1,4 @@
-From f795d07e46e2e332e4eed7b3c3e86f9942b6aabd Mon Sep 17 00:00:00 2001
+From 767835266b96419dc56272ddbb7254f957ce5109 Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Wed, 17 May 2017 18:13:32 +0200
 Subject: [PATCH 21/N] strace --quiet: be *really* quiet

@@ -1,4 +1,4 @@
-From a942cdb213fcc4063768a089fd49a33e32337499 Mon Sep 17 00:00:00 2001
+From 075799e8de59afa3682f5a153a42633acc0fb6c2 Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Mon, 16 Apr 2018 14:59:39 +0200
 Subject: [PATCH 40/N] Add a helper to obtain a function's address in
@@ -22,7 +22,7 @@ Signed-off-by: Johannes Schindelin <johannes.schindelin@gmx.de>
  create mode 100644 winsup/utils/getprocaddr.c
 
 diff --git a/winsup/utils/Makefile.in b/winsup/utils/Makefile.in
-index 49bb7dd..bbf493b 100644
+index 9bca4c2..4709d03 100644
 --- a/winsup/utils/Makefile.in
 +++ b/winsup/utils/Makefile.in
 @@ -35,6 +35,7 @@ prefix:=@prefix@

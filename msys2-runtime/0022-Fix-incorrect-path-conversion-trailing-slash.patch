@@ -1,4 +1,4 @@
-From 9dcd6bbf5f244dae7d4441b1167b3c281d02b919 Mon Sep 17 00:00:00 2001
+From a6f58a247e342666f9fd1d8a1ced9fd07916846e Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Wed, 14 Mar 2018 17:04:19 +0100
 Subject: [PATCH 22/N] Fix incorrect path conversion (trailing slash)
@@ -42,10 +42,10 @@ index ddeffa4..646eef3 100644
          {
            set_errno(conv.error);
 diff --git a/winsup/cygwin/path.cc b/winsup/cygwin/path.cc
-index ad152e4..f311a04 100644
+index 9a46a5b..26b3b85 100644
 --- a/winsup/cygwin/path.cc
 +++ b/winsup/cygwin/path.cc
-@@ -1236,9 +1236,22 @@ path_conv::check (const char *src, unsigned opt,
+@@ -1223,9 +1223,22 @@ path_conv::check (const char *src, unsigned opt,
  		cfree (wide_path);
  	      wide_path = NULL;
  	    }
@@ -69,7 +69,7 @@ index ad152e4..f311a04 100644
  	{
  	  size_t n = strlen (this->path);
  	  /* Do not add trailing \ to UNC device names like \\.\a: */
-@@ -1248,6 +1261,7 @@ path_conv::check (const char *src, unsigned opt,
+@@ -1235,6 +1248,7 @@ path_conv::check (const char *src, unsigned opt,
  	      this->modifiable_path ()[n] = '\\';
  	      this->modifiable_path ()[n + 1] = '\0';
  	    }
@@ -78,7 +78,7 @@ index ad152e4..f311a04 100644
  
        if (opt & PC_OPEN)
 diff --git a/winsup/cygwin/path.h b/winsup/cygwin/path.h
-index 0c94c61..69a78bc 100644
+index e76157b..e304cce 100644
 --- a/winsup/cygwin/path.h
 +++ b/winsup/cygwin/path.h
 @@ -58,6 +58,7 @@ enum pathconv_arg

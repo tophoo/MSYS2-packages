@@ -1,7 +1,7 @@
-From 1c26ea11b6cbb7f50e061c0c229cb9a7d4cb3b3d Mon Sep 17 00:00:00 2001
+From 643a2373a4187a4d9171760f6f02f8de2ab35f94 Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Thu, 21 Nov 2019 12:30:12 +0100
-Subject: [PATCH 55/N] Fix compilation with GCC v9.x
+Subject: [PATCH 51/N] Fix compilation with GCC v9.x
 
 The `logwtmp()` fixes might very well fix real buffer overflows...
 

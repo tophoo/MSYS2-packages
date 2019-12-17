@@ -1,4 +1,4 @@
-From 4ea44e410ca35ecacbeda3f635e21b06d2153adb Mon Sep 17 00:00:00 2001
+From 7f84a7168e010c32098ed9a29f82ff3803dc223a Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Tue, 21 Mar 2017 13:18:38 +0100
 Subject: [PATCH 49/N] Handle ORIGINAL_PATH just like PATH
@@ -26,7 +26,7 @@ Signed-off-by: Johannes Schindelin <johannes.schindelin@gmx.de>
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/winsup/cygwin/environ.cc b/winsup/cygwin/environ.cc
-index 8a39fb7..978965e 100644
+index 6dc4672..7041820 100644
 --- a/winsup/cygwin/environ.cc
 +++ b/winsup/cygwin/environ.cc
 @@ -310,6 +310,7 @@ static win_env conv_envvars[] =

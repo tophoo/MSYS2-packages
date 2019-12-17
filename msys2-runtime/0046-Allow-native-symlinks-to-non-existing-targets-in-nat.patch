@@ -1,4 +1,4 @@
-From 86dedc43788f0d6be15bb6c8704381e1ed10c8cf Mon Sep 17 00:00:00 2001
+From 0b8b18206594a8b8dfab4c106dddd10f067e93c2 Mon Sep 17 00:00:00 2001
 From: Karsten Blees <blees@dcon.de>
 Date: Wed, 20 May 2015 16:32:52 +0200
 Subject: [PATCH 46/N] Allow native symlinks to non-existing targets in
@@ -30,10 +30,10 @@ Signed-off-by: Johannes Schindelin <johannes.schindelin@gmx.de>
  1 file changed, 33 insertions(+), 9 deletions(-)
 
 diff --git a/winsup/cygwin/path.cc b/winsup/cygwin/path.cc
-index ad152e4..a8e437c 100644
+index 9a46a5b..935129b 100644
 --- a/winsup/cygwin/path.cc
 +++ b/winsup/cygwin/path.cc
-@@ -1820,7 +1820,7 @@ symlink_native (const char *oldpath, path_conv &win32_newpath)
+@@ -1810,7 +1810,7 @@ symlink_native (const char *oldpath, path_conv &win32_newpath)
    path_conv win32_oldpath;
    PUNICODE_STRING final_oldpath, final_newpath;
    UNICODE_STRING final_oldpath_buf;
@@ -42,7 +42,7 @@ index ad152e4..a8e437c 100644
  
    if (isabspath (oldpath))
      {
-@@ -1881,14 +1881,39 @@ symlink_native (const char *oldpath, path_conv &win32_newpath)
+@@ -1871,14 +1871,39 @@ symlink_native (const char *oldpath, path_conv &win32_newpath)
  	  wcpcpy (e_old, c_old);
  	}
      }
@@ -89,7 +89,7 @@ index ad152e4..a8e437c 100644
      }
    /* Don't allow native symlinks to Cygwin special files.  However, the
       caller shoud know because this case shouldn't be covered by the
-@@ -1917,7 +1942,6 @@ symlink_native (const char *oldpath, path_conv &win32_newpath)
+@@ -1907,7 +1932,6 @@ symlink_native (const char *oldpath, path_conv &win32_newpath)
  	final_oldpath->Buffer[1] = L'\\';
      }
    /* Try to create native symlink. */
