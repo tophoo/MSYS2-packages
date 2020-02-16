@@ -1,7 +1,7 @@
 # Maintainer: Alexey Pavlov <alexpux@gmail.com>
 
 pkgname=openssh
-pkgver=8.1p1
+pkgver=8.2p1
 pkgrel=1
 pkgdesc='Free version of the SSH connectivity tools'
 url='http://www.openssh.org/portable.html'
@@ -15,7 +15,7 @@ source=("https://cloudflare.cdn.openbsd.org/pub/OpenBSD/OpenSSH/portable/${pkgna
         0002-openssh-work-around-Cygwin-declaring-setkey.patch
         0003-openssh-skip-privilege-separation-tests.patch
         0004-Allow-scp-to-copy-files-that-start-with-a-Windows-dr.patch)
-sha256sums=('02f5dbef3835d0753556f973cd57b4c19b6b1f6cd24c03445e23ac77ca1b93ff'
+sha256sums=('43925151e6cf6cee1450190c0e9af4dc36b41c12737619edff8bcebdff64e671'
             'SKIP'
             '865f4ab0d752de6c6868ded2ff3ddbf4ce8604b8f61d4ea256fb9889bada041f'
             '0816f320377a77190f7622cbe47c4695130504d1cf0a5628b3e9ffaf6fb4072c'
