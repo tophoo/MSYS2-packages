@@ -3,7 +3,7 @@
 pkgbase="libcbor"
 pkgname=("${pkgbase}" "${pkgbase}-devel")
 pkgver=0.5.0
-pkgrel=1
+pkgrel=0
 pkgdesc="A C library for parsing and generating CBOR, a general-purpose schema-less binary data format"
 arch=('i686' 'x86_64')
 url="https://github.com/PJK/libcbor"
