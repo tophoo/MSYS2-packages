@@ -3,7 +3,7 @@
 pkgbase="libfido2"
 pkgname=("${pkgbase}" "${pkgbase}-devel")
 pkgver=1.3.1
-pkgrel=0
+pkgrel=1
 pkgdesc="libfido2 provides library functionality and command-line tools to communicate with a FIDO device over USB, and to verify attestation and assertion signatures."
 arch=('i686' 'x86_64')
 url="https://github.com/Yubico/libfido2"
