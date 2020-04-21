@@ -1,4 +1,4 @@
-From 7c1d18bcc3fc6cf4e59cd2d82e2e39b19d98ab42 Mon Sep 17 00:00:00 2001
+From 712929d6fb267c5ec8a2c28a613933b9939b0be8 Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Wed, 21 Nov 2018 13:55:56 +0100
 Subject: [PATCH 2/3] Support MSYS2
@@ -15,10 +15,10 @@ This is an almost mechanical "copy/edit Cygwin support" patch.
  crypto/build.info                 |  2 +-
  tools/c_rehash.in                 |  1 +
  util/process_docs.pl              |  1 +
- 13 files changed, 75 insertions(+), 10 deletions(-)
+ 10 files changed, 71 insertions(+), 6 deletions(-)
 
 diff --git a/Configurations/10-main.conf b/Configurations/10-main.conf
-index 5cf345d..a17caea 100644
+index df1cc00..8be6944 100644
 --- a/Configurations/10-main.conf
 +++ b/Configurations/10-main.conf
 @@ -1505,6 +1505,57 @@ my %targets = (
@@ -95,12 +95,12 @@ index 47eddd6..34f0f3b 100644
          return {
              %{$shared_info{'cygwin-shared'}},
 diff --git a/Configurations/unix-Makefile.tmpl b/Configurations/unix-Makefile.tmpl
-index e712019..df5a5ae 100644
+index 3a24d55..0159fc9 100644
 --- a/Configurations/unix-Makefile.tmpl
 +++ b/Configurations/unix-Makefile.tmpl
-@@ -14,7 +14,7 @@
-      our $dsoext = $target{dso_extension} || ".so";
-      our $makedepprog = $disabled{makedepend} ? undef : $config{makedepprog};
+@@ -34,7 +34,7 @@
+      $mingw_installroot = $ENV{$mingw_installroot} // $mingw_installdflt;
+      $mingw_commonroot = $ENV{$mingw_commonroot} // $mingw_commondflt;
  
 -     sub windowsdll { $config{target} =~ /^(?:Cygwin|mingw)/ }
 +     sub windowsdll { $config{target} =~ /^(?:Cygwin|Msys|mingw)/ }
@@ -108,10 +108,10 @@ index e712019..df5a5ae 100644
       # Shared AIX support is special. We put libcrypto[64].so.ver into
       # libcrypto.a and use libcrypto_a.a as static one.
 diff --git a/Configure b/Configure
-index d5dc36c..5801912 100755
+index 2e9efaa..b35e10d 100755
 --- a/Configure
 +++ b/Configure
-@@ -1124,7 +1124,7 @@ $target{CXXFLAGS}//=$target{CFLAGS} if $target{CXX};
+@@ -1128,7 +1128,7 @@ $target{CXXFLAGS}//=$target{CFLAGS} if $target{CXX};
  $target{cxxflags}//=$target{cflags} if $target{CXX};
  $target{exe_extension}="";
  $target{exe_extension}=".exe" if ($config{target} eq "DJGPP"
@@ -120,7 +120,7 @@ index d5dc36c..5801912 100755
  $target{exe_extension}=".pm"  if ($config{target} =~ /vos/);
  
  ($target{shared_extension_simple}=$target{shared_extension})
-@@ -1132,7 +1132,7 @@ $target{exe_extension}=".pm"  if ($config{target} =~ /vos/);
+@@ -1136,7 +1136,7 @@ $target{exe_extension}=".pm"  if ($config{target} =~ /vos/);
      unless defined($target{shared_extension_simple});
  $target{dso_extension}//=$target{shared_extension_simple};
  ($target{shared_import_extension}=$target{shared_extension_simple}.".a")
@@ -130,20 +130,20 @@ index d5dc36c..5801912 100755
  # Fill %config with values from %user, and in case those are undefined or
  # empty, use values from %target (acting as a default).
 diff --git a/apps/build.info b/apps/build.info
-index 751d8da..4c27432 100644
+index 0153736..dcc7ab5 100644
 --- a/apps/build.info
 +++ b/apps/build.info
-@@ -22,7 +22,7 @@ IF[{- !$disabled{apps} -}]
-   INCLUDE[openssl]=.. ../include
-   DEPEND[openssl]=libapps.a ../libssl
- 
--IF[{- $config{target} =~ /^(?:Cygwin|mingw|VC-)/ -}]
-+IF[{- $config{target} =~ /^(?:Cygwin|Msys|mingw|VC-)/ -}]
-   GENERATE[openssl.rc]=../util/mkrc.pl openssl
-   SOURCE[openssl]=openssl.rc
- ENDIF
+@@ -63,7 +63,7 @@ IF[{- !$disabled{apps} -}]
+     DEPEND[rsautl.o]=progs.h
+     DEPEND[genrsa.o]=progs.h
+   ENDIF
+-  IF[{- $config{target} =~ /^(?:Cygwin|mingw|VC-)/ -}]
++  IF[{- $config{target} =~ /^(?:Cygwin|Msys|mingw|VC-)/ -}]
+     GENERATE[openssl.rc]=../util/mkrc.pl openssl
+     SOURCE[openssl]=openssl.rc
+   ENDIF
 diff --git a/build.info b/build.info
-index 3dda4e8..25e198a 100644
+index 05c9bdd..3fc8ce2 100644
 --- a/build.info
 +++ b/build.info
 @@ -71,7 +71,7 @@ ELSIF[{- $config{target} =~ /^vms/ -}]
@@ -166,7 +166,7 @@ index 3dda4e8..25e198a 100644
   SHARED_NAME[libcrypto]=libcrypto-{- $sover_filename -}{- $config{target} eq "mingw64" ? "-x64" : "" -}
   SHARED_NAME[libssl]=libssl-{- $sover_filename -}{- $config{target} eq "mingw64" ? "-x64" : "" -}
 diff --git a/config b/config
-index b8adf34..02f3571 100755
+index f28828d..ec1a3f6 100755
 --- a/config
 +++ b/config
 @@ -331,6 +331,10 @@ case "${SYSTEM}:${RELEASE}:${VERSION}:${MACHINE}" in
@@ -180,7 +180,7 @@ index b8adf34..02f3571 100755
      vxworks*)
         echo "${MACHINE}-whatever-vxworks"; exit 0;
         ;;
-@@ -815,6 +819,7 @@ case "$GUESSOS" in
+@@ -812,6 +816,7 @@ case "$GUESSOS" in
    # these are all covered by the catchall below
    i[3456]86-*-cygwin) OUT="Cygwin-x86" ;;
    *-*-cygwin) OUT="Cygwin-${MACHINE}" ;;
@@ -225,5 +225,5 @@ index 30b149e..0f97ce1 100755
  foreach my $section (sort @{$options{section}}) {
      my $subdir = "man$section";
 -- 
-2.19.1
+2.26.0
 
