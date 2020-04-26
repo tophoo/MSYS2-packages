@@ -2,8 +2,8 @@
 
 _realname=YAML-Syck
 pkgname=perl-YAML-Syck
-pkgver=1.30
-pkgrel=2
+pkgver=1.32
+pkgrel=1
 pkgdesc="Fast, lightweight YAML loader and dumper"
 arch=('i686' 'x86_64')
 url="http://search.cpan.org/dist/YAML-Syck/"
@@ -14,8 +14,8 @@ groups=('perl-modules')
 options=('!emptydirs')
 source=(https://www.cpan.org/authors/id/T/TO/TODDR/YAML-Syck-${pkgver}.tar.gz
         'msysize.patch')
-sha256sums=('62b344216176556a0c497065ad8385157b9f261c6e687218dfa19ec7d7258dc7'
-            '808289add8a10652ddf25d25e3053ff9b5619daa92dd923f02bf70b2366d17cd')
+sha256sums=('db1d90ec03e0466e134e6032d03eaf73a7305631bcdbbfd8fe5356bd77cae9bb'
+            'd8ff46832fdba59261a18786c20e3027ee844a75f1914f8bfd6a3e682c5f66b6')
 
 prepare() {
   cd YAML-Syck-${pkgver}
