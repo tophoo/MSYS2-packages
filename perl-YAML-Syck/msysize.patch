@@ -1,11 +1,22 @@
---- YAML-Syck-1.27/inc/Module/Install/Can.pm.orig	2013-11-10 13:42:56.977200000 +0400
-+++ YAML-Syck-1.27/inc/Module/Install/Can.pm	2013-11-10 13:48:13.062400000 +0400
-@@ -132,7 +132,7 @@
+diff --git a/inc/ExtUtils/HasCompiler.pm b/inc/ExtUtils/HasCompiler.pm
+index 7c54238..5762cf9 100644
+--- a/inc/ExtUtils/HasCompiler.pm
++++ b/inc/ExtUtils/HasCompiler.pm
+@@ -104,7 +104,7 @@ sub can_compile_loadable_object {
+ 			my $lib = '-l' . ($libperl =~ /lib([^.]+)\./)[0];
+ 			push @extra, "$abs_basename.def", $lib, $perllibs;
+ 		}
+-		elsif ($^O eq 'cygwin') {
++		elsif ($^O eq 'cygwin' or $^O eq 'msys') {
+ 			push @extra, catfile($incdir, $config->get('useshrplib') ? 'libperl.dll.a' : 'libperl.a');
+ 		}
+ 		elsif ($^O eq 'aix') {
+@@ -153,7 +153,7 @@ sub can_compile_loadable_object {
+ 	}
  }
  
- # Fix Cygwin bug on maybe_command();
--if ( $^O eq 'cygwin' ) {
-+if ( $^O eq 'cygwin' or $^O eq 'msys' ) {
- 	require ExtUtils::MM_Cygwin;
- 	require ExtUtils::MM_Win32;
- 	if ( ! defined(&ExtUtils::MM_Cygwin::maybe_command) ) {
+-my %static_unsupported_on = map { $_ => 1 } qw/VMS aix MSWin32 cygwin/;
++my %static_unsupported_on = map { $_ => 1 } qw/VMS aix MSWin32 cygwin msys/;
+ sub can_compile_static_library {
+ 	my %args = @_;
+ 
