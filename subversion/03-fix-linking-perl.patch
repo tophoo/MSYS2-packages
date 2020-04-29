@@ -4,58 +4,82 @@ From: David Rothenberger <daveroth@acm.org>
 
 
 ---
- Makefile.in             |    1 +
- build.conf              |    3 ++-
- build/ac-macros/swig.m4 |    6 ++++++
- 3 files changed, 9 insertions(+), 1 deletion(-)
+ Makefile.in                                         | 1 +
+ build.conf                                          | 7 ++-----
+ subversion/bindings/swig/perl/native/Makefile.PL.in | 7 ++++---
+ 3 files changed, 7 insertions(+), 8 deletions(-)
 
 diff --git a/Makefile.in b/Makefile.in
-index e63a09c..c6329d9 100644
+index faf2a70..6a73b4c 100644
 --- a/Makefile.in
 +++ b/Makefile.in
-@@ -145,6 +145,7 @@ SWIG_PY_COMPILE = @SWIG_PY_COMPILE@
+@@ -153,6 +153,7 @@ SWIG_PY_COMPILE = @SWIG_PY_COMPILE@
  SWIG_PY_LINK = @SWIG_PY_LINK@
  SWIG_PY_LIBS = @SWIG_PY_LIBS@
  SWIG_PL_INCLUDES = @SWIG_PL_INCLUDES@
-+SWIG_PL_LIBS = @SWIG_PL_LIBS@
++SWIG_PL_LINK = @SWIG_PL_LINK@
  SWIG_RB_INCLUDES = @SWIG_RB_INCLUDES@ -I$(SWIG_SRC_DIR)/ruby/libsvn_swig_ruby
  SWIG_RB_COMPILE = @SWIG_RB_COMPILE@
  SWIG_RB_LINK = @SWIG_RB_LINK@
 diff --git a/build.conf b/build.conf
-index a22bdaf..2795c23 100644
+index b7177f7..33084f7 100644
 --- a/build.conf
 +++ b/build.conf
-@@ -575,7 +575,8 @@ msvc-export = ../bindings/swig/python/libsvn_swig_py/swigutil_py.h
+@@ -587,7 +587,8 @@ description = Subversion utility library for Python bindings
  type = swig_lib
  lang = perl
  path = subversion/bindings/swig/perl/libsvn_swig_perl
 -libs = libsvn_delta libsvn_subr apriconv apr perl swig
 +libs = libsvn_delta libsvn_subr apriconv apr swig
-+link-cmd = $(LINK) $(SWIG_PL_LIBS)
++link-cmd = $(LINK) $(SWIG_PL_LINK)
  install = swig-pl-lib
  # need special build rule to include
  compile-cmd = $(COMPILE_SWIG_PL)
-diff --git a/build/ac-macros/swig.m4 b/build/ac-macros/swig.m4
-index ae6cf10..19f09db 100644
---- a/build/ac-macros/swig.m4
-+++ b/build/ac-macros/swig.m4
-@@ -174,6 +174,11 @@ AC_DEFUN(SVN_FIND_SWIG,
-     AC_MSG_RESULT([$PERL_VERSION])
-     if test "$PERL_VERSION" -ge "5008000"; then
-       SWIG_PL_INCLUDES="\$(SWIG_INCLUDES) `$PERL -MExtUtils::Embed -e ccopts`"
-+
-+      AC_CACHE_CHECK([how to link Perl libraries], [ac_cv_perl_libs], [
-+        ac_cv_perl_libs="`$PERL -MExtUtils::Embed -e ldopts`"
-+      ])
-+      SWIG_PL_LIBS="`SVN_REMOVE_STANDARD_LIB_DIRS($ac_cv_perl_libs)`"
-     else
-       AC_MSG_WARN([perl bindings require perl 5.8.0 or newer.])
-     fi
-@@ -300,6 +305,7 @@ int main()
-   AC_SUBST(SWIG_PY_LINK)
-   AC_SUBST(SWIG_PY_LIBS)
-   AC_SUBST(SWIG_PL_INCLUDES)
-+  AC_SUBST(SWIG_PL_LIBS)
-   AC_SUBST(SWIG_RB_LINK)
-   AC_SUBST(SWIG_RB_LIBS)
-   AC_SUBST(SWIG_RB_INCLUDES)
+@@ -1521,10 +1522,6 @@ external-lib = $(SVN_XML_LIBS)
+ type = lib
+ external-lib = $(SVN_SWIG_LIBS)
+ 
+-[perl]
+-type = lib
+-external-lib = $(SVN_PERL_LIBS)
+-
+ [httpd]
+ type = lib
+ external-lib = -lmod_dav -lhttpd
+diff --git a/subversion/bindings/swig/perl/native/Makefile.PL.in b/subversion/bindings/swig/perl/native/Makefile.PL.in
+index 3b36901..30e2793 100644
+--- a/subversion/bindings/swig/perl/native/Makefile.PL.in
++++ b/subversion/bindings/swig/perl/native/Makefile.PL.in
+@@ -36,13 +36,13 @@ my $svnlib_builddir = "${top_builddir}/subversion";
+ my $swig_srcdir = "${svnlib_srcdir}/bindings/swig";
+ my $swig_builddir = "${svnlib_builddir}/bindings/swig";
+ 
+-my @modules = qw/client delta fs ra repos wc/;
++my @modules = qw/client fs ra delta repos wc/;
+ my @ldpaths = (abs_path($swig_builddir) . "/perl/libsvn_swig_perl/.libs",
+                map { abs_path($svnlib_builddir) . "/libsvn_$_/.libs" }
+                    @modules, qw/diff subr ra_local ra_svn ra_serf
+                                 fs_base fs_util fs_fs fs_x/);
+ 
+-my @ldmodules = map {"-lsvn_$_-1"} (@modules, qw/diff subr/);
++my @ldmodules = map {"-lsvn_$_-1"} (map { $_ eq 'ra' ? qw/ra ra_local ra_svn ra_serf/ : $_ } @modules, qw/diff subr/);
+ 
+ my $apr_shlib_path_var = '@SVN_APR_SHLIB_PATH_VAR@';
+ my $cppflags = <<'EOT';
+@@ -62,6 +62,7 @@ chomp($cflags);
+ $cflags =~ s/-ansi\s+//g;
+ $cflags =~ s/-std=c89\s+//g;
+ $cflags =~ s/-Wall//g;
++$cflags =~ s/-Werror=format-security//g;
+ $cflags =~ s/-Wunused//g;
+ $cflags =~ s/-Wshadow//g;
+ $cflags =~ s/-Wstrict-prototypes//g;
+@@ -88,7 +89,7 @@ my %config = (
+     OBJECT => q/$(O_FILES)/,
+     LIBS => [join(' ', $apr_ldflags,
+                   (map {"-L$_"} @ldpaths),
+-                  @ldmodules, '-lsvn_swig_perl-1',
++                  '-lsvn_swig_perl-1', @ldmodules, '-laprutil-1', '-lapr-1', '-lintl', '-lsasl2',
+                   `$swig -perl -ldflags`)],
+     LDFLAGS => join(' ', (map {"-L$_"} @ldpaths), '@LDFLAGS@ @SWIG_PL_LINK@'),
+     LDDLFLAGS => join(' ', (map {"-L$_"} @ldpaths),
