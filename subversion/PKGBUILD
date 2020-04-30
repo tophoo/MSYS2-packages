@@ -1,8 +1,8 @@
 # Maintainer: Alexey Pavlov <alexpux@gmail.com>
 
 pkgname=subversion
-pkgver=1.9.7
-pkgrel=3
+pkgver=1.13.0
+pkgrel=1
 pkgdesc="A Modern Concurrent Version Control System"
 arch=('i686' 'x86_64')
 url="https://subversion.apache.org/"
@@ -41,12 +41,12 @@ source=(https://archive.apache.org/dist/subversion/subversion-${pkgver}.tar.bz2{
         subversion-1.9.1-msys2.patch
         remove-checking-symlink.patch
         90-use-copy-instead-symlink.patch)
-sha256sums=('c3b118333ce12e501d509e66bb0a47bcc34d053990acab45559431ac3e491623'
+sha256sums=('bc50ce2c3faa7b1ae9103c432017df98dfd989c4239f9f8270bb3a314ed9e5bd'
             'SKIP'
             'b09dd041aba0078c8d50df130ef2f96c3ef8486279a620532fef4fe48ef9961e'
             'dfbd7b00ebdb3208614dc8622a99d3b12c0fd774f3207ac4d0e3b2d8a84b2a9e'
             '77fd514a60978fd9c5b2a5abfc051e22054685f4d25458f75f3c03aa5057e6aa'
-            'f4da4254af50ea509d8007116c8e8aa21d83621acc8136d0f2df94be2cdad1cb'
+            'f894cfc7026390daf8355e92a8824b2f24db73b4e11775a6135471a2de954cb9'
             'c31590874160a3a434fedad2ce2eef8cd9580c661fe80c9f65566f0be7c900f9'
             '52d727ef76a4b1081dc6fa705becdee870ff63b06398ffa0986491fa6677658b'
             'c77f72a397e588d07390fe1d184cb2d54dc47d92d87019b8364a38512c2e80f3'
@@ -60,7 +60,7 @@ sha256sums=('c3b118333ce12e501d509e66bb0a47bcc34d053990acab45559431ac3e491623'
             '4d3c427c3bb423cd2a3ac244cd76694c9849035373c09018d0e0f2bffc595c54'
             'd480726924809f3586d6145433efc9e1633db751c28fc7be13abfd83328f1a20'
             '8682d9f7da2ba8607ed15daf3beec92e5dacda3a6e4c07baaef8991264eb44cd'
-            '7152e0213f8e8e7a1b50349aaca57e7331b3eb239ada1afed617c22a7617578a'
+            '2020ea4cc203d9d14f8de698b5dbf8437c7cdfc9787f7e68198fb5387f071434'
             '484bf6d7f1440d7a8ee4a0bb00366937990694ed9a4a0f662225435df949aebc'
             'c7ebf4320b0147256a6b5ebab459603cbb7b8beb32da70b2ad85e6fb33609e30'
             '0e9a0f483bf53a105f3f53244ce3d03d6ed8c02f70cab1423e9e7c5ba44882e9'
