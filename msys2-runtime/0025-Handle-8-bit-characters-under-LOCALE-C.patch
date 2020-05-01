@@ -1,4 +1,4 @@
-From 4d503f548c9e1736c799b4099e9bccd715e62687 Mon Sep 17 00:00:00 2001
+From a0efb4ef2ebae8eb6b60b9a9b0380fd08ae65847 Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Fri, 20 Feb 2015 13:56:22 +0000
 Subject: [PATCH 25/N] Handle 8-bit characters under LOCALE=C

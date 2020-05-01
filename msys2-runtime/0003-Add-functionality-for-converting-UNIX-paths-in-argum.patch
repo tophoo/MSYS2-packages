@@ -1,4 +1,4 @@
-From 84dd053a0e5ab76027baf2f37bb97121118d4cd1 Mon Sep 17 00:00:00 2001
+From c651dc681aaf25258737541898960a442f0ba4cf Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?=D0=90=D0=BB=D0=B5=D0=BA=D1=81=D0=B5=D0=B8=CC=86=20=D0=9F?=
  =?UTF-8?q?=D0=B0=D0=B2=D0=BB=D0=BE=D0=B2?= <alexey.pawlow@gmail.com>
 Date: Thu, 12 Mar 2015 13:58:27 +0300
@@ -34,7 +34,7 @@ index 11e0a78..553f66e 100644
  	net.o \
  	netdb.o \
 diff --git a/winsup/cygwin/environ.cc b/winsup/cygwin/environ.cc
-index 8c5ce64..b44fcb2 100644
+index 3a03657..527f342 100644
 --- a/winsup/cygwin/environ.cc
 +++ b/winsup/cygwin/environ.cc
 @@ -1056,7 +1056,7 @@ env_compare (const void *key, const void *memb)
@@ -88,7 +88,7 @@ index 269591a..71c3f22 100644
  char ** __reg2 win32env_to_cygenv (PWCHAR rawenv, bool posify);
  
 diff --git a/winsup/cygwin/external.cc b/winsup/cygwin/external.cc
-index 94431bb..ffeafcb 100644
+index 14a1dfb..07aa2fa 100644
 --- a/winsup/cygwin/external.cc
 +++ b/winsup/cygwin/external.cc
 @@ -141,7 +141,7 @@ create_winenv (const char * const *env)
@@ -907,7 +907,7 @@ index 0000000..67d85ec
 +#endif /* end of include guard: PATH_CONV_H_DB4IQBH3 */
 +
 diff --git a/winsup/cygwin/path.cc b/winsup/cygwin/path.cc
-index b5efd61..8207c49 100644
+index 4da8884..bfc916a 100644
 --- a/winsup/cygwin/path.cc
 +++ b/winsup/cygwin/path.cc
 @@ -66,6 +66,7 @@
@@ -918,7 +918,7 @@ index b5efd61..8207c49 100644
  #undef basename
  
  suffix_info stat_suffixes[] =
-@@ -3438,6 +3439,74 @@ fchdir (int fd)
+@@ -3422,6 +3423,74 @@ fchdir (int fd)
    return res;
  }
  
@@ -994,7 +994,7 @@ index b5efd61..8207c49 100644
  
  /* Cover functions to the path conversion routines.
 diff --git a/winsup/cygwin/spawn.cc b/winsup/cygwin/spawn.cc
-index cea79e3..457ae9d 100644
+index 3e8c836..cb83a37 100644
 --- a/winsup/cygwin/spawn.cc
 +++ b/winsup/cygwin/spawn.cc
 @@ -277,6 +277,27 @@ child_info_spawn::worker (const char *prog_arg, const char *const *argv,

@@ -1,4 +1,4 @@
-From 31c103cc0061f71015c16a9748fed4fe12d459d2 Mon Sep 17 00:00:00 2001
+From 87d0e489baeef73185fee03f5a0748c20bbd9e92 Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Wed, 18 Feb 2015 11:07:17 +0000
 Subject: [PATCH 31/N] Leave Git's :name and :/message arguments alone, please

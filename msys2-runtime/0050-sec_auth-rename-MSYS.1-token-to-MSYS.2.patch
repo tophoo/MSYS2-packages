@@ -1,4 +1,4 @@
-From 96f255eb42162e1124597010ffc553d66f021e4b Mon Sep 17 00:00:00 2001
+From ecb462114416a5a0be9eed7a9d629c4d1a4f5de4 Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Thu, 21 Nov 2019 12:27:50 +0100
 Subject: [PATCH 50/N] sec_auth: rename MSYS.1 token to MSYS.2

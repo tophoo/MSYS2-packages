@@ -1,4 +1,4 @@
-From 0c94f37f340dd265e29d65a2a0b89637de09bb2b Mon Sep 17 00:00:00 2001
+From 4ce5289195a1b53678461790a3533c6ecf6c8677 Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Wed, 18 Feb 2015 11:07:17 +0000
 Subject: [PATCH 33/N] Leave paths containing '/~' alone

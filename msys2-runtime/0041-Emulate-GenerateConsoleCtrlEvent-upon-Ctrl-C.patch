@@ -1,4 +1,4 @@
-From 7c894b07d5381f1b13dc1fa69b39a18b86852ce7 Mon Sep 17 00:00:00 2001
+From d1f0ce5fc440111896e1ec092b57c3cd3e3b24f8 Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Fri, 20 Mar 2015 09:56:28 +0000
 Subject: [PATCH 41/N] Emulate GenerateConsoleCtrlEvent() upon Ctrl+C
@@ -84,7 +84,7 @@ Signed-off-by: Johannes Schindelin <johannes.schindelin@gmx.de>
  create mode 100644 winsup/cygwin/include/cygwin/exit_process.h
 
 diff --git a/winsup/cygwin/exceptions.cc b/winsup/cygwin/exceptions.cc
-index b84915b..3dfb7d5 100644
+index b390699..904f36b 100644
 --- a/winsup/cygwin/exceptions.cc
 +++ b/winsup/cygwin/exceptions.cc
 @@ -28,6 +28,7 @@ details. */
@@ -499,10 +499,10 @@ index 0000000..e0981bb
 +
 +#endif
 diff --git a/winsup/cygwin/include/cygwin/signal.h b/winsup/cygwin/include/cygwin/signal.h
-index e659d7a..081b0a5 100644
+index bc4ad18..f047982 100644
 --- a/winsup/cygwin/include/cygwin/signal.h
 +++ b/winsup/cygwin/include/cygwin/signal.h
-@@ -478,6 +478,7 @@ extern const char *sys_siglist[];
+@@ -482,6 +482,7 @@ extern const char *sys_siglist[];
  extern const char __declspec(dllimport) *sys_sigabbrev[];
  extern const char __declspec(dllimport) *sys_siglist[];
  #endif

@@ -1,4 +1,4 @@
-From b63563e852fa03e25b507b4ef81bd1358e9d99db Mon Sep 17 00:00:00 2001
+From bb74c2d77c936d2aad185da82e80910c728a3669 Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Wed, 18 Feb 2015 10:45:01 +0000
 Subject: [PATCH 28/N] Stop assuming that there are no spaces in POSIX-style

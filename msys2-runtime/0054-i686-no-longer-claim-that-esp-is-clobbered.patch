@@ -1,4 +1,4 @@
-From dd5aa267f6f28aef2a241cc7a01bb71a434b403c Mon Sep 17 00:00:00 2001
+From 34c63f1e017cda9b1bb34de089f12da1aa442f0f Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Thu, 21 Nov 2019 23:01:00 +0100
 Subject: [PATCH 54/N] i686: no longer claim that %esp is clobbered

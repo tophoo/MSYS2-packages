@@ -1,4 +1,4 @@
-From f17bc222c285ae3e59671ef35b20d932595d9ced Mon Sep 17 00:00:00 2001
+From 71579a44d1cdf190d67cd9afd70471cc69c7ad0c Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Wed, 18 Feb 2015 12:32:17 +0000
 Subject: [PATCH 24/N] Pass environment variables with empty values
@@ -17,7 +17,7 @@ Signed-off-by: Johannes Schindelin <johannes.schindelin@gmx.de>
  1 file changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/winsup/cygwin/environ.cc b/winsup/cygwin/environ.cc
-index 86d2dcf..a010a1c 100644
+index f729ba3..b556bda 100644
 --- a/winsup/cygwin/environ.cc
 +++ b/winsup/cygwin/environ.cc
 @@ -1315,11 +1315,11 @@ build_env (const char * const *envp, PWCHAR &envblock, int &envc,

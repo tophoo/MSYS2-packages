@@ -1,4 +1,4 @@
-From a6f58a247e342666f9fd1d8a1ced9fd07916846e Mon Sep 17 00:00:00 2001
+From c5a09527b5bf527cae4768d9eeede69d288ac5d0 Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Wed, 14 Mar 2018 17:04:19 +0100
 Subject: [PATCH 22/N] Fix incorrect path conversion (trailing slash)
@@ -42,10 +42,10 @@ index ddeffa4..646eef3 100644
          {
            set_errno(conv.error);
 diff --git a/winsup/cygwin/path.cc b/winsup/cygwin/path.cc
-index 9a46a5b..26b3b85 100644
+index 602882f..b79f604 100644
 --- a/winsup/cygwin/path.cc
 +++ b/winsup/cygwin/path.cc
-@@ -1223,9 +1223,22 @@ path_conv::check (const char *src, unsigned opt,
+@@ -1211,9 +1211,22 @@ path_conv::check (const char *src, unsigned opt,
  		cfree (wide_path);
  	      wide_path = NULL;
  	    }
@@ -69,7 +69,7 @@ index 9a46a5b..26b3b85 100644
  	{
  	  size_t n = strlen (this->path);
  	  /* Do not add trailing \ to UNC device names like \\.\a: */
-@@ -1235,6 +1248,7 @@ path_conv::check (const char *src, unsigned opt,
+@@ -1223,6 +1236,7 @@ path_conv::check (const char *src, unsigned opt,
  	      this->modifiable_path ()[n] = '\\';
  	      this->modifiable_path ()[n + 1] = '\0';
  	    }
@@ -78,14 +78,14 @@ index 9a46a5b..26b3b85 100644
  
        if (opt & PC_OPEN)
 diff --git a/winsup/cygwin/path.h b/winsup/cygwin/path.h
-index e76157b..e304cce 100644
+index b94f13d..a56194e 100644
 --- a/winsup/cygwin/path.h
 +++ b/winsup/cygwin/path.h
-@@ -58,6 +58,7 @@ enum pathconv_arg
-   PC_SYM_NOFOLLOW_PROCFD = _BIT (11),
-   PC_KEEP_HANDLE	 = _BIT (12),
-   PC_NO_ACCESS_CHECK	 = _BIT (13),
-+  PC_KEEP_FINAL_SLASH	 = _BIT (14),
+@@ -59,6 +59,7 @@ enum pathconv_arg
+   PC_KEEP_HANDLE	 = _BIT (12),	/* keep handle for later stat calls */
+   PC_NO_ACCESS_CHECK	 = _BIT (13),	/* helper flag for error check */
+   PC_SYM_NOFOLLOW_DIR	 = _BIT (14),	/* don't follow a trailing slash */
++  PC_KEEP_FINAL_SLASH	 = _BIT (15),   /* do not remove a trailing slash */
    PC_DONT_USE		 = _BIT (31)	/* conversion to signed happens. */
  };
  
