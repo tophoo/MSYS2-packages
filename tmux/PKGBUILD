@@ -1,7 +1,9 @@
 # Maintainer: Alexey Pavlov <alexpux@gmail.com>
 
 pkgname=tmux
-pkgver=2.7
+_base_ver=3.1
+_bugfix=
+pkgver=${_base_ver}${_bugfix}
 pkgrel=1
 pkgdesc='A terminal multiplexer'
 url='https://tmux.github.io/'
@@ -11,18 +13,18 @@ conflict=('tmux-git')
 replaces=('tmux-git')
 depends=('ncurses' 'libevent')
 makedepends=('ncurses-devel' 'libevent-devel')
-source=(https://github.com/tmux/tmux/releases/download/$pkgver/tmux-$pkgver.tar.gz
+source=(${pkgname}-${pkgver}.tar.gz::https://github.com/tmux/tmux/archive/${_base_ver}${_bugfix/./}.tar.gz
         'msys-platform.patch'
         'no-check-dirs-permission.patch'
         'inherit-msystem-var.patch')
 
-sha256sums=('9ded7d100313f6bc5a87404a4048b3745d61f2332f99ec1400a7c4ed9485d452'
+sha256sums=('a03344dcc8a3912b6d01c677a535d1e3f79822d716f007cda5f64feeefbeb656'
             'cf7e0f642d43fc97f7c55be41c693cceab5c891f81fcee687e918075e55cd533'
             '8f1938c9bcb99fba5441e11379a193c17eee582a03c04f1bde8089d58a84f44f'
-            'c4dfb160e7aaeef37034868fc4b3083e87588f6f5d69a80a7d5f7d936073a822')
+            'cc832494d4fd4c7bd86a77af5f830422d342a812c890ef1d1d2e8d8a08352cd4')
 
 prepare() {
-  cd "${srcdir}/$pkgname-$pkgver"
+  cd "${srcdir}/${pkgname}-${_base_ver}${_bugfix/./}"
   patch -p1 -i "${srcdir}"/msys-platform.patch
   patch -p0 -i "${srcdir}"/no-check-dirs-permission.patch
   patch -p1 -i "${srcdir}"/inherit-msystem-var.patch
@@ -30,11 +32,11 @@ prepare() {
   cp osdep-cygwin.c osdep-msys.c
 
   #msg2 "Running autogen.sh"
-  #./autogen.sh
+  ./autogen.sh
 }
 
 build() {
-  cd "${srcdir}/$pkgname-$pkgver"
+  cd "${srcdir}/${pkgname}-${_base_ver}${_bugfix/./}"
   ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
@@ -44,7 +46,7 @@ build() {
 }
 
 package() {
-  cd "${srcdir}/$pkgname-$pkgver"
+  cd "${srcdir}/${pkgname}-${_base_ver}${_bugfix/./}"
   make DESTDIR="${pkgdir}" install
 
   install -d "${pkgdir}"/usr/share/licenses/tmux
