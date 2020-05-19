@@ -4,7 +4,7 @@
 pkgbase=msys2-runtime
 pkgname=('msys2-runtime' 'msys2-runtime-devel')
 pkgver=3.1.4
-pkgrel=1
+pkgrel=2
 pkgdesc="Cygwin POSIX emulation engine"
 arch=('i686' 'x86_64')
 url="https://www.cygwin.com/"
@@ -80,7 +80,9 @@ source=('msys2-runtime'::git://sourceware.org/git/newlib-cygwin.git#tag=cygwin-$
         0054-i686-no-longer-claim-that-esp-is-clobbered.patch
         0055-fixup-Do-not-create-cygwin-symlinks.-Instead-use-dee.patch
         0056-Work-around-backward-incompatible-bfd_-changes.patch
-        0057-setup_pseudoconsole-handle-missing-incorrect-helper-.patch)
+        0057-setup_pseudoconsole-handle-missing-incorrect-helper-.patch
+        0058-Default-to-disable_pcon.patch
+        0059-Introduce-the-enable_pcon-value-for-MSYS.patch)
 sha256sums=('SKIP'
             'e5f6e7422d0918de87e1fc0cb073d8c4ef43357c1f7df2173be3383e5fb6bcd3'
             'c83011d4010f7323e7d3692da454cb765d6955bef2e0ec73d8301c40c4e914c9'
@@ -138,7 +140,9 @@ sha256sums=('SKIP'
             '8061ae18c546c78249df0ed3b623094f75d801f3288c782be0fef4990277b36f'
             'f4ca76a75ed661dd0a79a8367ad27d25c9a15b1e9147dbf7de3bcaacd56019ae'
             'c95e53ce6dd0f0310de229a6d59da32a6ca5cdbc2e874dd963911b87b7f28716'
-            '04343ab3e32b03287715aba6c10fdfc9f28ddf07066433fdc37bc7c75aa69ac7')
+            '04343ab3e32b03287715aba6c10fdfc9f28ddf07066433fdc37bc7c75aa69ac7'
+            '8c35800e6c47848b4cbe9ebd080b4b77125913df588763eef67c29eaf8541bb9'
+            '79a6fd1723340e7d3f8775f1b109e5b3f5f2c353787e2470c1c5bad63ec1fd2e')
 
 # Helper macro to help make tasks easier #
 del_file_exists() {
@@ -216,6 +220,8 @@ prepare() {
   git am --committer-date-is-author-date "${srcdir}"/0055-fixup-Do-not-create-cygwin-symlinks.-Instead-use-dee.patch
   git am --committer-date-is-author-date "${srcdir}"/0056-Work-around-backward-incompatible-bfd_-changes.patch
   git am --committer-date-is-author-date "${srcdir}"/0057-setup_pseudoconsole-handle-missing-incorrect-helper-.patch
+  git am --committer-date-is-author-date "${srcdir}"/0058-Default-to-disable_pcon.patch
+  git am --committer-date-is-author-date "${srcdir}"/0059-Introduce-the-enable_pcon-value-for-MSYS.patch
 }
 
 build() {
