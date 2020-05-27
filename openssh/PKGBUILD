@@ -17,10 +17,10 @@ source=("https://cloudflare.cdn.openbsd.org/pub/OpenBSD/OpenSSH/portable/${pkgna
         0004-Allow-scp-to-copy-files-that-start-with-a-Windows-dr.patch)
 sha256sums=('43925151e6cf6cee1450190c0e9af4dc36b41c12737619edff8bcebdff64e671'
             'SKIP'
-            '865f4ab0d752de6c6868ded2ff3ddbf4ce8604b8f61d4ea256fb9889bada041f'
-            '0816f320377a77190f7622cbe47c4695130504d1cf0a5628b3e9ffaf6fb4072c'
-            'eddf8c2e8e030459e6bf8b20b133a007d0fb285d0d92c94ead10b6558ca86989'
-            '713c5bce17260986402b2099baecbdc571a66d19fb1d5c36419e36ce291720a0')
+            '572d8aa267a493205e3e6d5b194bf1800e161c3745a07e36cdf325b8014c99b8'
+            '7eca1a47c2b523945899d5b7ad0418e00e7a5a30f4d6a6d3414a7328b520fd7e'
+            'e06ff5a726761d067e67e0f42ecad8d4786a8f31d3269dedf034798f3e9103ca'
+            'edad721c623aa96506c23444aedfdea8b7a4659574b55b05755e913879dbf3c6')
 validpgpkeys=('59C2118ED206D927E667EBE3D3E5F56B6D920D30')
 
 backup=('etc/ssh/ssh_config' 'etc/ssh/sshd_config')

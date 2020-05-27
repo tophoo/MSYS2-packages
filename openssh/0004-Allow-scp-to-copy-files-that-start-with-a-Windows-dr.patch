@@ -1,4 +1,4 @@
-From dc8996a9b53cf2cc7e6a04542e8ce05c7d044d00 Mon Sep 17 00:00:00 2001
+From b4cbdc7fd58ce84e280ab7d7eb86b1696d02a4dc Mon Sep 17 00:00:00 2001
 From: Sam Hocevar <sam@hocevar.net>
 Date: Tue, 20 Sep 2016 10:34:18 +0200
 Subject: [PATCH 4/4] Allow scp to copy files that start with a Windows drive
@@ -38,10 +38,10 @@ Signed-off-by: Sam Hocevar <sam@hocevar.net>
  1 file changed, 4 insertions(+)
 
 diff --git a/misc.c b/misc.c
-index 88833d7..3b79bcc 100644
+index 554ceb0..9defd4f 100644
 --- a/misc.c
 +++ b/misc.c
-@@ -624,6 +624,10 @@ colon(char *cp)
+@@ -636,6 +636,10 @@ colon(char *cp)
  
  	if (*cp == ':')		/* Leading colon is part of file name. */
  		return NULL;
@@ -53,5 +53,5 @@ index 88833d7..3b79bcc 100644
  		flag = 1;
  
 -- 
-2.23.0
+2.26.2
 
