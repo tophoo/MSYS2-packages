@@ -4,23 +4,23 @@ From: David Rothenberger <daveroth@acm.org>
 
 
 ---
- Makefile.in                                         | 1 +
- build.conf                                          | 7 ++-----
- subversion/bindings/swig/perl/native/Makefile.PL.in | 7 ++++---
- 3 files changed, 7 insertions(+), 8 deletions(-)
+ Makefile.in                                        |    1 +
+ build.conf                                         |    7 ++-----
+ .../bindings/swig/perl/native/Makefile.PL.in       |    1 +
+ 3 files changed, 4 insertions(+), 5 deletions(-)
 
 diff --git a/Makefile.in b/Makefile.in
 index faf2a70..6a73b4c 100644
 --- a/Makefile.in
 +++ b/Makefile.in
 @@ -153,6 +153,7 @@ SWIG_PY_COMPILE = @SWIG_PY_COMPILE@
- SWIG_PY_LINK = @SWIG_PY_LINK@
  SWIG_PY_LIBS = @SWIG_PY_LIBS@
+ SWIG_PY_ERRMSG = @SWIG_PY_ERRMSG@
  SWIG_PL_INCLUDES = @SWIG_PL_INCLUDES@
 +SWIG_PL_LINK = @SWIG_PL_LINK@
+ SWIG_PL_ERRMSG = @SWIG_PL_ERRMSG@
  SWIG_RB_INCLUDES = @SWIG_RB_INCLUDES@ -I$(SWIG_SRC_DIR)/ruby/libsvn_swig_ruby
  SWIG_RB_COMPILE = @SWIG_RB_COMPILE@
- SWIG_RB_LINK = @SWIG_RB_LINK@
 diff --git a/build.conf b/build.conf
 index b7177f7..33084f7 100644
 --- a/build.conf
@@ -47,25 +47,9 @@ index b7177f7..33084f7 100644
  type = lib
  external-lib = -lmod_dav -lhttpd
 diff --git a/subversion/bindings/swig/perl/native/Makefile.PL.in b/subversion/bindings/swig/perl/native/Makefile.PL.in
-index 3b36901..30e2793 100644
+index 3b36901..8ec0bac 100644
 --- a/subversion/bindings/swig/perl/native/Makefile.PL.in
 +++ b/subversion/bindings/swig/perl/native/Makefile.PL.in
-@@ -36,13 +36,13 @@ my $svnlib_builddir = "${top_builddir}/subversion";
- my $swig_srcdir = "${svnlib_srcdir}/bindings/swig";
- my $swig_builddir = "${svnlib_builddir}/bindings/swig";
- 
--my @modules = qw/client delta fs ra repos wc/;
-+my @modules = qw/client fs ra delta repos wc/;
- my @ldpaths = (abs_path($swig_builddir) . "/perl/libsvn_swig_perl/.libs",
-                map { abs_path($svnlib_builddir) . "/libsvn_$_/.libs" }
-                    @modules, qw/diff subr ra_local ra_svn ra_serf
-                                 fs_base fs_util fs_fs fs_x/);
- 
--my @ldmodules = map {"-lsvn_$_-1"} (@modules, qw/diff subr/);
-+my @ldmodules = map {"-lsvn_$_-1"} (map { $_ eq 'ra' ? qw/ra ra_local ra_svn ra_serf/ : $_ } @modules, qw/diff subr/);
- 
- my $apr_shlib_path_var = '@SVN_APR_SHLIB_PATH_VAR@';
- my $cppflags = <<'EOT';
 @@ -62,6 +62,7 @@ chomp($cflags);
  $cflags =~ s/-ansi\s+//g;
  $cflags =~ s/-std=c89\s+//g;
@@ -74,12 +58,3 @@ index 3b36901..30e2793 100644
  $cflags =~ s/-Wunused//g;
  $cflags =~ s/-Wshadow//g;
  $cflags =~ s/-Wstrict-prototypes//g;
-@@ -88,7 +89,7 @@ my %config = (
-     OBJECT => q/$(O_FILES)/,
-     LIBS => [join(' ', $apr_ldflags,
-                   (map {"-L$_"} @ldpaths),
--                  @ldmodules, '-lsvn_swig_perl-1',
-+                  '-lsvn_swig_perl-1', @ldmodules, '-laprutil-1', '-lapr-1', '-lintl', '-lsasl2',
-                   `$swig -perl -ldflags`)],
-     LDFLAGS => join(' ', (map {"-L$_"} @ldpaths), '@LDFLAGS@ @SWIG_PL_LINK@'),
-     LDDLFLAGS => join(' ', (map {"-L$_"} @ldpaths),
