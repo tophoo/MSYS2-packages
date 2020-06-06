@@ -66,7 +66,17 @@ sha256sums=('6ba8e218f9f97a83a799e58a3c6da1221d034b18d9d8cbbcb6ec52ab11722102'
             'd821304ee957ef4adbb0a8dec9cea3fe62ad7163aef132317d28f70ea25162ca'
             'fc545e375d8af4ef6d8afad453453480664b6a2ff74915f94b8a7da7de14155b')
 
+case "$(uname -m)" in
+i686)
+# py3c was not built in 32-bit MSYS2; In fact, all 32-bit development of MSYS2 stopped.
+# Just skip the Python bindings; Git for Windows does not need them.
+makedepends=('perl' 'swig' 'ruby' 'liblz4-devel' 'libsqlite-devel' 'libserf-devel' 'libsasl-devel' 'gmp-devel')
+PYTHON_SITELIB=
+;;
+*)
 PYTHON_SITELIB=$(/usr/bin/python -c 'from distutils.sysconfig import * ; print(get_python_lib(0,0));')
+;;
+esac
 
 prepare() {
   cd ${startdir}/
@@ -123,6 +133,11 @@ build() {
       --enable-disallowing-of-undefined-references \
       --enable-local-library-preloading
 
+  test -n "$PYTHON_SITELIB" || {
+    sed -i 's/\(swig:.*\) [^ ]*-py/\1/' Makefile
+    sed -i 's/\(swig:.*\) [^ ]*-py/\1/' build-outputs.mk
+  }
+
   make clean-swig
   make autogen-swig
   make all
@@ -133,8 +148,10 @@ build() {
   plain "Compiling swig bindings: perl"
   make swig-pl
 
+  test -z "$PYTHON_SITELIB" || {
   plain "Compiling swig bindings: python"
   make swig-py swig_pydir=${PYTHON_SITELIB}/libsvn swig_pydir_extra=${PYTHON_SITELIB}/svn
+  }
 }
 
 #check() {
@@ -149,7 +166,7 @@ package() {
   make -j1 DESTDIR="${pkgdir}" INSTALLDIRS=vendor \
     swig_pydir=${PYTHON_SITELIB}/libsvn \
     swig_pydir_extra=${PYTHON_SITELIB}/svn \
-    install install-tools install-swig-py install-swig-pl install-swig-rb
+    install install-tools $(test -z "$PYTHON_SITELIB" || echo install-swig-py) install-swig-pl install-swig-rb
 
   install -dm755 "${pkgdir}"/usr/share/subversion
   cp -a tools/hook-scripts "${pkgdir}"/usr/share/subversion/
