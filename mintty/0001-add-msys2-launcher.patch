@@ -1,7 +1,7 @@
-From 0269cb818915d82f732753215caa29325cc85e70 Mon Sep 17 00:00:00 2001
+From f69f748f74d82f63ef73c745d523f755bd0ce0a2 Mon Sep 17 00:00:00 2001
 From: Mihail Konev <k.mvc@ya.ru>
 Date: Sat, 4 Mar 2017 07:43:42 +0500
-Subject: [PATCH 1/3] add msys2 launcher
+Subject: [PATCH 1/2] add msys2 launcher
 
 Also makes mintty pinnable to Windows Taskbar.
 
@@ -36,7 +36,7 @@ least for the current Windows 10.
  create mode 100644 src/launcher.h
 
 diff --git a/src/appinfo.h b/src/appinfo.h
-index 89f0a9e..0de8600 100644
+index 714e235..a895494 100644
 --- a/src/appinfo.h
 +++ b/src/appinfo.h
 @@ -10,7 +10,7 @@
@@ -248,7 +248,7 @@ index 642b086..2373606 100644
   * The actual VERSIONINFO resource.
   */
 diff --git a/src/winmain.c b/src/winmain.c
-index 24ba242..89a6b3b 100644
+index 3f8a33e..257cc0a 100644
 --- a/src/winmain.c
 +++ b/src/winmain.c
 @@ -54,6 +54,9 @@ char * mintty_debug;
@@ -261,7 +261,7 @@ index 24ba242..89a6b3b 100644
  
  char * home;
  char * cmd;
-@@ -4616,6 +4619,8 @@ main(int argc, char *argv[])
+@@ -5000,6 +5003,8 @@ main(int argc, char *argv[])
      }
    }
  
@@ -270,7 +270,7 @@ index 24ba242..89a6b3b 100644
    // The window class.
    class_atom = RegisterClassExW(&(WNDCLASSEXW){
      .cbSize = sizeof(WNDCLASSEXW),
-@@ -4624,7 +4629,7 @@ main(int argc, char *argv[])
+@@ -5008,7 +5013,7 @@ main(int argc, char *argv[])
      .cbClsExtra = 0,
      .cbWndExtra = 0,
      .hInstance = inst,
@@ -279,7 +279,7 @@ index 24ba242..89a6b3b 100644
      .hIconSm = small_icon,
      .hCursor = LoadCursor(null, IDC_IBEAM),
      .hbrBackground = null,
-@@ -4632,7 +4637,6 @@ main(int argc, char *argv[])
+@@ -5016,7 +5021,6 @@ main(int argc, char *argv[])
      .lpszClassName = wclass,
    });
  
@@ -287,7 +287,7 @@ index 24ba242..89a6b3b 100644
    // Initialise the fonts, thus also determining their width and height.
    win_init_fonts(cfg.font.size);
  
-@@ -4929,10 +4933,28 @@ main(int argc, char *argv[])
+@@ -5323,10 +5327,28 @@ main(int argc, char *argv[])
    if (*cfg.background == '%')
      scale_to_image_ratio();
  
@@ -321,5 +321,5 @@ index 24ba242..89a6b3b 100644
    // Finally show the window.
    ShowWindow(wnd, show_cmd);
 -- 
-2.22.0
+2.26.2
 
