@@ -1,4 +1,4 @@
-From 76b6049cdf5efd2e4c30df69c45029d5c9dbb960 Mon Sep 17 00:00:00 2001
+From 4aae6368a911890466c445d9a6fdff8df74a0655 Mon Sep 17 00:00:00 2001
 From: Karsten Blees <blees@dcon.de>
 Date: Wed, 15 Apr 2015 21:05:42 +0200
 Subject: [PATCH 23/N] Pass the TZ variable to non-msys programs if it is
@@ -30,10 +30,10 @@ Signed-off-by: Karsten Blees <blees@dcon.de>
  1 file changed, 9 insertions(+), 1 deletion(-)
 
 diff --git a/winsup/cygwin/environ.cc b/winsup/cygwin/environ.cc
-index 8e1f9ea..f729ba3 100644
+index df7bc69..be35764 100644
 --- a/winsup/cygwin/environ.cc
 +++ b/winsup/cygwin/environ.cc
-@@ -1195,7 +1195,15 @@ build_env (const char * const *envp, PWCHAR &envblock, int &envc,
+@@ -1204,7 +1204,15 @@ build_env (const char * const *envp, PWCHAR &envblock, int &envc,
        {
  	/* Don't pass timezone environment to non-msys applications */
  	if (ascii_strncasematch(*srcp, "TZ=", 3))

@@ -1,4 +1,4 @@
-From 491629eced8b685f24bf503ec17bef5368163685 Mon Sep 17 00:00:00 2001
+From fc4c8292d63d9d84d98cfacbbb6ba0164958cd92 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?=D0=90=D0=BB=D0=B5=D0=BA=D1=81=D0=B5=D0=B8=CC=86=20=D0=9F?=
  =?UTF-8?q?=D0=B0=D0=B2=D0=BB=D0=BE=D0=B2?= <alexey.pawlow@gmail.com>
 Date: Tue, 1 Mar 2016 13:19:18 +0300
@@ -10,7 +10,7 @@ Subject: [PATCH 09/N] Special case for converting root directory to have
  1 file changed, 16 insertions(+), 9 deletions(-)
 
 diff --git a/winsup/cygwin/path.cc b/winsup/cygwin/path.cc
-index 39b9c03..9eeb011 100644
+index 3cfcde2..ba5465e 100644
 --- a/winsup/cygwin/path.cc
 +++ b/winsup/cygwin/path.cc
 @@ -701,6 +701,12 @@ path_conv::check (const char *src, unsigned opt,

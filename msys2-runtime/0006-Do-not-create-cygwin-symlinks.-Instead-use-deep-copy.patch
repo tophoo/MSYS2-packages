@@ -1,4 +1,4 @@
-From 67e4b13685211f698cc6bb4d2346efb92cccacd6 Mon Sep 17 00:00:00 2001
+From faf374b8aa42c624714a6ff6eb6e54b81452cfee Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?=D0=90=D0=BB=D0=B5=D0=BA=D1=81=D0=B5=D0=B8=CC=86=20=D0=9F?=
  =?UTF-8?q?=D0=B0=D0=B2=D0=BB=D0=BE=D0=B2?= <alexey.pawlow@gmail.com>
 Date: Thu, 12 Mar 2015 14:09:29 +0300
@@ -6,11 +6,11 @@ Subject: [PATCH 06/N] Do not create cygwin symlinks. Instead use deep copy of
  files/folders.
 
 ---
- winsup/cygwin/path.cc | 147 ++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 147 insertions(+)
+ winsup/cygwin/path.cc | 148 ++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 148 insertions(+)
 
 diff --git a/winsup/cygwin/path.cc b/winsup/cygwin/path.cc
-index bfc916a..39b9c03 100644
+index e56b69d..3cfcde2 100644
 --- a/winsup/cygwin/path.cc
 +++ b/winsup/cygwin/path.cc
 @@ -1643,6 +1643,86 @@ conv_path_list (const char *src, char *dst, size_t size,
@@ -100,7 +100,7 @@ index bfc916a..39b9c03 100644
  /* Create a symlink from FROMPATH to TOPATH. */
  
  extern "C" int
-@@ -2071,6 +2151,73 @@ symlink_worker (const char *oldpath, path_conv &win32_newpath, bool isdevice)
+@@ -2175,6 +2255,74 @@ symlink_worker (const char *oldpath, path_conv &win32_newpath, bool isdevice)
  	}
        else
  	{
@@ -123,6 +123,7 @@ index bfc916a..39b9c03 100644
 +                 to the directory of the destination */
 +             {
 +                /* Determine the character position of the last path component */
++                const char *newpath = win32_newpath.get_posix();
 +                int pos = strlen (newpath);
 +                while (--pos >= 0)
 +                  if (isdirsep (newpath[pos]))

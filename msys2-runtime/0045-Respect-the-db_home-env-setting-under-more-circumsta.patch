@@ -1,4 +1,4 @@
-From 35b5fcb91fb1a15be2d4fdfd79153a0c451952d7 Mon Sep 17 00:00:00 2001
+From 353cced7ec4e9671c78cafe885e200a98ea58749 Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Thu, 7 Jan 2016 15:54:27 +0000
 Subject: [PATCH 45/N] Respect the `db_home: env` setting under more
@@ -24,10 +24,10 @@ Signed-off-by: Johannes Schindelin <johannes.schindelin@gmx.de>
  1 file changed, 8 insertions(+), 2 deletions(-)
 
 diff --git a/winsup/cygwin/uinfo.cc b/winsup/cygwin/uinfo.cc
-index f9c33bd..bab7ec5 100644
+index 8d740cb..620c2f6 100644
 --- a/winsup/cygwin/uinfo.cc
 +++ b/winsup/cygwin/uinfo.cc
-@@ -1110,6 +1110,8 @@ cygheap_pwdgrp::get_home (PUSER_INFO_3 ui, cygpsid &sid, PCWSTR dom,
+@@ -1105,6 +1105,8 @@ cygheap_pwdgrp::get_home (PUSER_INFO_3 ui, cygpsid &sid, PCWSTR dom,
  
    for (uint16_t idx = 0; !home && idx < NSS_SCHEME_MAX; ++idx)
      {
@@ -36,7 +36,7 @@ index f9c33bd..bab7ec5 100644
        switch (home_scheme[idx].method)
  	{
  	case NSS_SCHEME_FALLBACK:
-@@ -2273,6 +2275,9 @@ pwdgrp::fetch_account_from_windows (fetch_user_arg_t &arg, cyg_ldap *pldap)
+@@ -2265,6 +2267,9 @@ pwdgrp::fetch_account_from_windows (fetch_user_arg_t &arg, cyg_ldap *pldap)
  	{
  	  /* Just some fake. */
  	  sid = csid.create (99, 1, 0);
@@ -46,7 +46,7 @@ index f9c33bd..bab7ec5 100644
  	  break;
  	}
        else if (arg.id >= UNIX_POSIX_OFFSET)
-@@ -2833,10 +2838,11 @@ pwdgrp::fetch_account_from_windows (fetch_user_arg_t &arg, cyg_ldap *pldap)
+@@ -2825,10 +2830,11 @@ pwdgrp::fetch_account_from_windows (fetch_user_arg_t &arg, cyg_ldap *pldap)
       logon.  Unless it's the SYSTEM account.  This conveniently allows to
       logon interactively as SYSTEM for debugging purposes. */
    else if (acc_type != SidTypeUser && sid != well_known_system_sid)

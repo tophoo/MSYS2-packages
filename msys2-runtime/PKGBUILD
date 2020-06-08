@@ -3,8 +3,8 @@
 
 pkgbase=msys2-runtime
 pkgname=('msys2-runtime' 'msys2-runtime-devel')
-pkgver=3.1.4
-pkgrel=2
+pkgver=3.1.5
+pkgrel=1
 pkgdesc="Cygwin POSIX emulation engine"
 arch=('i686' 'x86_64')
 url="https://www.cygwin.com/"
@@ -40,11 +40,11 @@ source=('msys2-runtime'::git://sourceware.org/git/newlib-cygwin.git#tag=cygwin-$
         0014-Add-debugging-for-strace-make_command_line.patch
         0015-environ.cc-New-facility-environment-variable-MSYS2_E.patch
         0016-Fix-native-symbolic-link-spawn-passing-wrong-arg0.patch
-        0017-fixup-Add-MSYS-triplets.patch
-        0018-fixup-Add-functionality-for-converting-UNIX-paths-in.patch
-        0019-fixup-Add-functionality-for-converting-UNIX-paths-in.patch
-        0020-fixup-Add-functionality-for-converting-UNIX-paths-in.patch
-        0021-strace-quiet-be-really-quiet.patch
+        0017-QueryUnbiasedInterruptTime-must-be-load-from-kernel3.patch
+        0018-strace-quiet-be-really-quiet.patch
+        0019-Default-to-disable_pcon.patch
+        0020-Introduce-the-enable_pcon-value-for-MSYS.patch
+        0021-Don-t-create-WSL-symlinks-for-MSYS2.patch
         0022-Fix-incorrect-path-conversion-trailing-slash.patch
         0023-Pass-the-TZ-variable-to-non-msys-programs-if-it-is-s.patch
         0024-Pass-environment-variables-with-empty-values.patch
@@ -73,76 +73,60 @@ source=('msys2-runtime'::git://sourceware.org/git/newlib-cygwin.git#tag=cygwin-$
         0047-POSIX-ify-the-SHELL-variable.patch
         0048-Make-paths-WCS-MBS-conversion-explicit.patch
         0049-Handle-ORIGINAL_PATH-just-like-PATH.patch
-        0050-sec_auth-rename-MSYS.1-token-to-MSYS.2.patch
-        0051-Fix-compilation-with-GCC-v9.x.patch
-        0052-QueryUnbiasedInterruptTime-must-be-load-from-kernel3.patch
-        0053-Use-MB_CUR_MAX-6-by-default.patch
-        0054-i686-no-longer-claim-that-esp-is-clobbered.patch
-        0055-fixup-Do-not-create-cygwin-symlinks.-Instead-use-dee.patch
-        0056-Work-around-backward-incompatible-bfd_-changes.patch
-        0057-setup_pseudoconsole-handle-missing-incorrect-helper-.patch
-        0058-Default-to-disable_pcon.patch
-        0059-Introduce-the-enable_pcon-value-for-MSYS.patch)
+        0050-Use-MB_CUR_MAX-6-by-default.patch
+        0051-popen-call-usr-bin-sh-instead-of-bin-sh.patch)
 sha256sums=('SKIP'
-            'e5f6e7422d0918de87e1fc0cb073d8c4ef43357c1f7df2173be3383e5fb6bcd3'
-            'c83011d4010f7323e7d3692da454cb765d6955bef2e0ec73d8301c40c4e914c9'
-            '8d6a46b02c856a4e94ea0da19617fe803ca5713579441a9e53dd47c34f5d272a'
-            'cf21f5afe03a947bce783a248352610be8330e5283fa39716f8f1bf191ee3642'
-            '9019cf95b453109dd87d038e51cf6dadda64fc52c1452bb825eb83094ec4ca3a'
-            'c0f6c07eb63f4a1179b2a8d3353d0329f40b8d6dbf58dd73fe94b96637824067'
-            'e8f18daa15e44412ecc842b54bc1a72defd541fa7e355464109e3adb90278e9a'
-            'b6522dc79f7395ed84136919f587304cd011834226991086e4a5aefcf07fbf24'
-            'b4244658d1d7afb15917bc97a0c44217add116edb979d7843fcccbed49d9e46b'
-            'ccefa5c0346b9d7858b918262187f174140152be8cb24ac280e289878320f482'
-            '9699c48b866aabf3a8b147244e0d161258590d1ccf3224770d6688f00bc20321'
-            '7c4bcd03909c12d6553419b0e02826202e1f38be55bfaea4575a3968ce3369b4'
-            'b0e62404c39e4d884c72c45a79412da874377808fc9f77983b42e8db77dba8d7'
-            'ce0be02b6fc4b1450d7a7ca65b954cfb1f4fb0c2f9f9a3bdec894a06e29d61a2'
-            '95e3292ed91578d28530abdf57b2af503ab9df9d9178d96184ef70f8653cc9da'
-            'f4ffafa96bc7ce14ba940276f58bd514fa937c71e4d73fe171ce42486633710f'
-            'e000948161de103c81b19224ac18195c3fae04c0bace7865f3ca688d62f39f3f'
-            '7dd9ae354276587f74ce537011f2420639cbeea7f61407fd98361b8b03550168'
-            '3c082475b54bb4de6bb15a039e235e6d2eaa1621a544b511fb910ebc18457d93'
-            '8863eab4cc5ce981e0adbc7cb3a058e3322ad4a4b07d16ec307f1f1af717d87f'
-            'ac6b153e9b01ebbf2e481ffcd04938467d6638ae47a0a84d7bb72deec759e977'
-            'afc1fedf6181495f0946c042c778b790f14b46474aded92507a8f5de8be10a73'
-            '419f79dbd6da862090a4c62f9076eecf854a47c5704e0c41cbbbc784b775a9f0'
-            'fcf67535d65de1d4c2d96ff9bb2bd4b6cc76de76709acf3b6c362acc0ad1de18'
-            'e0d1d8e8460adb5f61960c3e122bf6b2f3cef4c4924e8d6a74160f1f438db332'
-            'd01e6b26fe3ff2bf7e4dd42002a1c37f331ce4778aa65551b3c58565b849f716'
-            '417e9b9cfb731fc73252333b1396c37817fc9eaf9aafb3a2e95c0433e5aeb0fe'
-            '50170f9640f165d43e79ad37b535c1548fdf9a80ea01009c18b9a4acb671ad4c'
-            '1089377243a146a8285af6ab63c217dc7005a47c12b684ae3e851fe98b93bd06'
-            'c4f46ab9cc968d02e8db4673862d94f8375904190af8d09670f456de22d01de1'
-            '47463b1b5c478be27e5bfda420a14f64c63bfec56751586bf91fddc419083582'
-            '41322efeb0828497ad80ef7226fc787a10b2b9e76c1d3166d5d39aa3b60b1d0d'
-            'ff8df4c201d6d4b7abc12663645813ba908eec6bf9ced6d8bd3cc98f25dfbaba'
-            'd2d0ab6143385544a0b4bfe9b2e445759f2498b2e886adf1a54a0ce4bb606f45'
-            '45dde43de1f39e26b5ffd33f475fac2e61d8ae131a6391e4aa5f5b557d58414e'
-            '621427799b339dd39b4ba2724fe56c14602ea0c9406127b37d80193cafb54a5a'
-            'c1c41947eb970e38703463af8cbcd79a037f8b34c496371939ba01195e427121'
-            '8ee9e606fccbf64fbec2a3865b816caaaaf450e2bfee864678460bae506bc103'
-            'abf045a798336c9762719d53ee6187de71465384e506c0464cf02909cc5cef16'
-            '338b8113e6b9d89466545970f2576ceb9d0d63eaca0490a50998a72deb2e8028'
-            '018dff2b1a61da82a360eb7a8a4a5c2a9c629f3d189ca47f331266d0d878c54c'
-            '7150468932e26c3832b6dd5cbf79d323ae4c9040a162837b50f2183946b043fb'
-            '910f06defcc345f4925f326f0acffbe7690ea9cc5690e43596c0398e09139e40'
-            '488891239db9479956919ff852d341916210a70f8232013e0e5cc2061f1f582d'
-            '3ff130774f21c92585a531c217e1bb5d446bf36eae047ddafd4540047ed88331'
-            'b3e58e9c99654f2eed75e82a7f8b913fffcd507b4e07ba0445f5a4a8ac183b7c'
-            '388216ca79b0617f83835338c43858c99b40d12fe8ee63c6053c764f9ff9a8fe'
-            '44b42955af59d590523d2f8c3dc548204c0dd751e951058d20e1fed682960dfd'
-            'f04f688310d112b63e9708433acd151e9f77e749c863880cbffda3cd2c7f1ece'
-            'a133732946263d876224ee8eea1c5d4c675d22f1142d7d3a6873dd46040344b3'
-            '0882951168fa69e0ebd639dff5fb17049ee1709eeb0a314cdd5402c5b01bc58a'
-            '71408c19f738133a3d9318c81c81cc307bcbcddf352ed57ae8ea7bfc56af60de'
-            'b30caabf13ce34814b5151e2438a10183c7961e2fafac08f9b377db9bdf5a5fa'
-            '8061ae18c546c78249df0ed3b623094f75d801f3288c782be0fef4990277b36f'
-            'f4ca76a75ed661dd0a79a8367ad27d25c9a15b1e9147dbf7de3bcaacd56019ae'
-            'c95e53ce6dd0f0310de229a6d59da32a6ca5cdbc2e874dd963911b87b7f28716'
-            '04343ab3e32b03287715aba6c10fdfc9f28ddf07066433fdc37bc7c75aa69ac7'
-            '8c35800e6c47848b4cbe9ebd080b4b77125913df588763eef67c29eaf8541bb9'
-            '79a6fd1723340e7d3f8775f1b109e5b3f5f2c353787e2470c1c5bad63ec1fd2e')
+            'dd1ba61024998e2afc22df0c672a47ad2f497a3e473edddd7cb0dddbed5bb74c'
+            '61e7a49d57f9ba8be7cf2df938b5495eb50171932fe2638a738e58264f6ec4cd'
+            'f6eb49dc48cc38bbd32e7f8deb41f3437089a89a2238870c4f706aac0a7140d2'
+            '54a8375c24d71bf762736c5bf011fb17bad7365f8d14a36e63d0c48c6b89117f'
+            '11a9074954f43f5864cb98f5f8ae6da3b8b7cf672ab76fd07a737a98b42a8dea'
+            '590592f8989f3b129ce79c992f75a5539548bdcf05a3ef756bc99497a308678c'
+            'cf5248ee42024ec8fa9c7dc4ff108a1887ee9ed38506ebe6f8861b36ec421485'
+            '4bd41973baaf054685988f7049ce0964e76bbfe1c9c09dcbe8a8a0cd105b5f9e'
+            '7eb35c1609caa572853975e296ec395b034b2bb0e287fa007e249fa213f3f784'
+            '403d37aedd13d505a7faff54ebf269425ac6f30e7c457c0906b1e3f820328abd'
+            'bc5531901e6d22819c672e5dda30bdf52911ae68156b64e54406e9ebb8a16634'
+            '7de14755083e8976b2909a7b79d7a26e800599c6155499ea927723550e0473fb'
+            'a598287f4e576d3b7d09994600e37c07f3659bdc884e1b7397558397d6fcbf6f'
+            '3ee9b06d2ef0413e3dddd967a24c2356de10b8531975c2a7e734d857495edacf'
+            '234693fe5cf7ea975a6328a554494e19a593a2235ebda01d674525c234e43357'
+            '16e0cdc13dec3bec16e0d13e0736f3e562e9fcb5b9422333a332f613f1fba240'
+            '977b8d16c6705e6013fa796722515790f43bcdf5c0be14b7fb3d1ffebd9e12f7'
+            'e1eecd89ba4c3140c38ae95189e1e2aab162b73fcededbcc74703ba765bf9a76'
+            '7e103f9087e6b9a4bd968708c23e7cba65048540381e0099dca98a5f4974b81f'
+            'e059d8be4f4277e2e6f17b3feeb897b586731cb6d0abd85fe794ace921a92cc1'
+            'a958cd51946bfaea7e3401e0b078cf6ac62b2f07879a3b050062f6f914d5fd32'
+            '59d2670669b421e683dd7790afd5bf30f0abad96c867c9e0ea19052498607403'
+            '104885a6e507b2850278e93eccb251955d40b99de82a572a6224f7455bdc730b'
+            'f4fecb08621ec1f8be504a0f09ef09b6c54763a1ac385c2f96480bf79f87333c'
+            'fcd7d81e0ee8545233642ad7d605fe8e09b3849de4cd78eb75fbf5692175e41e'
+            '6456a0ab402589e9f7c685ebb1cd29db02e63d45e6bf4f1013d46cc53d7060b7'
+            'f06fb9a97f505030af068aaa8de71e175152aba17aa086f0ea13660bd8085edb'
+            '68e280d0f8a9f2004e14923364ff51358ad68a7753f23d87a6efc06f5e3e2e10'
+            'c7e0290b83a9b6f4d6e5cb6023c27f5e035908b5d924aa031d7786025d8720ef'
+            '4490f46437bcaf4842c00304d71a004ae1803b5320a37f369a93bfbf69ecaa00'
+            '1efff6b2220231a69bebbf73d287e82d02686634b4a905d004f2ed13728a9fa5'
+            'cee0f8b92e7a3dd79b0d91dc9e5d841bde2240e5a785a6aad72c0335fc635016'
+            'ac4b91aab3d2df06f36ea2cfa4fdddde121f526f3ad3ba7c994c2ae0ad12f732'
+            '07bbfeb2fdde585d5d3661c29cb6b41b4ebd92cea6a4f0ffee67d10f5fd02ff9'
+            '3b1a77555f8564ec5aae7b367c610909b8ffe779142d88c3e98b3cbf57d327c8'
+            '4df2022457077c5fc9492325c379d8ab6b0b0315b22b4f28505cb7566b199281'
+            '2eb88239d191a435a2bf59acbcf0174cbd0954f8c7e416206410b4ae7ad99be3'
+            '24cd54b443f7477ebaa0e9ce127937de96465a144cfcc1c4646e609a47293e43'
+            '361405eec146df0c0192945e9eb30f84eba6e5d3498cc81746f25c73cc335d3e'
+            '59a6196b3517a1992f0589c487966729f3e518678c7278a2322fc37ffcd5046b'
+            '13b54ac22e070840c3014dd3271f1f4bde65061f7be219a6f722c4d0d8769478'
+            'eec4920208e406558874d7eaf8483d140dffae186675911ba18e72fd37c86822'
+            '10b88aa446033f4665035ccdc42fa17e3a9bf157bd93d61acca3e9a37a628e7a'
+            '62767fe6f20333638cfe934263a434b5bfa9fb49248371d7ed8ed2523642ac62'
+            '61fcc0a37d87792846301c8e4fd8bdef2374b9726acfad9654b6cdf20aa0b9ea'
+            '7e10c14e7a68a075765035a2a492e5eebd3fa89133d33d41bcc83bbebc36bb63'
+            'c20d49d739d13b3c4fbfcf18a7848d60e713055f96c9addc089b123edf1e6266'
+            'ac989679dfdf1083b0ee6b0fa23cd62b17728f8b3ce6e2170de7e4b0058c3ee6'
+            'c44b7b7512cca60bc45a331b5676f94bb7ab0d4b011032c353be09f49bb07220'
+            '4a5986d828a7eef247f31016e47ac176053e839ef8aaa0d86b330bae078bcb15'
+            '28a84b0d10f91e35869fe52a741f9e50a663997aef4427621b4d7043653b404c')
 
 # Helper macro to help make tasks easier #
 del_file_exists() {
@@ -179,11 +163,11 @@ prepare() {
   git am --committer-date-is-author-date "${srcdir}"/0014-Add-debugging-for-strace-make_command_line.patch
   git am --committer-date-is-author-date "${srcdir}"/0015-environ.cc-New-facility-environment-variable-MSYS2_E.patch
   git am --committer-date-is-author-date "${srcdir}"/0016-Fix-native-symbolic-link-spawn-passing-wrong-arg0.patch
-  git am --committer-date-is-author-date "${srcdir}"/0017-fixup-Add-MSYS-triplets.patch
-  git am --committer-date-is-author-date "${srcdir}"/0018-fixup-Add-functionality-for-converting-UNIX-paths-in.patch
-  git am --committer-date-is-author-date "${srcdir}"/0019-fixup-Add-functionality-for-converting-UNIX-paths-in.patch
-  git am --committer-date-is-author-date "${srcdir}"/0020-fixup-Add-functionality-for-converting-UNIX-paths-in.patch
-  git am --committer-date-is-author-date "${srcdir}"/0021-strace-quiet-be-really-quiet.patch
+  git am --committer-date-is-author-date "${srcdir}"/0017-QueryUnbiasedInterruptTime-must-be-load-from-kernel3.patch
+  git am --committer-date-is-author-date "${srcdir}"/0018-strace-quiet-be-really-quiet.patch
+  git am --committer-date-is-author-date "${srcdir}"/0019-Default-to-disable_pcon.patch
+  git am --committer-date-is-author-date "${srcdir}"/0020-Introduce-the-enable_pcon-value-for-MSYS.patch
+  git am --committer-date-is-author-date "${srcdir}"/0021-Don-t-create-WSL-symlinks-for-MSYS2.patch
   git am --committer-date-is-author-date "${srcdir}"/0022-Fix-incorrect-path-conversion-trailing-slash.patch
   git am --committer-date-is-author-date "${srcdir}"/0023-Pass-the-TZ-variable-to-non-msys-programs-if-it-is-s.patch
   git am --committer-date-is-author-date "${srcdir}"/0024-Pass-environment-variables-with-empty-values.patch
@@ -212,16 +196,8 @@ prepare() {
   git am --committer-date-is-author-date "${srcdir}"/0047-POSIX-ify-the-SHELL-variable.patch
   git am --committer-date-is-author-date "${srcdir}"/0048-Make-paths-WCS-MBS-conversion-explicit.patch
   git am --committer-date-is-author-date "${srcdir}"/0049-Handle-ORIGINAL_PATH-just-like-PATH.patch
-  git am --committer-date-is-author-date "${srcdir}"/0050-sec_auth-rename-MSYS.1-token-to-MSYS.2.patch
-  git am --committer-date-is-author-date "${srcdir}"/0051-Fix-compilation-with-GCC-v9.x.patch
-  git am --committer-date-is-author-date "${srcdir}"/0052-QueryUnbiasedInterruptTime-must-be-load-from-kernel3.patch
-  git am --committer-date-is-author-date "${srcdir}"/0053-Use-MB_CUR_MAX-6-by-default.patch
-  git am --committer-date-is-author-date "${srcdir}"/0054-i686-no-longer-claim-that-esp-is-clobbered.patch
-  git am --committer-date-is-author-date "${srcdir}"/0055-fixup-Do-not-create-cygwin-symlinks.-Instead-use-dee.patch
-  git am --committer-date-is-author-date "${srcdir}"/0056-Work-around-backward-incompatible-bfd_-changes.patch
-  git am --committer-date-is-author-date "${srcdir}"/0057-setup_pseudoconsole-handle-missing-incorrect-helper-.patch
-  git am --committer-date-is-author-date "${srcdir}"/0058-Default-to-disable_pcon.patch
-  git am --committer-date-is-author-date "${srcdir}"/0059-Introduce-the-enable_pcon-value-for-MSYS.patch
+  git am --committer-date-is-author-date "${srcdir}"/0050-Use-MB_CUR_MAX-6-by-default.patch
+  git am --committer-date-is-author-date "${srcdir}"/0051-popen-call-usr-bin-sh-instead-of-bin-sh.patch
 }
 
 build() {

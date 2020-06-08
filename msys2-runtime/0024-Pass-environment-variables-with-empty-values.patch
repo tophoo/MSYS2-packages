@@ -1,4 +1,4 @@
-From 71579a44d1cdf190d67cd9afd70471cc69c7ad0c Mon Sep 17 00:00:00 2001
+From 1c17815225930701d4de994fdc4f6eeecda7ffb2 Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Wed, 18 Feb 2015 12:32:17 +0000
 Subject: [PATCH 24/N] Pass environment variables with empty values
@@ -17,10 +17,10 @@ Signed-off-by: Johannes Schindelin <johannes.schindelin@gmx.de>
  1 file changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/winsup/cygwin/environ.cc b/winsup/cygwin/environ.cc
-index f729ba3..b556bda 100644
+index be35764..d48d986 100644
 --- a/winsup/cygwin/environ.cc
 +++ b/winsup/cygwin/environ.cc
-@@ -1315,11 +1315,11 @@ build_env (const char * const *envp, PWCHAR &envblock, int &envc,
+@@ -1324,11 +1324,11 @@ build_env (const char * const *envp, PWCHAR &envblock, int &envc,
  	     Note that this doesn't stop invalid strings without '=' in it
  	     etc., but we're opting for speed here for now.  Adding complete
  	     checking would be pretty expensive. */
@@ -34,7 +34,7 @@ index f729ba3..b556bda 100644
  	  if (conv)
  	    {
  	      p = conv->native;	/* Use win32 path */
-@@ -1333,7 +1333,7 @@ build_env (const char * const *envp, PWCHAR &envblock, int &envc,
+@@ -1342,7 +1342,7 @@ build_env (const char * const *envp, PWCHAR &envblock, int &envc,
  		}
  	    }
  #ifdef __MSYS__

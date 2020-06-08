@@ -1,4 +1,4 @@
-From c5a09527b5bf527cae4768d9eeede69d288ac5d0 Mon Sep 17 00:00:00 2001
+From fdfac5d4b022da5abdf48f4f3e94809ca7385ee4 Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Wed, 14 Mar 2018 17:04:19 +0100
 Subject: [PATCH 22/N] Fix incorrect path conversion (trailing slash)
@@ -42,7 +42,7 @@ index ddeffa4..646eef3 100644
          {
            set_errno(conv.error);
 diff --git a/winsup/cygwin/path.cc b/winsup/cygwin/path.cc
-index 602882f..b79f604 100644
+index db2949c..2f81bc3 100644
 --- a/winsup/cygwin/path.cc
 +++ b/winsup/cygwin/path.cc
 @@ -1211,9 +1211,22 @@ path_conv::check (const char *src, unsigned opt,

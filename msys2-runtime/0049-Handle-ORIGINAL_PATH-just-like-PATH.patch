@@ -1,4 +1,4 @@
-From a4215f51e46db7ed04c9da541b3b98e6e21a6e17 Mon Sep 17 00:00:00 2001
+From 8aec69bd956464ce1f696c2b4e2ebe1992b90f27 Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Tue, 21 Mar 2017 13:18:38 +0100
 Subject: [PATCH 49/N] Handle ORIGINAL_PATH just like PATH
@@ -26,10 +26,10 @@ Signed-off-by: Johannes Schindelin <johannes.schindelin@gmx.de>
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/winsup/cygwin/environ.cc b/winsup/cygwin/environ.cc
-index 7699f09..0c85a4a 100644
+index 8e5eed5..1eb0dd1 100644
 --- a/winsup/cygwin/environ.cc
 +++ b/winsup/cygwin/environ.cc
-@@ -310,6 +310,7 @@ static win_env conv_envvars[] =
+@@ -319,6 +319,7 @@ static win_env conv_envvars[] =
      {NL ("HOME="), NULL, NULL, env_path_to_posix, env_path_to_win32, false},
      {NL ("LD_LIBRARY_PATH="), NULL, NULL,
  			       env_plist_to_posix, env_plist_to_win32, true},
@@ -37,7 +37,7 @@ index 7699f09..0c85a4a 100644
      {NL ("SHELL="), NULL, NULL, env_path_to_posix, env_path_to_win32, true, true},
      {NL ("TMPDIR="), NULL, NULL, env_path_to_posix, env_path_to_win32, false},
      {NL ("TMP="), NULL, NULL, env_path_to_posix, env_path_to_win32, false},
-@@ -336,7 +337,7 @@ static const unsigned char conv_start_chars[256] =
+@@ -345,7 +346,7 @@ static const unsigned char conv_start_chars[256] =
      0,        0,        0,        0,        0,        0,        0,        0,
      /*  72 */
  /*  H         I         J         K         L         M         N         O */

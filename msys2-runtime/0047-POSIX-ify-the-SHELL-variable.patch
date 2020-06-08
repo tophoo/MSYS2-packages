@@ -1,4 +1,4 @@
-From 52843cb36706fd0abd83eb3ea4dfa72e0955669b Mon Sep 17 00:00:00 2001
+From 31bdf6c14dae76edf6608f80bacec42ef276a3e9 Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Mon, 23 Nov 2015 20:03:11 +0100
 Subject: [PATCH 47/N] POSIX-ify the SHELL variable
@@ -47,10 +47,10 @@ Signed-off-by: Johannes Schindelin <johannes.schindelin@gmx.de>
  2 files changed, 8 insertions(+), 2 deletions(-)
 
 diff --git a/winsup/cygwin/environ.cc b/winsup/cygwin/environ.cc
-index 8e1f9ea..7699f09 100644
+index df7bc69..8e5eed5 100644
 --- a/winsup/cygwin/environ.cc
 +++ b/winsup/cygwin/environ.cc
-@@ -310,6 +310,7 @@ static win_env conv_envvars[] =
+@@ -319,6 +319,7 @@ static win_env conv_envvars[] =
      {NL ("HOME="), NULL, NULL, env_path_to_posix, env_path_to_win32, false},
      {NL ("LD_LIBRARY_PATH="), NULL, NULL,
  			       env_plist_to_posix, env_plist_to_win32, true},
@@ -58,7 +58,7 @@ index 8e1f9ea..7699f09 100644
      {NL ("TMPDIR="), NULL, NULL, env_path_to_posix, env_path_to_win32, false},
      {NL ("TMP="), NULL, NULL, env_path_to_posix, env_path_to_win32, false},
      {NL ("TEMP="), NULL, NULL, env_path_to_posix, env_path_to_win32, false},
-@@ -338,7 +339,7 @@ static const unsigned char conv_start_chars[256] =
+@@ -347,7 +348,7 @@ static const unsigned char conv_start_chars[256] =
      WC,       0,        0,        0,        WC,       0,        0,        0,
      /*  80 */
  /*  P         Q         R         S         T         U         V         W */
@@ -67,7 +67,7 @@ index 8e1f9ea..7699f09 100644
      /*  88 */
  /*  x         Y         Z                                                   */
      0,        0,        0,        0,        0,        0,        0,        0,
-@@ -367,6 +368,7 @@ win_env::operator = (struct win_env& x)
+@@ -376,6 +377,7 @@ win_env::operator = (struct win_env& x)
    toposix = x.toposix;
    towin32 = x.towin32;
    immediate = false;
@@ -75,7 +75,7 @@ index 8e1f9ea..7699f09 100644
    return *this;
  }
  
-@@ -388,6 +390,8 @@ win_env::add_cache (const char *in_posix, const char *in_native)
+@@ -397,6 +399,8 @@ win_env::add_cache (const char *in_posix, const char *in_native)
        native = (char *) realloc (native, namelen + 1 + strlen (in_native));
        stpcpy (stpcpy (native, name), in_native);
      }
@@ -84,7 +84,7 @@ index 8e1f9ea..7699f09 100644
    else
      {
        tmp_pathbuf tp;
-@@ -453,6 +457,8 @@ posify_maybe (char **here, const char *value, char *outenv)
+@@ -462,6 +466,8 @@ posify_maybe (char **here, const char *value, char *outenv)
      return;
  
    int len = strcspn (src, "=") + 1;

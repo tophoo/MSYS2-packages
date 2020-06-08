@@ -1,4 +1,4 @@
-From 45ef8305c3edac6b668df63c898e0f09eacfd01a Mon Sep 17 00:00:00 2001
+From bf641c53fa0095ddb35045dff7ec60c466512dce Mon Sep 17 00:00:00 2001
 From: Ray Donnelly <mingw.android@gmail.com>
 Date: Fri, 21 Aug 2015 12:52:09 +0100
 Subject: [PATCH 10/N] dcrt0.cc: Untangle allow_glob from winshell
@@ -11,7 +11,7 @@ a Cygwin program.
  1 file changed, 8 insertions(+), 7 deletions(-)
 
 diff --git a/winsup/cygwin/dcrt0.cc b/winsup/cygwin/dcrt0.cc
-index aa6ed8b..6b7814b 100644
+index e9387af..e850c0e 100644
 --- a/winsup/cygwin/dcrt0.cc
 +++ b/winsup/cygwin/dcrt0.cc
 @@ -153,12 +153,12 @@ isquote (char c)

@@ -1,7 +1,7 @@
-From dbf10f0aadae1f7c95fa2527c22586d9808ea469 Mon Sep 17 00:00:00 2001
+From 13674a4200b9453d31727a80f7193bb69efe8eba Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Tue, 19 May 2020 13:24:55 +0200
-Subject: [PATCH 58/N] Default to `disable_pcon`
+Subject: [PATCH 19/N] Default to `disable_pcon`
 
 The pseudo console support is just a bit too buggy still:
 

@@ -1,4 +1,4 @@
-From d1f0ce5fc440111896e1ec092b57c3cd3e3b24f8 Mon Sep 17 00:00:00 2001
+From 4538be226d6e3a9fdda5a8f72e0267a221a840aa Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Fri, 20 Mar 2015 09:56:28 +0000
 Subject: [PATCH 41/N] Emulate GenerateConsoleCtrlEvent() upon Ctrl+C
@@ -84,7 +84,7 @@ Signed-off-by: Johannes Schindelin <johannes.schindelin@gmx.de>
  create mode 100644 winsup/cygwin/include/cygwin/exit_process.h
 
 diff --git a/winsup/cygwin/exceptions.cc b/winsup/cygwin/exceptions.cc
-index b390699..904f36b 100644
+index 13528a7..d5b323e 100644
 --- a/winsup/cygwin/exceptions.cc
 +++ b/winsup/cygwin/exceptions.cc
 @@ -28,6 +28,7 @@ details. */
@@ -499,7 +499,7 @@ index 0000000..e0981bb
 +
 +#endif
 diff --git a/winsup/cygwin/include/cygwin/signal.h b/winsup/cygwin/include/cygwin/signal.h
-index bc4ad18..f047982 100644
+index 7b17134..88bcaec 100644
 --- a/winsup/cygwin/include/cygwin/signal.h
 +++ b/winsup/cygwin/include/cygwin/signal.h
 @@ -482,6 +482,7 @@ extern const char *sys_siglist[];

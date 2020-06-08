@@ -1,7 +1,7 @@
-From e20cef85ff9b0b25a9af62f72aa8b4b327a0bdda Mon Sep 17 00:00:00 2001
+From 907b259cd9a9b8d4c3706d29564f54639cb9ecde Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Wed, 17 May 2017 18:13:32 +0200
-Subject: [PATCH 21/N] strace --quiet: be *really* quiet
+Subject: [PATCH 18/N] strace --quiet: be *really* quiet
 
 The biggest problem with strace spitting out `create_child: ...` despite
 being asked to be real quiet is that its output can very well interfere
