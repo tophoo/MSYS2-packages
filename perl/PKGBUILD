@@ -3,7 +3,7 @@
 pkgname=perl
 pkgver=5.32.0
 _gccver=9.1.0
-pkgrel=0
+pkgrel=1
 pkgdesc="A highly capable, feature-rich programming language"
 arch=(i686 x86_64)
 license=('GPL')
@@ -142,17 +142,17 @@ provides=('perl-Archive-Tar=2.32'
           'perl-XSLoader=0.30')
 # Add your own provides here
 provides=(${provides[@]})
-sha256sums=('a1aa88bd6fbbdc2e82938afbb76c408b0ea847317737b712dc196cc7907a5259'
+sha256sums=('6f436b447cf56d22464f980fac1916e707a040e96d52172984c5d184c09b859b'
             '91bf8a45a3f04f51fe0eca146a71e278d41dbde19ba60dabc1e41c4639477c07'
             '478a52dc440d5ca324f4c95238b39cc8c90d5d7d8d5601fa085ffef79fea04f4'
             '11ce66bcf4803b0bf27179a32ce53f41bcdfa967c4c0d54ac103dbc4951d18a3'
             'fe91f1de38af525cb82503feef553b71299c52ea52c01b1959143f48f4051ffa'
-            '9745883a27edc99ac0a90cbbf930c2a532085719dc1eaf801b2dda29f7d475e9'
-            'ecc088b7c69676179bf149e53d558e49645e03aff33f041ce35ec353865bedcc'
-            '2520356a2ffca851207a38adeb8fd0af4d87bcaa20c6ebf5185295ba588fac58'
-            '48083033bce0d57d3b41d6febe3db824d00751b6f86f65380abc773837c23ede'
-            'f2ce1f39bb98479ed024f9575794bb6a85f9c45d9fad40910a5adeec3b59a531'
-            '886acf8359a364c53013e179054808ce9a1b1c3f97a89a06021068f21de6f9f0'
+            '6af94f260c78e7b6c413e3716421da5e39c6d1f611b7fe2ec4bf1a429c30f74b'
+            '903fee910b7cf7791e98b8e88b02b8515bc73bdb015afb2a0f03c470e5ea0321'
+            '6bc9205a17dbc0e74190f1e220a34203b355c64a87f52eda7a8e9ba34bc64f25'
+            '3cf58e7bd9f1c53b1caec46e08ef609ddadf8f14ce504bdf21c482cc41530d46'
+            '93b85160dbcae7b2e8d27ef4a4186d06aa0db12a20dc448f9365ff3d726cc890'
+            'e6f5b1c55f9d9e109311c9862a93d7a5b02969bb8aa7bc842e340b380fccc911'
             'f2f28c33743f767e98a5c6b2666a838ed12590d913b02b2baf3258d6c175dc06')
 
 prepare() {
