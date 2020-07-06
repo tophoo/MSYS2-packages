@@ -1,7 +1,9 @@
---- origsrc/perl-5.22.0/Makefile.SH
-+++ origsrc/perl-5.22.0/Makefile.SH
-@@ -71,7 +71,7 @@ true)
- 			     -install_name \$(shrpdir)/\$@"
+diff --git a/Makefile.SH b/Makefile.SH
+index f77f170..3680ee3 100755
+--- a/Makefile.SH
++++ b/Makefile.SH
+@@ -79,7 +79,7 @@ true)
+ 		esac
  		;;
  	cygwin*)
 -		shrpldflags="$shrpldflags -Wl,--out-implib=libperl.dll.a -Wl,--image-base,0x52000000"

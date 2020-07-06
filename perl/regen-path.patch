@@ -1,8 +1,8 @@
 diff --git a/Makefile.SH b/Makefile.SH
-index f48386e..e1a089b 100755
+index 5b850f2..6e01fe6 100755
 --- a/Makefile.SH
 +++ b/Makefile.SH
-@@ -339,7 +339,7 @@ define?*)
+@@ -358,7 +358,7 @@ define?*)
  	$spitshell >>$Makefile <<!GROK!THIS!
  # Macros to invoke a copy of our fully operational perl during the build.
  PERL_EXE = perl\$(EXE_EXT)
@@ -11,15 +11,3 @@ index f48386e..e1a089b 100755
  !GROK!THIS!
  	;;
  *)
-diff --git a/t/porting/bench.t b/t/porting/bench.t
-index d15474c..019918d 100644
---- a/t/porting/bench.t
-+++ b/t/porting/bench.t
-@@ -6,5 +6,7 @@ use strict;
- 
- chdir '..' if -f 'test.pl' && -f 'thread_it.pl';
- require './t/test.pl';
-+my $source = find_git_or_skip('all');
-+chdir $source or die "Can't chdir to $source: $!";
- 
- system "$^X -I. -MTestInit Porting/bench.pl --action=selftest";

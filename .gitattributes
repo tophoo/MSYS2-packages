@@ -16,3 +16,5 @@
 *.a binary
 *.ico binary
 *.ttf binary
+
+*.patch -text
