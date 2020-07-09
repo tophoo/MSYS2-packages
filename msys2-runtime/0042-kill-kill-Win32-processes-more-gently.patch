@@ -1,4 +1,4 @@
-From fac84bae518867f03c92044ffffdd043553b63cc Mon Sep 17 00:00:00 2001
+From 281017369ea65980a220ae2c5cdfa873f43d2dad Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Fri, 20 Mar 2015 10:01:50 +0000
 Subject: [PATCH 42/N] kill: kill Win32 processes more gently

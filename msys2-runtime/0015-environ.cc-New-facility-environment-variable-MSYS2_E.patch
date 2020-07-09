@@ -1,4 +1,4 @@
-From 6be253df369888051824ec60f3271399e439f361 Mon Sep 17 00:00:00 2001
+From 6ac2395b049bc3dc7682246bbfffbeaa747bf5bb Mon Sep 17 00:00:00 2001
 From: Ray Donnelly <mingw.android@gmail.com>
 Date: Sun, 10 Apr 2016 21:47:41 +0100
 Subject: [PATCH 15/N] environ.cc: New facility/environment variable

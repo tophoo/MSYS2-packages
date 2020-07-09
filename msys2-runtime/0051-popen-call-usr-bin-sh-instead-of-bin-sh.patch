@@ -1,4 +1,4 @@
-From a493e189a65ee1028c3b3cdaeb4865459549c6d2 Mon Sep 17 00:00:00 2001
+From 3a1ba43635e3826a16d6b3936c584ff931f08072 Mon Sep 17 00:00:00 2001
 From: Christoph Reiter <reiter.christoph@gmail.com>
 Date: Fri, 5 Jun 2020 20:09:11 +0200
 Subject: [PATCH 51/N] popen: call /usr/bin/sh instead of /bin/sh

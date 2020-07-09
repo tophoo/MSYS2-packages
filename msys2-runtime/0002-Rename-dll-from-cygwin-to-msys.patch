@@ -1,4 +1,4 @@
-From 01e4a1e78b1eae66d23a30b634a696b99ec70bed Mon Sep 17 00:00:00 2001
+From f7fb7fb9c1991c9dffe2d2a15fcbebff03fd97db Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?=D0=90=D0=BB=D0=B5=D0=BA=D1=81=D0=B5=D0=B8=CC=86=20=D0=9F?=
  =?UTF-8?q?=D0=B0=D0=B2=D0=BB=D0=BE=D0=B2?= <alexey.pawlow@gmail.com>
 Date: Tue, 5 Apr 2016 10:15:20 +0300
@@ -570,7 +570,7 @@ index edbaded..fea4bb7 100644
  /* Create a pipe, and return handles to the read and write ends,
     just like CreatePipe, but ensure that the write end permits
 diff --git a/winsup/cygwin/fhandler_tty.cc b/winsup/cygwin/fhandler_tty.cc
-index bcc7648..29d9b1e 100644
+index a611671..b6e2670 100644
 --- a/winsup/cygwin/fhandler_tty.cc
 +++ b/winsup/cygwin/fhandler_tty.cc
 @@ -910,7 +910,11 @@ fhandler_pty_slave::open (int flags, mode_t)
@@ -585,7 +585,7 @@ index bcc7648..29d9b1e 100644
  		       &cygheap->installation_key, get_minor ());
        termios_printf ("dup handles via master control pipe %s", buf);
        if (!CallNamedPipe (buf, &req, sizeof req, &repl, sizeof repl,
-@@ -2406,7 +2410,11 @@ fhandler_pty_master::close ()
+@@ -2412,7 +2416,11 @@ fhandler_pty_master::close ()
  	  pipe_reply repl;
  	  DWORD len;
  
@@ -597,7 +597,7 @@ index bcc7648..29d9b1e 100644
  			   &cygheap->installation_key, get_minor ());
  	  acquire_output_mutex (INFINITE);
  	  if (master_ctl)
-@@ -3670,7 +3678,11 @@ fhandler_pty_master::setup ()
+@@ -3675,7 +3683,11 @@ fhandler_pty_master::setup ()
  
    /* Create master control pipe which allows the master to duplicate
       the pty pipe handles to processes which deserve it. */
@@ -721,7 +721,7 @@ index 56b4363..6bc948a 100644
  
  #endif /* __CYGWIN_CYGWIN_DLL_H__ */
 diff --git a/winsup/cygwin/include/cygwin/version.h b/winsup/cygwin/include/cygwin/version.h
-index 7e85cf1..fd9ef08 100644
+index b9afd27..5f8a2a1 100644
 --- a/winsup/cygwin/include/cygwin/version.h
 +++ b/winsup/cygwin/include/cygwin/version.h
 @@ -530,7 +530,11 @@ details. */

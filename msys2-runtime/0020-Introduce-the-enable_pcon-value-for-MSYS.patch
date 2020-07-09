@@ -1,4 +1,4 @@
-From 392851efac78bc1da661fe2702219ad6ef4ff2d6 Mon Sep 17 00:00:00 2001
+From 8fa923ba8680b2b20ad0357546aa6198eba4a893 Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Tue, 19 May 2020 13:49:37 +0200
 Subject: [PATCH 20/N] Introduce the `enable_pcon` value for `MSYS`

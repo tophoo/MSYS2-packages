@@ -1,4 +1,4 @@
-From 9aadb37883005ba1271e58c206b52933d493c81f Mon Sep 17 00:00:00 2001
+From 718a14bfd2d21345da6b511e32da43b1502c83ab Mon Sep 17 00:00:00 2001
 From: Alexey Pavlov <alexpux@gmail.com>
 Date: Tue, 2 Jun 2020 14:28:09 +0300
 Subject: [PATCH 21/N] Don't create WSL symlinks for MSYS2

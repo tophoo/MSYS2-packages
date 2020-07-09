@@ -1,4 +1,4 @@
-From 6ca6fcd5b7d2508dbe080a334d51bae80944a338 Mon Sep 17 00:00:00 2001
+From 75896d0c61e7786bb3c0886748a86cf6f26fc00f Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Mon, 27 Apr 2015 11:58:08 +0200
 Subject: [PATCH 43/N] Allow overriding the home directory via the HOME

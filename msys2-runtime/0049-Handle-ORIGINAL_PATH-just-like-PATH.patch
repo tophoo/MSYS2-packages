@@ -1,4 +1,4 @@
-From 8aec69bd956464ce1f696c2b4e2ebe1992b90f27 Mon Sep 17 00:00:00 2001
+From 22509f2c29417e9d20bc6ab060f99830850efe5f Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Tue, 21 Mar 2017 13:18:38 +0100
 Subject: [PATCH 49/N] Handle ORIGINAL_PATH just like PATH

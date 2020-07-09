@@ -1,4 +1,4 @@
-From 65e1bc9442cf0ee04335c0dc2721d8d9e92f7043 Mon Sep 17 00:00:00 2001
+From c645bee595de483e50cdb9c3069deffb6271619f Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Fri, 18 Dec 2015 20:19:57 +0100
 Subject: [PATCH 48/N] Make paths' WCS->MBS conversion explicit
@@ -530,7 +530,7 @@ index db2949c..086c637 100644
      }
    else
 diff --git a/winsup/cygwin/strfuncs.cc b/winsup/cygwin/strfuncs.cc
-index e0a4c71..30e30e2 100644
+index 604d761..8dd43b1 100644
 --- a/winsup/cygwin/strfuncs.cc
 +++ b/winsup/cygwin/strfuncs.cc
 @@ -499,13 +499,13 @@ sys_wcstombs (char *dst, size_t len, const wchar_t *src, size_t nwc,
