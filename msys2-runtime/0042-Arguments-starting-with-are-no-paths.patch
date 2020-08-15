@@ -1,0 +1,33 @@
+From fe92a93ce0984ae1ba0daaf1588102f37bb112be Mon Sep 17 00:00:00 2001
+From: Johannes Schindelin <johannes.schindelin@gmx.de>
+Date: Wed, 18 Feb 2015 11:07:17 +0000
+Subject: [PATCH 42/N] Arguments starting with '@@' are no paths
+
+... so let's skip posix-to-windows conversion on such parameters.
+
+This fixes Git's t1508-at-combinations.sh.
+
+Signed-off-by: Johannes Schindelin <johannes.schindelin@gmx.de>
+---
+ winsup/cygwin/msys2_path_conv.cc | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/winsup/cygwin/msys2_path_conv.cc b/winsup/cygwin/msys2_path_conv.cc
+index f66ed9f..0a18bf1 100644
+--- a/winsup/cygwin/msys2_path_conv.cc
++++ b/winsup/cygwin/msys2_path_conv.cc
+@@ -381,6 +381,11 @@ skip_p2w:
+                     goto skip_p2w;
+             }
+             break;
++        case '@':
++            // Paths do not contain '@@'
++            if (it + 1 < end && it[1] == '@')
++                goto skip_p2w;
++        }
+         ++it;
+     }
+     it = *src;
+-- 
+2.9.0
+
