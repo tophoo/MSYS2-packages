@@ -1,4 +1,4 @@
-From 7f58e1cbb4f09b36145745af99b1c9638c7bdb44 Mon Sep 17 00:00:00 2001
+From c1587e9aec2e8ebd063430cb6c77ce863ed4d7f6 Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Wed, 18 Feb 2015 11:07:17 +0000
 Subject: [PATCH 39/N] Leave paths containing '/~' alone
@@ -13,7 +13,7 @@ Signed-off-by: Johannes Schindelin <johannes.schindelin@gmx.de>
  1 file changed, 4 insertions(+)
 
 diff --git a/winsup/cygwin/msys2_path_conv.cc b/winsup/cygwin/msys2_path_conv.cc
-index ffe76ee..c1817a3 100644
+index 665f951..02a69fa 100644
 --- a/winsup/cygwin/msys2_path_conv.cc
 +++ b/winsup/cygwin/msys2_path_conv.cc
 @@ -364,6 +364,10 @@ skip_p2w:

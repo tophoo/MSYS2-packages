@@ -1,4 +1,4 @@
-From c5d8350adb5da29c0000ed236f9107399d2781be Mon Sep 17 00:00:00 2001
+From 1c997d6ce00f5cb3d272886356f7512e0344e89a Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Wed, 18 Feb 2015 11:07:17 +0000
 Subject: [PATCH 40/N] Skip posix-to-windows conversion when '::' is seen
@@ -11,7 +11,7 @@ Signed-off-by: Johannes Schindelin <johannes.schindelin@gmx.de>
  1 file changed, 5 insertions(+)
 
 diff --git a/winsup/cygwin/msys2_path_conv.cc b/winsup/cygwin/msys2_path_conv.cc
-index c1817a3..b13d518 100644
+index 02a69fa..ae24c76 100644
 --- a/winsup/cygwin/msys2_path_conv.cc
 +++ b/winsup/cygwin/msys2_path_conv.cc
 @@ -368,6 +368,11 @@ skip_p2w:

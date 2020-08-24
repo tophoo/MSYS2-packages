@@ -1,0 +1,43 @@
+From e7a6075082b16a19d3280010274a797974706d67 Mon Sep 17 00:00:00 2001
+From: Johannes Schindelin <johannes.schindelin@gmx.de>
+Date: Thu, 20 Aug 2020 12:22:05 +0200
+Subject: [PATCH 58/N] Do not try to sync with Cygwin
+
+This is a forked repository...
+
+Signed-off-by: Johannes Schindelin <johannes.schindelin@gmx.de>
+---
+ .github/workflows/sync-with-cygwin.yml | 21 ---------------------
+ 1 file changed, 21 deletions(-)
+ delete mode 100644 .github/workflows/sync-with-cygwin.yml
+
+diff --git a/.github/workflows/sync-with-cygwin.yml b/.github/workflows/sync-with-cygwin.yml
+deleted file mode 100644
+index defcdf8..0000000
+--- a/.github/workflows/sync-with-cygwin.yml
++++ /dev/null
+@@ -1,21 +0,0 @@
+-name: sync-with-cygwin
+-
+-# File: .github/workflows/repo-sync.yml
+-
+-on:
+-  schedule:
+-  - cron:  "42 * * * *"
+-jobs:
+-  repo-sync:
+-    runs-on: ubuntu-latest
+-    steps:
+-    - name: Fetch Cygwin's latest master and tags
+-      run: |
+-        git init --bare
+-        # Potentially use git://sourceware.org/git/newlib-cygwin.git directly, but GitHub seems more reliable
+-        git fetch https://github.com/cygwin/cygwin master:refs/heads/cygwin/master 'refs/tags/*:refs/tags/*'
+-    - name: Push to our fork
+-      env:
+-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+-      run: |
+-        git push https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY refs/heads/cygwin/master 'refs/tags/*:refs/tags/*'
+-- 
+2.9.0
+

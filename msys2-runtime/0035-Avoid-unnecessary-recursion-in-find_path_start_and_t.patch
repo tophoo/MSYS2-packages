@@ -1,4 +1,4 @@
-From 8b2137a0cd6c68d5527dc234f502ad17a2ccdd39 Mon Sep 17 00:00:00 2001
+From 7afe3d4f6cd4fe3046c206f5d5c6b4f472d12cfa Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Sun, 22 Feb 2015 18:28:02 +0100
 Subject: [PATCH 35/N] Avoid unnecessary recursion in
@@ -10,7 +10,7 @@ Signed-off-by: Johannes Schindelin <johannes.schindelin@gmx.de>
  1 file changed, 4 insertions(+), 2 deletions(-)
 
 diff --git a/winsup/cygwin/msys2_path_conv.cc b/winsup/cygwin/msys2_path_conv.cc
-index a4abc48..71564fe 100644
+index 428c58d..aaecf6e 100644
 --- a/winsup/cygwin/msys2_path_conv.cc
 +++ b/winsup/cygwin/msys2_path_conv.cc
 @@ -341,8 +341,10 @@ path_type find_path_start_and_type(const char** src, int recurse, const char* en

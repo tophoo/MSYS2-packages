@@ -1,4 +1,4 @@
-From 4af6664aef39b0ca1f6e8d413efa33443c911862 Mon Sep 17 00:00:00 2001
+From 24fb4e4b1c55753a38ac472d7b8f1ba59b0eee6c Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Fri, 20 Mar 2015 09:56:28 +0000
 Subject: [PATCH 47/N] Emulate GenerateConsoleCtrlEvent() upon Ctrl+C
@@ -84,18 +84,18 @@ Signed-off-by: Johannes Schindelin <johannes.schindelin@gmx.de>
  create mode 100644 winsup/cygwin/include/cygwin/exit_process.h
 
 diff --git a/winsup/cygwin/exceptions.cc b/winsup/cygwin/exceptions.cc
-index 13528a7..d5b323e 100644
+index 5db94f8..3853279 100644
 --- a/winsup/cygwin/exceptions.cc
 +++ b/winsup/cygwin/exceptions.cc
-@@ -28,6 +28,7 @@ details. */
- #include "ntdll.h"
+@@ -29,6 +29,7 @@ details. */
  #include "exception.h"
  #include "posix_timer.h"
+ #include "gcc_seh.h"
 +#include "cygwin/exit_process.h"
  
  /* Definitions for code simplification */
  #ifdef __x86_64__
-@@ -1539,8 +1540,23 @@ exit_sig:
+@@ -1550,8 +1551,23 @@ exit_sig:
  dosig:
    if (have_execed)
      {

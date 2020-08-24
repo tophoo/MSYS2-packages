@@ -1,4 +1,4 @@
-From e3c30b553ce4937771cb32886378411f9b7636fc Mon Sep 17 00:00:00 2001
+From f3927c17d1ab19315b74bbdd1318a2226958a14a Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Fri, 18 Dec 2015 20:19:57 +0100
 Subject: [PATCH 54/N] Make paths' WCS->MBS conversion explicit
@@ -62,12 +62,6 @@ sys_wcstombs_path()), the following call sites are implicitly changed to
 cygheap.h (get_drive):
 	Cannot contain special characters
 
-dcrt0.cc (dll_crt0_1):
-	Is input from outside of Cygwin
-
-environ.cc (getwinenveq):
-	Is input from outside of Cygwin
-
 external.cc (cygwin_internal):
 	Refers to user/domain names, not paths
 
@@ -90,12 +84,6 @@ fhandler_registry.cc (fstat):
 fhandler_registry.cc (fill_filebuf):
 	Is a registry value, not a path or filename
 
-miscfuncs.cc (strlwr):
-	TODO
-
-miscfuncs.cc (strupr):
-	TODO
-
 net.cc (get_ipv4fromreg):
 	Is a registry value, not a path or filename
 
@@ -108,6 +96,14 @@ netdb.cc (open_system_file):
 smallprint.cc (__small_vsprintf):
 	Is a free text, not a path or filename
 
+strfuncs.cc (strlwr):
+	Should preserve the characters from the private page if there
+	are any
+
+strfuncs.cc (strupr):
+	Should preserve the characters from the private page if there
+	are any
+
 uinfo.cc (cygheap_user::init):
 	Refers to a user name, not a path or filename
 
@@ -117,12 +113,6 @@ uinfo.cc (pwdgrp::fetch_account_from_windows):
 By keeping the function name sys_wcstombs_alloc() (and not changing it to
 sys_wcstombs_alloc_path()), the following call sites are implicitly
 changed to *exclude* the special path/file name conversion:
-
-environ.cc (environ_init):
-	Is input from outside of Cygwin
-
-environ.cc (build_env):
-	Refers to the environment from outside Cygwin
 
 ldap.cc (cyg_ldap::remap_uid):
 	Refers to a user name, not a path or filename
@@ -164,13 +154,12 @@ Signed-off-by: Johannes Schindelin <johannes.schindelin@gmx.de>
  winsup/cygwin/mount.cc              |  8 ++++----
  winsup/cygwin/nlsfuncs.cc           |  2 +-
  winsup/cygwin/path.cc               | 29 +++++++++++++++--------------
- winsup/cygwin/strfuncs.cc           |  8 ++++----
  winsup/cygwin/uinfo.cc              | 20 ++++++++++----------
- winsup/cygwin/wchar.h               |  5 ++++-
- 14 files changed, 62 insertions(+), 56 deletions(-)
+ winsup/cygwin/wchar.h               | 16 ++++++++--------
+ 13 files changed, 62 insertions(+), 59 deletions(-)
 
 diff --git a/winsup/cygwin/dcrt0.cc b/winsup/cygwin/dcrt0.cc
-index 1ad390e..a990fed 100644
+index 4683972..8c7aadc 100644
 --- a/winsup/cygwin/dcrt0.cc
 +++ b/winsup/cygwin/dcrt0.cc
 @@ -945,9 +945,9 @@ dll_crt0_1 (void *)
@@ -410,7 +399,7 @@ index 1d54763..e088a89 100644
  	  mount_flags |= MOUNT_USER_TEMP;
  	  int res = mount_table->add_item (mb_tmp, posix_path, mount_flags);
 diff --git a/winsup/cygwin/nlsfuncs.cc b/winsup/cygwin/nlsfuncs.cc
-index 0099a96..4a3345a 100644
+index 668d7eb..68174cd 100644
 --- a/winsup/cygwin/nlsfuncs.cc
 +++ b/winsup/cygwin/nlsfuncs.cc
 @@ -1558,7 +1558,7 @@ internal_setlocale ()
@@ -423,7 +412,7 @@ index 0099a96..4a3345a 100644
      }
  }
 diff --git a/winsup/cygwin/path.cc b/winsup/cygwin/path.cc
-index 0c54ecf..88206cc 100644
+index aa70113..93e372b 100644
 --- a/winsup/cygwin/path.cc
 +++ b/winsup/cygwin/path.cc
 @@ -613,7 +613,8 @@ path_conv::check (const UNICODE_STRING *src, unsigned opt,
@@ -529,44 +518,8 @@ index 0c54ecf..88206cc 100644
  		    win32.Length / sizeof (WCHAR));
      }
    else
-diff --git a/winsup/cygwin/strfuncs.cc b/winsup/cygwin/strfuncs.cc
-index 604d761..8dd43b1 100644
---- a/winsup/cygwin/strfuncs.cc
-+++ b/winsup/cygwin/strfuncs.cc
-@@ -499,13 +499,13 @@ sys_wcstombs (char *dst, size_t len, const wchar_t *src, size_t nwc,
- }
- 
- size_t __reg3
--sys_wcstombs (char *dst, size_t len, const wchar_t * src, size_t nwc)
-+sys_wcstombs_path (char *dst, size_t len, const wchar_t * src, size_t nwc)
- {
-   return sys_wcstombs (dst, len, src, nwc, true);
- }
- 
- size_t __reg3
--sys_wcstombs_no_path (char *dst, size_t len, const wchar_t * src, size_t nwc)
-+sys_wcstombs (char *dst, size_t len, const wchar_t * src, size_t nwc)
- {
-   return sys_wcstombs (dst, len, src, nwc, false);
- }
-@@ -543,13 +543,13 @@ sys_wcstombs_alloc (char **dst_p, int type, const wchar_t *src, size_t nwc,
- }
- 
- size_t __reg3
--sys_wcstombs_alloc (char **dst_p, int type, const wchar_t *src, size_t nwc)
-+sys_wcstombs_alloc_path (char **dst_p, int type, const wchar_t *src, size_t nwc)
- {
-   return sys_wcstombs_alloc (dst_p, type, src, nwc, true);
- }
- 
- size_t __reg3
--sys_wcstombs_alloc_no_path (char **dst_p, int type, const wchar_t *src,
-+sys_wcstombs_alloc (char **dst_p, int type, const wchar_t *src,
- 		size_t nwc)
- {
-   return sys_wcstombs_alloc (dst_p, type, src, nwc, false);
 diff --git a/winsup/cygwin/uinfo.cc b/winsup/cygwin/uinfo.cc
-index f4fcfd0..6978136 100644
+index 4c94d83..771779f 100644
 --- a/winsup/cygwin/uinfo.cc
 +++ b/winsup/cygwin/uinfo.cc
 @@ -416,12 +416,12 @@ cygheap_user::ontherange (homebodies what, struct passwd *pw)
@@ -657,30 +610,47 @@ index f4fcfd0..6978136 100644
  	    }
  	  break;
 diff --git a/winsup/cygwin/wchar.h b/winsup/cygwin/wchar.h
-index b3dacf3..dfc7e86 100644
+index 4291905..d7c927d 100644
 --- a/winsup/cygwin/wchar.h
 +++ b/winsup/cygwin/wchar.h
-@@ -45,16 +45,19 @@ extern wctomb_f __utf8_wctomb;
+@@ -51,29 +51,29 @@ extern size_t _sys_wcstombs_alloc (char **dst_p, int type, const wchar_t *src,
+ 				   size_t nwc, bool is_path);
  
- #ifdef __INSIDE_CYGWIN__
- #ifdef __cplusplus
-+size_t __reg3 sys_wcstombs_path (char *dst, size_t len, const wchar_t * src,
-+			       size_t nwc = (size_t) -1);
- size_t __reg3 sys_wcstombs (char *dst, size_t len, const wchar_t * src,
- 			    size_t nwc = (size_t) -1);
- size_t __reg3 sys_wcstombs_no_path (char *dst, size_t len,
- 				    const wchar_t * src,
- 				    size_t nwc = (size_t) -1);
-+size_t __reg3 sys_wcstombs_alloc_path (char **, int, const wchar_t *,
-+				       size_t = (size_t) -1);
- size_t __reg3 sys_wcstombs_alloc (char **, int, const wchar_t *,
- 				  size_t = (size_t) -1);
- size_t __reg3 sys_wcstombs_alloc_no_path (char **, int, const wchar_t *,
- 					  size_t = (size_t) -1);
--
- size_t __reg3 sys_cp_mbstowcs (mbtowc_p, wchar_t *, size_t, const char *,
- 			       size_t = (size_t) -1);
- size_t __reg3 sys_mbstowcs (wchar_t * dst, size_t dlen, const char *src,
+ static inline size_t
+-sys_wcstombs (char *dst, size_t len, const wchar_t * src,
+-	      size_t nwc = (size_t) -1)
++sys_wcstombs_path (char *dst, size_t len, const wchar_t * src,
++		   size_t nwc = (size_t) -1)
+ {
+   return _sys_wcstombs (dst, len, src, nwc, true);
+ }
+ 
+ static inline size_t
+-sys_wcstombs_no_path (char *dst, size_t len, const wchar_t * src,
+-		      size_t nwc = (size_t) -1)
++sys_wcstombs (char *dst, size_t len, const wchar_t * src,
++	      size_t nwc = (size_t) -1)
+ {
+   return _sys_wcstombs (dst, len, src, nwc, false);
+ }
+ 
+ static inline size_t
+-sys_wcstombs_alloc (char **dst_p, int type, const wchar_t *src,
+-		    size_t nwc = (size_t) -1)
++sys_wcstombs_alloc_path (char **dst_p, int type, const wchar_t *src,
++			 size_t nwc = (size_t) -1)
+ {
+   return _sys_wcstombs_alloc (dst_p, type, src, nwc, true);
+ }
+ 
+ static inline size_t
+-sys_wcstombs_alloc_no_path (char **dst_p, int type, const wchar_t *src,
+-			    size_t nwc = (size_t) -1)
++sys_wcstombs_alloc (char **dst_p, int type, const wchar_t *src,
++		    size_t nwc = (size_t) -1)
+ {
+   return _sys_wcstombs_alloc (dst_p, type, src, nwc, false);
+ }
 -- 
 2.9.0
 

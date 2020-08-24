@@ -1,4 +1,4 @@
-From d6a7e628140788f8b85067e6e6fcc82e8ed7a698 Mon Sep 17 00:00:00 2001
+From 54614539387235f2b669c1b5a4be99c3882e4d4b Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Fri, 20 Feb 2015 13:56:22 +0000
 Subject: [PATCH 31/N] Handle 8-bit characters under LOCALE=C
@@ -43,10 +43,10 @@ index b479934..d0fe158 100644
  #else
    if ((size_t)wchar >= 0x100)
 diff --git a/winsup/cygwin/strfuncs.cc b/winsup/cygwin/strfuncs.cc
-index 604d761..d87b2b7 100644
+index 07f2e48..53aee76 100644
 --- a/winsup/cygwin/strfuncs.cc
 +++ b/winsup/cygwin/strfuncs.cc
-@@ -641,7 +641,11 @@ sys_cp_mbstowcs (mbtowc_p f_mbtowc, wchar_t *dst, size_t dlen,
+@@ -616,7 +616,11 @@ _sys_mbstowcs (mbtowc_p f_mbtowc, wchar_t *dst, size_t dlen, const char *src,
  	     to store them in a symmetric way. */
  	  bytes = 1;
  	  if (dst)

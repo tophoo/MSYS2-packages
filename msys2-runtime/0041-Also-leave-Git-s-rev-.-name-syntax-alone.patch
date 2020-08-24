@@ -1,4 +1,4 @@
-From b7fec80764f2fb3cf24bf8920552bf41471cdd5e Mon Sep 17 00:00:00 2001
+From ad1fc7653d40481fe9e6db63a35bd4616f0d5954 Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Wed, 18 Feb 2015 11:07:17 +0000
 Subject: [PATCH 41/N] Also leave Git's <rev>:./<name> syntax alone
@@ -11,7 +11,7 @@ Signed-off-by: Johannes Schindelin <johannes.schindelin@gmx.de>
  1 file changed, 8 insertions(+)
 
 diff --git a/winsup/cygwin/msys2_path_conv.cc b/winsup/cygwin/msys2_path_conv.cc
-index b13d518..f66ed9f 100644
+index ae24c76..398301a 100644
 --- a/winsup/cygwin/msys2_path_conv.cc
 +++ b/winsup/cygwin/msys2_path_conv.cc
 @@ -372,6 +372,14 @@ skip_p2w:

@@ -1,4 +1,4 @@
-From 30536862640f2601ea78775d4e2fdd8d737b67f2 Mon Sep 17 00:00:00 2001
+From 25c4c018b282bacd07403d40219c967a39311b1c Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Mon, 16 Apr 2018 14:59:39 +0200
 Subject: [PATCH 46/N] Add a helper to obtain a function's address in
@@ -22,10 +22,10 @@ Signed-off-by: Johannes Schindelin <johannes.schindelin@gmx.de>
  create mode 100644 winsup/utils/getprocaddr.c
 
 diff --git a/winsup/utils/Makefile.in b/winsup/utils/Makefile.in
-index 9bca4c2..4709d03 100644
+index a2bf192..292c8ad 100644
 --- a/winsup/utils/Makefile.in
 +++ b/winsup/utils/Makefile.in
-@@ -35,6 +35,7 @@ prefix:=@prefix@
+@@ -37,6 +37,7 @@ prefix:=@prefix@
  exec_prefix:=@exec_prefix@
  
  bindir:=@bindir@
@@ -33,7 +33,7 @@ index 9bca4c2..4709d03 100644
  program_transform_name:=@program_transform_name@
  
  override INSTALL:=@INSTALL@
-@@ -51,6 +52,8 @@ CYGWIN_LDFLAGS := -static -Wl,--enable-auto-import -L${WINDOWS_LIBDIR} $(LDLIBS)
+@@ -53,6 +54,8 @@ CYGWIN_LDFLAGS := -static -Wl,--enable-auto-import -L${WINDOWS_LIBDIR} $(LDLIBS)
  DEP_LDLIBS := $(cygwin_build)/libmsys-2.0.a
  
  MINGW_CXX      := @MINGW_CXX@
@@ -42,7 +42,7 @@ index 9bca4c2..4709d03 100644
  
  # List all binaries to be linked in Cygwin mode.  Each binary on this list
  # must have a corresponding .o of the same name.
-@@ -121,7 +124,7 @@ else
+@@ -123,7 +126,7 @@ else
  all: warn_dumper
  endif
  
@@ -51,7 +51,7 @@ index 9bca4c2..4709d03 100644
  
  # test harness support (note: the "MINGW_BINS +=" should come after the
  # "all:" above so that the testsuite is not run for "make" but only
-@@ -160,6 +163,19 @@ $(CYGWIN_BINS): %.exe: %.o
+@@ -162,6 +165,19 @@ $(CYGWIN_BINS): %.exe: %.o
  $(MINGW_BINS): $(DEP_LDLIBS)
  $(CYGWIN_BINS): $(DEP_LDLIBS)
  
@@ -71,7 +71,7 @@ index 9bca4c2..4709d03 100644
  cygcheck.o cygpath.o module_info.o path.o ps.o regtool.o strace.o: loadlib.h
  
  .PHONY: clean
-@@ -177,6 +193,10 @@ install: all
+@@ -179,6 +195,10 @@ install: all
  	  n=`echo $$i | sed '$(program_transform_name)'`; \
  	  $(INSTALL_PROGRAM) $$i $(DESTDIR)$(bindir)/$$n; \
  	done

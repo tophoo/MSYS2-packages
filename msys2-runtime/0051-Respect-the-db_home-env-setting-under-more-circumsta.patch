@@ -1,4 +1,4 @@
-From 56fb9ecde00a5463badfded022470333effae097 Mon Sep 17 00:00:00 2001
+From c46a57b6465bfdbe69cfe515b62c42bf161dde0a Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Thu, 7 Jan 2016 15:54:27 +0000
 Subject: [PATCH 51/N] Respect the `db_home: env` setting under more
@@ -24,7 +24,7 @@ Signed-off-by: Johannes Schindelin <johannes.schindelin@gmx.de>
  1 file changed, 8 insertions(+), 2 deletions(-)
 
 diff --git a/winsup/cygwin/uinfo.cc b/winsup/cygwin/uinfo.cc
-index 8d740cb..620c2f6 100644
+index b15af8d..282d0f4 100644
 --- a/winsup/cygwin/uinfo.cc
 +++ b/winsup/cygwin/uinfo.cc
 @@ -1105,6 +1105,8 @@ cygheap_pwdgrp::get_home (PUSER_INFO_3 ui, cygpsid &sid, PCWSTR dom,

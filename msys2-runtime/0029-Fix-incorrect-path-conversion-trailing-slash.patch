@@ -1,4 +1,4 @@
-From 48a98066f64979fddff8ecb8c195ee7c196ce323 Mon Sep 17 00:00:00 2001
+From a256dcd121a406352276cf36bef752440157edd2 Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Wed, 14 Mar 2018 17:04:19 +0100
 Subject: [PATCH 29/N] Fix incorrect path conversion (trailing slash)
@@ -29,7 +29,7 @@ Signed-off-by: Johannes Schindelin <johannes.schindelin@gmx.de>
  3 files changed, 17 insertions(+), 2 deletions(-)
 
 diff --git a/winsup/cygwin/msys2_path_conv.cc b/winsup/cygwin/msys2_path_conv.cc
-index a989734..d43f3a0 100644
+index f9dcda5..54f58fb 100644
 --- a/winsup/cygwin/msys2_path_conv.cc
 +++ b/winsup/cygwin/msys2_path_conv.cc
 @@ -624,7 +624,7 @@ void posix_to_win32_path(const char* from, const char* to, char** dst, const cha
@@ -42,7 +42,7 @@ index a989734..d43f3a0 100644
          {
            set_errno(conv.error);
 diff --git a/winsup/cygwin/path.cc b/winsup/cygwin/path.cc
-index 0c54ecf..7598186 100644
+index aa70113..041e4d5 100644
 --- a/winsup/cygwin/path.cc
 +++ b/winsup/cygwin/path.cc
 @@ -1211,9 +1211,22 @@ path_conv::check (const char *src, unsigned opt,

@@ -1,4 +1,4 @@
-From 1d6922bc4a67fb214bca9facf5a82319e77d9a8b Mon Sep 17 00:00:00 2001
+From bb53013ebb3c0ac8fd8a352f5dd330c9511fa5ba Mon Sep 17 00:00:00 2001
 From: Johannes Schindelin <johannes.schindelin@gmx.de>
 Date: Wed, 18 Feb 2015 11:06:15 +0000
 Subject: [PATCH 33/N] Add a helpful debug message for posix-to-windows
@@ -10,7 +10,7 @@ Signed-off-by: Johannes Schindelin <johannes.schindelin@gmx.de>
  1 file changed, 1 insertion(+)
 
 diff --git a/winsup/cygwin/msys2_path_conv.cc b/winsup/cygwin/msys2_path_conv.cc
-index d43f3a0..d494e54 100644
+index 54f58fb..41cd6dc 100644
 --- a/winsup/cygwin/msys2_path_conv.cc
 +++ b/winsup/cygwin/msys2_path_conv.cc
 @@ -238,6 +238,7 @@ void find_end_of_rooted_path(const char** from, const char** to, int* in_string)
