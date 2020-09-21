@@ -2,7 +2,7 @@
 
 pkgbase="libcbor"
 pkgname=("${pkgbase}" "${pkgbase}-devel")
-pkgver=0.5.0
+pkgver=0.8.0
 pkgrel=1
 pkgdesc="A C library for parsing and generating CBOR, a general-purpose schema-less binary data format"
 arch=('i686' 'x86_64')
@@ -10,7 +10,7 @@ url="https://github.com/PJK/libcbor"
 license=('MIT')
 makedepends=("cmake" "make" "gcc")
 source=(${pkgbase}-${pkgver}.tar.gz::"$url/archive/v${pkgver}.tar.gz")
-sha256sums=('9bbec94bb385bad3cd2f65482e5d343ddb97e9ffe261123ea0faa3bfea51d320')
+sha256sums=('618097166ea4a54499646998ccaa949a5816e6a665cf1d6df383690895217c8b')
 
 prepare() {
   cd "${srcdir}/${pkgbase}-${pkgver}"
@@ -20,14 +20,8 @@ build() {
   mkdir -p "${srcdir}/${pkgbase}-${pkgver}/build-${CARCH}"
   cd "${srcdir}/${pkgbase}-${pkgver}/build-${CARCH}"
 
-  cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr -DCBOR_CUSTOM_ALLOC=ON ..
+  cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr -DCBOR_CUSTOM_ALLOC=ON -DBUILD_SHARED_LIBS=1 ..
 
-  #fix error of release mode build
-  sed -i -r 's/libcbor\.a/libcbor.dll.a/g' \
-  	examples/CMakeFiles/*.dir/link.txt
-  #./src/CMakeFiles/cbor_shared.dir/link.txt
-
-  make cbor_shared # make the shared library first
   make
   make DESTDIR=${srcdir}/dest install
 }
