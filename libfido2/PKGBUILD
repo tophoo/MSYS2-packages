@@ -2,7 +2,7 @@
 
 pkgbase="libfido2"
 pkgname=("${pkgbase}" "${pkgbase}-devel")
-pkgver=1.3.1
+pkgver=1.5.0
 pkgrel=1
 pkgdesc="libfido2 provides library functionality and command-line tools to communicate with a FIDO device over USB, and to verify attestation and assertion signatures."
 arch=('i686' 'x86_64')
@@ -10,14 +10,14 @@ url="https://github.com/Yubico/libfido2"
 license=('BSD-2-Clause')
 depends=("libcbor" "openssl")
 makedepends=("libcbor-devel" "openssl-devel" "cmake" "make" "gcc")
-source=(${pkgbase}-${pkgver}.tar.gz::"$url/archive/v${pkgver}.tar.gz"
-        0001-cmake-msys-fixes.patch)
-sha256sums=('ba35e22016b60c1e4be66dff3cd6a60c1fe4bfa0d91ec0b89ca9da25ebeaaf41'
-            'f6d16055368dc57c421e488790381b7606836ab789784610c119f93437a69d90')
+source=(${pkgbase}-${pkgver}.tar.gz::"$url/archive/${pkgver}.tar.gz"
+        0001-msys-fixes.patch)
+sha256sums=('5990f923c9390fe1e6a00ba5d1d1f74030e7344b855e971d9fb7223e70ff3122'
+            '4f439f11f599583584a55050084e768f10e7c710d2f078982adf4154aae9418b')
 
 prepare() {
   cd "${srcdir}/${pkgbase}-${pkgver}"
-  patch -p1 -i ${srcdir}/0001-cmake-msys-fixes.patch
+  patch -p1 -i ${srcdir}/0001-msys-fixes.patch
 }
 
 build() {
@@ -25,7 +25,7 @@ build() {
   cd "${srcdir}/${pkgbase}-${pkgver}/build-${CARCH}"
 
   #cmake files are changing rapidly on this project, careful when upgrading
-  CMAKE_LEGACY_CYGWIN_WIN32=1 cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr ..
+  cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr ..
 
   make
   make DESTDIR=${srcdir}/dest install
@@ -35,11 +35,10 @@ package_libfido2() {
   groups=("libraries")
   cd "${srcdir}/dest"
   mkdir -p ${pkgdir}/usr/bin
-  mkdir -p ${pkgdir}/usr/share/man/
-  #msys-fido2-1.dll is in lib instead of bin
+  mkdir -p ${pkgdir}/usr/share/man/man1
   cp usr/lib/*.dll ${pkgdir}/usr/bin/
   cp usr/bin/*.exe ${pkgdir}/usr/bin/
-  cp -rf usr/man/* ${pkgdir}/usr/share/man/
+  cp -rf usr/share/man/man1/* ${pkgdir}/usr/share/man/man1
 }
 
 package_libfido2-devel() {
@@ -49,6 +48,8 @@ package_libfido2-devel() {
   cd "${srcdir}/dest"
   mkdir -p ${pkgdir}/usr/lib
   mkdir -p ${pkgdir}/usr/include
+  mkdir -p ${pkgdir}/usr/share/man/man3
   cp -rf usr/lib/*.a ${pkgdir}/usr/lib
   cp -rf usr/include/* ${pkgdir}/usr/include
+  cp -rf usr/share/man/man3/* ${pkgdir}/usr/share/man/man3
 }
