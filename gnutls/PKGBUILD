@@ -25,9 +25,11 @@ sha256sums=('5630751adec7025b8ef955af4d141d00d252a985769f51b4059e5affa3d39d63'
             'SKIP'
             '3b0b347d207033bdc21d5f9b9186f6819ad1f4a575f775fbbf5cb671130b4e68')
 validpgpkeys=('0424D4EE81A0E3D119C6F835EDA21E94B565716F'
-              '1F42418905D8206AA754CCDC29EE58B996865171')
+              '1F42418905D8206AA754CCDC29EE58B996865171'
+              '462225C3B46F34879FC8496CD605848ED7E69871')
                # "Simon Josefsson <simon@josefsson.org>"
                # "Nikos Mavrogiannopoulos <nmav@gnutls.org>
+	       # "Daiki Ueno <ueno@unixuser.org>"
 
 prepare() {
   cd "${srcdir}"/${pkgname}-${_base_ver}
