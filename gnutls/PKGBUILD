@@ -2,8 +2,9 @@
 
 pkgbase=gnutls
 pkgname=('gnutls' 'libgnutls' 'libgnutls-devel')
-pkgver=3.6.3
-pkgrel=1
+_base_ver=3.6.15
+pkgver=${_base_ver}
+pkgrel=0
 pkgdesc="A library which provides a secure layer over a reliable transport layer"
 arch=('x86_64' 'i686')
 license=('GPL3' 'LGPL2.1')
@@ -18,25 +19,25 @@ makedepends=('gettext-devel'
              'libunistring-devel'
              'zlib-devel')
 #optdepends=('guile: for use with Guile bindings')
-source=(https://gnupg.org/ftp/gcrypt/gnutls/v${pkgver%.*}/${pkgname}-${pkgver}.tar.xz{,.sig}
+source=(https://gnupg.org/ftp/gcrypt/gnutls/v${_base_ver%.*}/${pkgname}-${pkgver}.tar.xz{,.sig}
         gnutls-3.6.3-msysize.patch)
-sha256sums=('ed642b66a4ecf4851ab2d809cd1475c297b6201d8e8bd14b4d1c08b53ffca993'
+sha256sums=('5630751adec7025b8ef955af4d141d00d252a985769f51b4059e5affa3d39d63'
             'SKIP'
-            'd3ff01773d6f88d82492e7af54dde9f4f577a111e0e9443c7e4b72bac95af613')
+            '3b0b347d207033bdc21d5f9b9186f6819ad1f4a575f775fbbf5cb671130b4e68')
 validpgpkeys=('0424D4EE81A0E3D119C6F835EDA21E94B565716F'
               '1F42418905D8206AA754CCDC29EE58B996865171')
                # "Simon Josefsson <simon@josefsson.org>"
                # "Nikos Mavrogiannopoulos <nmav@gnutls.org>
 
 prepare() {
-  cd "${srcdir}"/${pkgname}-${pkgver}
+  cd "${srcdir}"/${pkgname}-${_base_ver}
   patch -p1 -i ${srcdir}/gnutls-3.6.3-msysize.patch
-  
+
   autoreconf -vfi
 }
 
 build() {
-  cd "${srcdir}/${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${_base_ver}"
   ./configure \
     --build=${CHOST} \
     --prefix=/usr \
@@ -54,7 +55,7 @@ build() {
 }
 
 check() {
-  cd "${srcdir}"/${pkgname}-${pkgver}
+  cd "${srcdir}"/${pkgname}-${_base_ver}
   #make check
 }
 
