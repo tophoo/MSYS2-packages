@@ -163,6 +163,12 @@ prepare() {
     git config core.symlinks true &&
     /usr/bin/git reset --hard
   fi
+  if test false != "$(git config core.autocrlf)"
+  then
+    git config core.autocrlf false &&
+    rm "$(git rev-parse --git-path index)" &&
+    /usr/bin/git reset --hard
+  fi
   del_file_exists winsup/cygwin/msys2_path_conv.cc \
     winsup/cygwin/msys2_path_conv.h
   git am --committer-date-is-author-date "${srcdir}"/0001-Add-MSYS2-triplet.patch
