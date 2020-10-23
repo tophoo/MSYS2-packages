@@ -4,7 +4,7 @@
 pkgbase=msys2-runtime
 pkgname=('msys2-runtime' 'msys2-runtime-devel')
 pkgver=3.1.7
-pkgrel=3
+pkgrel=4
 pkgdesc="Cygwin POSIX emulation engine"
 arch=('i686' 'x86_64')
 url="https://www.cygwin.com/"
@@ -83,7 +83,10 @@ source=('msys2-runtime'::git://sourceware.org/git/newlib-cygwin.git#tag=cygwin-$
         0057-Mirror-master-and-main.patch
         0058-Do-not-try-to-sync-with-Cygwin.patch
         0059-Cygwin-console-Replace-WriteConsoleA-with-WriteConso.patch
-        0060-Cygwin-pty-Prevent-garbled-output-when-pseudo-consol.patch)
+        0060-Cygwin-pty-Prevent-garbled-output-when-pseudo-consol.patch
+        0061-fixup-Mirror-master-and-main.patch
+        0062-squash-Do-not-create-cygwin-symlinks.-Instead-use-de.patch
+        0063-fixup-Don-t-create-WSL-symlinks-for-MSYS2.patch)
 sha256sums=('SKIP'
             'e02e924abdc3e3a9d5185a3b9024ee5c24c1589e2ad886abef2b42d5ac4297d5'
             'afa0444b7e6076826135b4113982602e89927a2cee8b591981bd916043fdaa18'
@@ -144,7 +147,10 @@ sha256sums=('SKIP'
             '90cc0e1843d2880eeb557a5e613950214dcca44eb05e53b650938cb9500ed6d4'
             '2d9aa4ddf3de4e78ae1cd61eafdd54742600e9cf18a59c190b6936131fbb721d'
             '28f94d897577e40b0c5602d47b44a67846871b62e2ac3a35faf320d4236c4103'
-            'cd2fff6c514ee5b737fd2fb0c070ef65e657dd745618018b92b3c8cadee8232f')
+            'cd2fff6c514ee5b737fd2fb0c070ef65e657dd745618018b92b3c8cadee8232f'
+            '3bbdabc840c3668d96e7e7c1b1eeb483c393196479e3c873c8a18a89f019946e'
+            '0e581702ee9ca2944f695f9f2a5a0e42a724d2552d74ef0debd51a8caaef553c'
+            'c4dd234bb81a6d498c23f15f2cf06b81fd6ef0b7e688947fb8bf2e9b80fdfcb9')
 
 # Helper macro to help make tasks easier #
 del_file_exists() {
@@ -231,6 +237,9 @@ prepare() {
   git am --committer-date-is-author-date "${srcdir}"/0058-Do-not-try-to-sync-with-Cygwin.patch
   git am --committer-date-is-author-date "${srcdir}"/0059-Cygwin-console-Replace-WriteConsoleA-with-WriteConso.patch
   git am --committer-date-is-author-date "${srcdir}"/0060-Cygwin-pty-Prevent-garbled-output-when-pseudo-consol.patch
+  git am --committer-date-is-author-date "${srcdir}"/0061-fixup-Mirror-master-and-main.patch
+  git am --committer-date-is-author-date "${srcdir}"/0062-squash-Do-not-create-cygwin-symlinks.-Instead-use-de.patch
+  git am --committer-date-is-author-date "${srcdir}"/0063-fixup-Don-t-create-WSL-symlinks-for-MSYS2.patch
 }
 
 build() {

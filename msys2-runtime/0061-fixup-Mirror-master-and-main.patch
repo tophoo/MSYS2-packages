@@ -1,0 +1,46 @@
+From b055139279d3ec5635f4719ace61f45772991caa Mon Sep 17 00:00:00 2001
+From: Johannes Schindelin <johannes.schindelin@gmx.de>
+Date: Tue, 20 Oct 2020 21:20:58 +0200
+Subject: [PATCH 61/N] fixup! Mirror master and main
+
+For an unspecified transition phase, we installed a GitHub workflow to
+keep updating between the `main` and the `master` branch, with `main`
+being the _actual_ main branch.
+
+This was four months ago. It's time to end the transition phase, remove
+this GitHub workflow and the `master` branch.
+
+Signed-off-by: Johannes Schindelin <johannes.schindelin@gmx.de>
+---
+ .github/workflows/mirror-master-and-main.yml | 19 -------------------
+ 1 file changed, 19 deletions(-)
+ delete mode 100644 .github/workflows/mirror-master-and-main.yml
+
+diff --git a/.github/workflows/mirror-master-and-main.yml b/.github/workflows/mirror-master-and-main.yml
+deleted file mode 100644
+index 8516479..0000000
+--- a/.github/workflows/mirror-master-and-main.yml
++++ /dev/null
+@@ -1,19 +0,0 @@
+-name: Mirror "master" and "main" branches
+-on:
+-  push:
+-    branches:
+-      - master
+-      - main
+-
+-jobs:
+-  mirror:
+-    runs-on: ubuntu-latest
+-    steps:
+-      - name: Partial clone
+-        env:
+-          ref: ${{ github.event.ref }}
+-        run: git clone --bare --depth=100 --single-branch --branch ${ref#refs/heads/} --filter=blob:none ${{ github.event.repository.html_url }} .
+-      - name: Push
+-        run: |
+-          git config http.https://github.com/.extraheader "Authorization: Basic $(echo -n x-access-token:${{ github.token }} | base64 --wrap=0)"
+-          git push origin HEAD:master HEAD:main
+-- 
+2.9.0
+
