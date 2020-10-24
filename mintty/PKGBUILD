@@ -2,7 +2,7 @@
 
 pkgname=mintty
 pkgver=3.4.1
-pkgrel=0
+pkgrel=1
 epoch=1
 pkgdesc="Terminal emulator with native Windows look and feel"
 arch=('i686' 'x86_64')
@@ -13,9 +13,9 @@ url="https://mintty.github.io"
 source=(${pkgname}-${pkgver}.tar.gz::https://github.com/mintty/mintty/archive/${pkgver}.tar.gz
         0001-add-msys2-launcher.patch
         0002-fix-current-dir-inheritance-for-alt-f2-on-msys2.patch)
-sha256sums=('1901875bc608e9979b8c7a34adad446e3d959f45d06e7c61544bef3f2d3a6877'
-            '7f7475e8a8e3b15319b95cabed856e941ddfdbc31ca09b47ce0f25ffb22aeb03'
-            'de398d6ca166ebeb44ab1c23e3759ec5d2d13e2241360d6a06c918c611e62830')
+sha256sums=('5eb42fd54b9ac7b7da818dfae16d5dc8e306333e11b70c8f40f77bf213f96a84'
+            'e9796bf781ff86c632796f1df6444465274e20677ae84b143d55f24210245e62'
+            'c587f2a6d3c31bccb373589289c4ce0e18fcfaf8e97ac7660390c5dc5f5b3a62')
 
 del_file_exists() {
   for _fname in "$@"
