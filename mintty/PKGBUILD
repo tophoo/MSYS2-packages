@@ -1,8 +1,8 @@
 # Maintainer: Alexey Pavlov <alexpux@gmail.com>
 
 pkgname=mintty
-pkgver=3.4.0
-pkgrel=1
+pkgver=3.4.1
+pkgrel=0
 epoch=1
 pkgdesc="Terminal emulator with native Windows look and feel"
 arch=('i686' 'x86_64')

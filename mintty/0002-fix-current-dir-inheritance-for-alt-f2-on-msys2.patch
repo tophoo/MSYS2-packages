@@ -1,4 +1,4 @@
-From 11b259b6e708a25ff1443e3ab50f1b083ef5893c Mon Sep 17 00:00:00 2001
+From 3b39dbe8bf6b8bd45200d93df17bd06fd109fb11 Mon Sep 17 00:00:00 2001
 From: Mihail Konev <k.mvc@ya.ru>
 Date: Sun, 5 Mar 2017 22:58:09 +0500
 Subject: [PATCH 2/2] fix current dir inheritance for alt-f2 on msys2
@@ -9,12 +9,12 @@ Subject: [PATCH 2/2] fix current dir inheritance for alt-f2 on msys2
  2 files changed, 16 insertions(+)
 
 diff --git a/src/child.c b/src/child.c
-index befa396..23c1663 100644
+index 06ef1da..d99cd06 100644
 --- a/src/child.c
 +++ b/src/child.c
-@@ -1153,6 +1153,9 @@ do_child_fork(int argc, char *argv[], int moni, bool launch)
-     else if (IsZoomed(wnd))
-       setenvi("MINTTY_MAXIMIZE", 1);
+@@ -1163,6 +1163,9 @@ do_child_fork(int argc, char *argv[], int moni, bool launch, bool config_size)
+     if (icon_is_from_shortcut)
+       setenv("MINTTY_ICON", cs__wcstoutf(cfg.icon), true);
  
 +    // tell alt-f2 mintty instance that it is such one
 +    setenv("MINTTY_IS_CHILD", "1", 1);
@@ -23,10 +23,10 @@ index befa396..23c1663 100644
  
  #if CYGWIN_VERSION_DLL_MAJOR >= 1005
 diff --git a/src/winmain.c b/src/winmain.c
-index 257cc0a..c226846 100644
+index d6516de..3f925ec 100644
 --- a/src/winmain.c
 +++ b/src/winmain.c
-@@ -4243,6 +4243,12 @@ opts[] = {
+@@ -4488,6 +4488,12 @@ opts[] = {
    {0, 0, 0, 0}
  };
  
@@ -39,7 +39,7 @@ index 257cc0a..c226846 100644
  int
  main(int argc, char *argv[])
  {
-@@ -5339,6 +5345,13 @@ main(int argc, char *argv[])
+@@ -5643,6 +5649,13 @@ typedef UINT_PTR uintptr_t;
        launcher_setup_env();
        launcher_setup_argv();
      }
@@ -54,5 +54,5 @@ index 257cc0a..c226846 100644
      // Create child process.
      child_create(
 -- 
-2.26.2
+2.28.0
 

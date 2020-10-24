@@ -1,4 +1,4 @@
-From f69f748f74d82f63ef73c745d523f755bd0ce0a2 Mon Sep 17 00:00:00 2001
+From 5544c85fd910b99346abc4a3e0a647f7bcdf8fce Mon Sep 17 00:00:00 2001
 From: Mihail Konev <k.mvc@ya.ru>
 Date: Sat, 4 Mar 2017 07:43:42 +0500
 Subject: [PATCH 1/2] add msys2 launcher
@@ -30,13 +30,13 @@ least for the current Windows 10.
  src/launcher.h |  12 +++++
  src/res.h      |   4 ++
  src/res.rc     |  16 +++++-
- src/winmain.c  |  34 ++++++++++---
- 6 files changed, 189 insertions(+), 8 deletions(-)
+ src/winmain.c  |  33 +++++++++++--
+ 6 files changed, 189 insertions(+), 7 deletions(-)
  create mode 100644 src/launcher.c
  create mode 100644 src/launcher.h
 
 diff --git a/src/appinfo.h b/src/appinfo.h
-index 714e235..a895494 100644
+index f166646..b3482c4 100644
 --- a/src/appinfo.h
 +++ b/src/appinfo.h
 @@ -10,7 +10,7 @@
@@ -46,7 +46,7 @@ index 714e235..a895494 100644
 -#define APPDESC "Terminal"
 +#define APPDESC "MSYS2 terminal"
  #define AUTHOR  "Andy Koppe / Thomas Wolff"
- #define YEAR    "2013/2019"
+ #define YEAR    "2013/2020"
  
 diff --git a/src/launcher.c b/src/launcher.c
 new file mode 100644
@@ -248,10 +248,10 @@ index 642b086..2373606 100644
   * The actual VERSIONINFO resource.
   */
 diff --git a/src/winmain.c b/src/winmain.c
-index 3f8a33e..257cc0a 100644
+index fa11aff..d6516de 100644
 --- a/src/winmain.c
 +++ b/src/winmain.c
-@@ -54,6 +54,9 @@ char * mintty_debug;
+@@ -56,6 +56,9 @@ char * mintty_debug;
  #define GWL_USERDATA -21
  #endif
  
@@ -261,7 +261,7 @@ index 3f8a33e..257cc0a 100644
  
  char * home;
  char * cmd;
-@@ -5000,6 +5003,8 @@ main(int argc, char *argv[])
+@@ -5260,6 +5263,8 @@ main(int argc, char *argv[])
      }
    }
  
@@ -270,7 +270,7 @@ index 3f8a33e..257cc0a 100644
    // The window class.
    class_atom = RegisterClassExW(&(WNDCLASSEXW){
      .cbSize = sizeof(WNDCLASSEXW),
-@@ -5008,7 +5013,7 @@ main(int argc, char *argv[])
+@@ -5268,7 +5273,7 @@ main(int argc, char *argv[])
      .cbClsExtra = 0,
      .cbWndExtra = 0,
      .hInstance = inst,
@@ -279,15 +279,7 @@ index 3f8a33e..257cc0a 100644
      .hIconSm = small_icon,
      .hCursor = LoadCursor(null, IDC_IBEAM),
      .hbrBackground = null,
-@@ -5016,7 +5021,6 @@ main(int argc, char *argv[])
-     .lpszClassName = wclass,
-   });
- 
--
-   // Initialise the fonts, thus also determining their width and height.
-   win_init_fonts(cfg.font.size);
- 
-@@ -5323,10 +5327,28 @@ main(int argc, char *argv[])
+@@ -5626,10 +5631,28 @@ typedef UINT_PTR uintptr_t;
    if (*cfg.background == '%')
      scale_to_image_ratio();
  
@@ -318,8 +310,8 @@ index 3f8a33e..257cc0a 100644
 +    }
 +  }
  
-   // Finally show the window.
-   ShowWindow(wnd, show_cmd);
+   // Set up clipboard notifications.
+   HRESULT (WINAPI * pAddClipboardFormatListener)(HWND) =
 -- 
-2.26.2
+2.28.0
 
