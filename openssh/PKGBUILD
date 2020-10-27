@@ -2,7 +2,7 @@
 
 pkgname=openssh
 pkgver=8.4p1
-pkgrel=1
+pkgrel=2
 pkgdesc='Free version of the SSH connectivity tools'
 url='http://www.openssh.org/portable.html'
 license=('custom:BSD')
@@ -21,7 +21,8 @@ sha256sums=('5a01d22e407eb1c05ba8a8f7c654d388a13e9f226e4ed33bd38748dafa1d2b24'
             '572d8aa267a493205e3e6d5b194bf1800e161c3745a07e36cdf325b8014c99b8'
             '7eca1a47c2b523945899d5b7ad0418e00e7a5a30f4d6a6d3414a7328b520fd7e'
             'e06ff5a726761d067e67e0f42ecad8d4786a8f31d3269dedf034798f3e9103ca'
-            'edad721c623aa96506c23444aedfdea8b7a4659574b55b05755e913879dbf3c6')
+            'edad721c623aa96506c23444aedfdea8b7a4659574b55b05755e913879dbf3c6'
+            'ab61eb9dbd295e54d94a328e07b2db914ccebca113ed09f71ed6346cc3ace1cd')
 validpgpkeys=('59C2118ED206D927E667EBE3D3E5F56B6D920D30')
 
 backup=('etc/ssh/ssh_config' 'etc/ssh/sshd_config')
