@@ -14,7 +14,8 @@ source=("https://cloudflare.cdn.openbsd.org/pub/OpenBSD/OpenSSH/portable/${pkgna
         0001-Forward-port-MSys2-patches.patch
         0002-openssh-work-around-Cygwin-declaring-setkey.patch
         0003-openssh-skip-privilege-separation-tests.patch
-        0004-Allow-scp-to-copy-files-that-start-with-a-Windows-dr.patch)
+        0004-Allow-scp-to-copy-files-that-start-with-a-Windows-dr.patch
+        d9e727dcc04a52caaac87543ea1d230e9e6b5604.patch)
 sha256sums=('5a01d22e407eb1c05ba8a8f7c654d388a13e9f226e4ed33bd38748dafa1d2b24'
             'SKIP'
             '572d8aa267a493205e3e6d5b194bf1800e161c3745a07e36cdf325b8014c99b8'
@@ -31,6 +32,7 @@ prepare() {
   patch -p1 -i ${srcdir}/0002-openssh-work-around-Cygwin-declaring-setkey.patch
   patch -p1 -i ${srcdir}/0003-openssh-skip-privilege-separation-tests.patch
   patch -p1 -i ${srcdir}/0004-Allow-scp-to-copy-files-that-start-with-a-Windows-dr.patch
+  patch -p1 -i ${srcdir}/d9e727dcc04a52caaac87543ea1d230e9e6b5604.patch
   autoreconf -fvi
 }
 
