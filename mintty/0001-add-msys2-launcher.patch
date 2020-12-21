@@ -1,4 +1,4 @@
-From 5544c85fd910b99346abc4a3e0a647f7bcdf8fce Mon Sep 17 00:00:00 2001
+From cd78644eb0c611481c7482def85022224067ee7f Mon Sep 17 00:00:00 2001
 From: Mihail Konev <k.mvc@ya.ru>
 Date: Sat, 4 Mar 2017 07:43:42 +0500
 Subject: [PATCH 1/2] add msys2 launcher
@@ -30,13 +30,13 @@ least for the current Windows 10.
  src/launcher.h |  12 +++++
  src/res.h      |   4 ++
  src/res.rc     |  16 +++++-
- src/winmain.c  |  33 +++++++++++--
- 6 files changed, 189 insertions(+), 7 deletions(-)
+ src/winmain.c  |  35 +++++++++++---
+ 6 files changed, 190 insertions(+), 8 deletions(-)
  create mode 100644 src/launcher.c
  create mode 100644 src/launcher.h
 
 diff --git a/src/appinfo.h b/src/appinfo.h
-index f166646..b3482c4 100644
+index 6c252d5..a6bf67d 100644
 --- a/src/appinfo.h
 +++ b/src/appinfo.h
 @@ -10,7 +10,7 @@
@@ -202,10 +202,10 @@ index 0000000..619508a
 +
 +INT_PTR CALLBACK launcher_dlgproc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 diff --git a/src/res.h b/src/res.h
-index 68fe48e..c986305 100644
+index d17a55d..93d5643 100644
 --- a/src/res.h
 +++ b/src/res.h
-@@ -28,3 +28,7 @@
+@@ -29,3 +29,7 @@
  //#define DIALOG_FONT "Trebuchet MS"
  //#define DIALOG_FONT "Lucida Sans Unicode"
  
@@ -214,7 +214,7 @@ index 68fe48e..c986305 100644
 +#define IDD_MINGW32_BTN      0x102
 +#define IDD_MINGW64_BTN      0x103
 diff --git a/src/res.rc b/src/res.rc
-index 642b086..2373606 100644
+index 156843b..a329dca 100644
 --- a/src/res.rc
 +++ b/src/res.rc
 @@ -4,7 +4,7 @@
@@ -248,10 +248,10 @@ index 642b086..2373606 100644
   * The actual VERSIONINFO resource.
   */
 diff --git a/src/winmain.c b/src/winmain.c
-index fa11aff..d6516de 100644
+index ccd4180..c298f0b 100644
 --- a/src/winmain.c
 +++ b/src/winmain.c
-@@ -56,6 +56,9 @@ char * mintty_debug;
+@@ -57,6 +57,9 @@ typedef UINT_PTR uintptr_t;
  #define GWL_USERDATA -21
  #endif
  
@@ -261,7 +261,7 @@ index fa11aff..d6516de 100644
  
  char * home;
  char * cmd;
-@@ -5260,6 +5263,8 @@ main(int argc, char *argv[])
+@@ -5319,6 +5322,8 @@ main(int argc, char *argv[])
      }
    }
  
@@ -270,7 +270,7 @@ index fa11aff..d6516de 100644
    // The window class.
    class_atom = RegisterClassExW(&(WNDCLASSEXW){
      .cbSize = sizeof(WNDCLASSEXW),
-@@ -5268,7 +5273,7 @@ main(int argc, char *argv[])
+@@ -5327,7 +5332,7 @@ main(int argc, char *argv[])
      .cbClsExtra = 0,
      .cbWndExtra = 0,
      .hInstance = inst,
@@ -279,13 +279,14 @@ index fa11aff..d6516de 100644
      .hIconSm = small_icon,
      .hCursor = LoadCursor(null, IDC_IBEAM),
      .hbrBackground = null,
-@@ -5626,10 +5631,28 @@ typedef UINT_PTR uintptr_t;
+@@ -5682,11 +5687,29 @@ static int dynfonts = 0;
    if (*cfg.background == '%')
      scale_to_image_ratio();
  
 -  // Create child process.
 -  child_create(
--    argv, &(struct winsize){term_rows, term_cols, term_width, term_height}
+-    argv,
+-    &(struct winsize){term_rows, term_cols, term_cols * cell_width, term_rows * cell_height}
 -  );
 +  {
 +    char **argv1 = argv;
@@ -302,7 +303,8 @@ index fa11aff..d6516de 100644
 +
 +    // Create child process.
 +    child_create(
-+      argv1, &(struct winsize){term_rows, term_cols, term_width, term_height}
++      argv1,
++      &(struct winsize){term_rows, term_cols, term_cols * cell_width, term_rows * cell_height}
 +    );
 +
 +    if (argc == 1) {
@@ -313,5 +315,5 @@ index fa11aff..d6516de 100644
    // Set up clipboard notifications.
    HRESULT (WINAPI * pAddClipboardFormatListener)(HWND) =
 -- 
-2.28.0
+2.29.2
 
