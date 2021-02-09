@@ -12,10 +12,12 @@ depends=('sh')
 url="https://mintty.github.io"
 source=(${pkgname}-${pkgver}.tar.gz::https://github.com/mintty/mintty/archive/${pkgver}.tar.gz
         0001-add-msys2-launcher.patch
-        0002-fix-current-dir-inheritance-for-alt-f2-on-msys2.patch)
+        0002-fix-current-dir-inheritance-for-alt-f2-on-msys2.patch
+        2506d2be13a0fe6889d0f815ea9192d7cb6e54b6.patch)
 sha256sums=('68471772bd019dddbc45f6e5b09989a6f094699012d1dbff060a33b0a89a04c1'
             '43bc67e768ad6f9d5d79e75e39bcc439265164ab497a7455df6b95b0854fc8e9'
-            '1a4dba7b9deed9fcf2dbbebac59f5a2d5a3e3034927cf919db522936b6e38402')
+            '1a4dba7b9deed9fcf2dbbebac59f5a2d5a3e3034927cf919db522936b6e38402'
+            '98aa444b8e9eb32e9f1761de02e62e7e679372275ef7d315f27fd0d1ceec8b62')
 
 del_file_exists() {
   for _fname in "$@"
@@ -31,6 +33,7 @@ prepare() {
   del_file_exists src/launcher.c src/launcher.h
   patch -p1 -i ${srcdir}/0001-add-msys2-launcher.patch
   patch -p1 -i ${srcdir}/0002-fix-current-dir-inheritance-for-alt-f2-on-msys2.patch
+  patch -p1 -i ${srcdir}/2506d2be13a0fe6889d0f815ea9192d7cb6e54b6.patch
 }
 
 build() {
