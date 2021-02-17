@@ -1,4 +1,4 @@
-From 13a9532b1f3b9fbb7d641a345c57f0f1382cddb4 Mon Sep 17 00:00:00 2001
+From 0faa618530ce05823395f29c2ce9403f469baeab Mon Sep 17 00:00:00 2001
 From: Mihail Konev <k.mvc@ya.ru>
 Date: Sun, 5 Mar 2017 22:58:09 +0500
 Subject: [PATCH 2/2] fix current dir inheritance for alt-f2 on msys2
@@ -23,10 +23,10 @@ index 06ef1da..d99cd06 100644
  
  #if CYGWIN_VERSION_DLL_MAJOR >= 1005
 diff --git a/src/winmain.c b/src/winmain.c
-index c298f0b..b205fb8 100644
+index ad7c67e..e0cc504 100644
 --- a/src/winmain.c
 +++ b/src/winmain.c
-@@ -4547,6 +4547,12 @@ opts[] = {
+@@ -4562,6 +4562,12 @@ opts[] = {
    {0, 0, 0, 0}
  };
  
@@ -39,7 +39,7 @@ index c298f0b..b205fb8 100644
  int
  main(int argc, char *argv[])
  {
-@@ -5699,6 +5705,13 @@ static int dynfonts = 0;
+@@ -5742,6 +5748,13 @@ static int dynfonts = 0;
        launcher_setup_env();
        launcher_setup_argv();
      }
@@ -54,5 +54,5 @@ index c298f0b..b205fb8 100644
      // Create child process.
      child_create(
 -- 
-2.29.2
+2.30.0
 

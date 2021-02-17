@@ -1,4 +1,4 @@
-From cd78644eb0c611481c7482def85022224067ee7f Mon Sep 17 00:00:00 2001
+From 96048ad5a01ebbada2701b392920fdfdc2996224 Mon Sep 17 00:00:00 2001
 From: Mihail Konev <k.mvc@ya.ru>
 Date: Sat, 4 Mar 2017 07:43:42 +0500
 Subject: [PATCH 1/2] add msys2 launcher
@@ -36,7 +36,7 @@ least for the current Windows 10.
  create mode 100644 src/launcher.h
 
 diff --git a/src/appinfo.h b/src/appinfo.h
-index 6c252d5..a6bf67d 100644
+index b954bc8..2e6743c 100644
 --- a/src/appinfo.h
 +++ b/src/appinfo.h
 @@ -10,7 +10,7 @@
@@ -46,7 +46,7 @@ index 6c252d5..a6bf67d 100644
 -#define APPDESC "Terminal"
 +#define APPDESC "MSYS2 terminal"
  #define AUTHOR  "Andy Koppe / Thomas Wolff"
- #define YEAR    "2013/2020"
+ #define YEAR    "2013/2021"
  
 diff --git a/src/launcher.c b/src/launcher.c
 new file mode 100644
@@ -248,7 +248,7 @@ index 156843b..a329dca 100644
   * The actual VERSIONINFO resource.
   */
 diff --git a/src/winmain.c b/src/winmain.c
-index ccd4180..c298f0b 100644
+index 7ff1f22..ad7c67e 100644
 --- a/src/winmain.c
 +++ b/src/winmain.c
 @@ -57,6 +57,9 @@ typedef UINT_PTR uintptr_t;
@@ -261,7 +261,7 @@ index ccd4180..c298f0b 100644
  
  char * home;
  char * cmd;
-@@ -5319,6 +5322,8 @@ main(int argc, char *argv[])
+@@ -5344,6 +5347,8 @@ main(int argc, char *argv[])
      }
    }
  
@@ -270,7 +270,7 @@ index ccd4180..c298f0b 100644
    // The window class.
    class_atom = RegisterClassExW(&(WNDCLASSEXW){
      .cbSize = sizeof(WNDCLASSEXW),
-@@ -5327,7 +5332,7 @@ main(int argc, char *argv[])
+@@ -5352,7 +5357,7 @@ main(int argc, char *argv[])
      .cbClsExtra = 0,
      .cbWndExtra = 0,
      .hInstance = inst,
@@ -279,9 +279,9 @@ index ccd4180..c298f0b 100644
      .hIconSm = small_icon,
      .hCursor = LoadCursor(null, IDC_IBEAM),
      .hbrBackground = null,
-@@ -5682,11 +5687,29 @@ static int dynfonts = 0;
-   if (*cfg.background == '%')
-     scale_to_image_ratio();
+@@ -5725,11 +5730,29 @@ static int dynfonts = 0;
+     }
+   }
  
 -  // Create child process.
 -  child_create(
@@ -315,5 +315,5 @@ index ccd4180..c298f0b 100644
    // Set up clipboard notifications.
    HRESULT (WINAPI * pAddClipboardFormatListener)(HWND) =
 -- 
-2.29.2
+2.30.0
 
