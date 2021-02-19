@@ -1,7 +1,7 @@
 # Maintainer: Alexey Pavlov <alexpux@gmail.com>
 
 pkgname=mintty
-pkgver=3.4.5
+pkgver=3.4.6
 pkgrel=1
 epoch=1
 pkgdesc="Terminal emulator with native Windows look and feel"
@@ -13,7 +13,7 @@ url="https://mintty.github.io"
 source=(${pkgname}-${pkgver}.tar.gz::https://github.com/mintty/mintty/archive/${pkgver}.tar.gz
         0001-add-msys2-launcher.patch
         0002-fix-current-dir-inheritance-for-alt-f2-on-msys2.patch)
-sha256sums=('fc7ed1c2180a9af034b3a9899227aea1bc7d6701a6644211e48407872626f7cf'
+sha256sums=('9f3b9a80c2ca8e5cc20a333bebef227ef53f0efea5fd9bec1881dc912fa3367e'
             '3c814f5e8a7013ae579fc7db6893b6c5f8b9ea7922b9bf93c656323cc82362fd'
             '64e5c008abd700c3ce5dafd93c2f2fc541747f1c065b3e25c453375e0c6a97ff')
 
