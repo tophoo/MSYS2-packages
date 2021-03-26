@@ -1,0 +1,28 @@
+From 12e88192b84673b81c6550e48fb7df9b607dada3 Mon Sep 17 00:00:00 2001
+From: Johannes Schindelin <johannes.schindelin@gmx.de>
+Date: Fri, 26 Mar 2021 22:37:42 +0100
+Subject: [PATCH 71/N] fixup! Work around old mingw-w64-headers in the i686
+ flavor of MSYS2
+
+Argh. Forgot `git commit --amend -a`...
+
+Signed-off-by: Johannes Schindelin <johannes.schindelin@gmx.de>
+---
+ winsup/utils/ps.cc | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/winsup/utils/ps.cc b/winsup/utils/ps.cc
+index 6f04716..fcfb395 100644
+--- a/winsup/utils/ps.cc
++++ b/winsup/utils/ps.cc
+@@ -8,6 +8,7 @@ details. */
+ 
+ #ifdef __i386__ /* 32-bit MSYS2 won't get new enough mingw-w64-headers */
+ #define PMEM_EXTENDED_PARAMETER PVOID
++#endif
+ #include <errno.h>
+ #include <stdio.h>
+ #include <locale.h>
+-- 
+2.9.0
+

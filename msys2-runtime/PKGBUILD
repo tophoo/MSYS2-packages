@@ -4,7 +4,7 @@
 pkgbase=msys2-runtime
 pkgname=('msys2-runtime' 'msys2-runtime-devel')
 pkgver=3.1.7
-pkgrel=4
+pkgrel=5
 pkgdesc="Cygwin POSIX emulation engine"
 arch=('i686' 'x86_64')
 url="https://www.cygwin.com/"
@@ -87,7 +87,15 @@ source=('msys2-runtime'::git://sourceware.org/git/newlib-cygwin.git#tag=cygwin-$
         0060-Cygwin-pty-Prevent-garbled-output-when-pseudo-consol.patch
         0061-fixup-Mirror-master-and-main.patch
         0062-squash-Do-not-create-cygwin-symlinks.-Instead-use-de.patch
-        0063-fixup-Don-t-create-WSL-symlinks-for-MSYS2.patch)
+        0063-fixup-Don-t-create-WSL-symlinks-for-MSYS2.patch
+        0064-Cygwin-avoid-GCC-10-error-with-Werror-parentheses.patch
+        0065-Cygwin-avoid-GCC-10-error-with-Werror-narrowing.patch
+        0066-Cygwin-avoid-GCC-10-error-with-Werror-narrowing.patch
+        0067-Cygwin-Treat-Windows-Store-s-app-execution-aliases-a.patch
+        0068-Allow-executing-Windows-Store-s-app-execution-aliase.patch
+        0069-Cygwin-winlean.h-remove-most-of-the-extended-memory-.patch
+        0070-Work-around-old-mingw-w64-headers-in-the-i686-flavor.patch
+        0071-fixup-Work-around-old-mingw-w64-headers-in-the-i686-.patch)
 sha256sums=('SKIP'
             'e02e924abdc3e3a9d5185a3b9024ee5c24c1589e2ad886abef2b42d5ac4297d5'
             'afa0444b7e6076826135b4113982602e89927a2cee8b591981bd916043fdaa18'
@@ -151,7 +159,15 @@ sha256sums=('SKIP'
             'cd2fff6c514ee5b737fd2fb0c070ef65e657dd745618018b92b3c8cadee8232f'
             '3bbdabc840c3668d96e7e7c1b1eeb483c393196479e3c873c8a18a89f019946e'
             '0e581702ee9ca2944f695f9f2a5a0e42a724d2552d74ef0debd51a8caaef553c'
-            'c4dd234bb81a6d498c23f15f2cf06b81fd6ef0b7e688947fb8bf2e9b80fdfcb9')
+            'c4dd234bb81a6d498c23f15f2cf06b81fd6ef0b7e688947fb8bf2e9b80fdfcb9'
+            '1b9a423c6e4b8ebbc46b2f80285718a66cc96b5ac317a68c5621a9fcdae5a3a5'
+            'd2dae8d0a6a53a2b2189a91014171a7453a31cdfe911531c8c65021351f6051f'
+            '40db52b89ab300b2797b48527976e9b473224e580d765b48c3c719b95a183aa1'
+            '6dbd17b541cf01f51fe2540e50233f0836d57fbca3310f63c0686a067f886b8f'
+            'cf716c266f2b32377ffa5942920434407de7523e82f204c8da4f051e45262385'
+            'fb9873282ff8d3283bdd065f2de7411f1c0fcebb80c9a3e00c393c3e602606f3'
+            '163a543aedc2d97ff05bb7dabc407ec4bdaeb5d9a620dc1caff9bd1ed1ab4202'
+            '34021a7d3fcfc7d5b5785162abaa65a201497b22003fef04e847fa1ed9fd9ed2')
 
 # Helper macro to help make tasks easier #
 del_file_exists() {
@@ -241,6 +257,14 @@ prepare() {
   git am --committer-date-is-author-date "${srcdir}"/0061-fixup-Mirror-master-and-main.patch
   git am --committer-date-is-author-date "${srcdir}"/0062-squash-Do-not-create-cygwin-symlinks.-Instead-use-de.patch
   git am --committer-date-is-author-date "${srcdir}"/0063-fixup-Don-t-create-WSL-symlinks-for-MSYS2.patch
+  git am --committer-date-is-author-date "${srcdir}"/0064-Cygwin-avoid-GCC-10-error-with-Werror-parentheses.patch
+  git am --committer-date-is-author-date "${srcdir}"/0065-Cygwin-avoid-GCC-10-error-with-Werror-narrowing.patch
+  git am --committer-date-is-author-date "${srcdir}"/0066-Cygwin-avoid-GCC-10-error-with-Werror-narrowing.patch
+  git am --committer-date-is-author-date "${srcdir}"/0067-Cygwin-Treat-Windows-Store-s-app-execution-aliases-a.patch
+  git am --committer-date-is-author-date "${srcdir}"/0068-Allow-executing-Windows-Store-s-app-execution-aliase.patch
+  git am --committer-date-is-author-date "${srcdir}"/0069-Cygwin-winlean.h-remove-most-of-the-extended-memory-.patch
+  git am --committer-date-is-author-date "${srcdir}"/0070-Work-around-old-mingw-w64-headers-in-the-i686-flavor.patch
+  git am --committer-date-is-author-date "${srcdir}"/0071-fixup-Work-around-old-mingw-w64-headers-in-the-i686-.patch
 }
 
 build() {

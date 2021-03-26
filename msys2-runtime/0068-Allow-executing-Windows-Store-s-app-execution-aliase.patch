@@ -1,0 +1,49 @@
+From d8692914f5a786a6394a4db5e58fb32fbde86447 Mon Sep 17 00:00:00 2001
+From: Johannes Schindelin <johannes.schindelin@gmx.de>
+Date: Fri, 12 Mar 2021 15:50:05 +0100
+Subject: [PATCH 68/N] Allow executing Windows Store's "app execution aliases"
+
+The Windows Store version of Python (and apparently other Windows Store
+applications) install a special reparse point called "app execution
+alias" into the user's `PATH`.
+
+These applications can be executed without any problem, but they cannot
+be read as if they were files. This trips up Cygwin's beautiful logic that
+tries to determine whether we're about to execute a Cygwin executable or
+not: instead of executing the application, it will fail, saying
+"Permission denied".
+
+Let's detect this situation (`NtOpenFile()` helpfully says that this
+operation is not supported on this reparse point type), and simply skip
+the logic: Windows Store apps are not Cygwin executables (and even if
+they were, it is unlikely that they would come with a compatible
+`cygwin1.dll` or `msys-2.0.dll`).
+
+This fixes https://github.com/msys2/MSYS2-packages/issues/1943
+
+Signed-off-by: Johannes Schindelin <johannes.schindelin@gmx.de>
+---
+ winsup/cygwin/spawn.cc | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/winsup/cygwin/spawn.cc b/winsup/cygwin/spawn.cc
+index af177c0..ea08f36 100644
+--- a/winsup/cygwin/spawn.cc
++++ b/winsup/cygwin/spawn.cc
+@@ -1166,6 +1166,13 @@ av::setup (const char *prog_arg, path_conv& real_path, const char *ext,
+ 			     FILE_SYNCHRONOUS_IO_NONALERT
+ 			     | FILE_OPEN_FOR_BACKUP_INTENT
+ 			     | FILE_NON_DIRECTORY_FILE);
++	if (status == STATUS_IO_REPARSE_TAG_NOT_HANDLED)
++	  {
++	    /* This is most likely an app execution alias (such as the
++	       Windows Store version of Python, i.e. not a Cygwin program */
++	    real_path.set_cygexec (false);
++	    break;
++	  }
+ 	if (!NT_SUCCESS (status))
+ 	  {
+ 	    /* File is not readable?  Doesn't mean it's not executable.
+-- 
+2.9.0
+
