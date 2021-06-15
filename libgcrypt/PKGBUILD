@@ -18,7 +18,7 @@ source=(https://gnupg.org/ftp/gcrypt/${pkgname}/${pkgname}-${pkgver}.tar.bz2
 sha256sums=('97ebe4f94e2f7e35b752194ce15a0f3c66324e0ff6af26659bbfb5ff2ec328fd'
             '3a420cc2b238203b1d107bb20313bfdaa79f8a1358678a2f222093223132038c'
             'ffa8d8dcb6193ff85f8f978625f24e589985dbe22e1858af9b52cd141a76052f'
-            'cd7f58dc81a13328e34e0de8c6011196b5a2aa61b69dd611d4d7579ebf6cbb32')
+            '3339e6d9e3e1558eaff05c7adf6f0d3660590e84c3e9b5645543d464233ee270')
 
 prepare() {
   cd "${srcdir}/${pkgname}-${pkgver}"
