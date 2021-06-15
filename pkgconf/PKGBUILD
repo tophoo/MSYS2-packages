@@ -1,30 +1,48 @@
 # Maintainer: Bartlomiej Piotrowski <nospam@bpiotrowski.pl>
 
 pkgname=pkgconf
-pkgver=0.9.11
-pkgrel=1
+pkgver=1.7.4
+pkgrel=0
 pkgdesc='pkg-config compatible utility which does not depend on glib'
-url='https://github.com/nenolod/pkgconf'
+url='https://github.com/pkgconf/pkgconf'
 arch=('i686' 'x86_64')
 license=('ISC')
-#makedepends=('popt')
+groups=('base-devel')
+makedepends=('meson'
+             'ninja')
 conflicts=('pkg-config')
 provides=('pkg-config')
-source=(http://rabbit.dereferenced.org/~nenolod/distfiles//$pkgname-$pkgver.tar.bz2)
-sha256sums=('3bdae1b2672133943dc0dda694ed57074f8b03c3fea10efb215d76d3cabe2c3b')
+replaces=('pkg-config')
+source=(https://github.com/pkgconf/pkgconf/archive/refs/tags/$pkgname-$pkgver.tar.gz
+        001-no-cygpath-conv.patch)
+sha256sums=('2828dcdef88098748c306281d64a630b4ccd0703b1d92b532c31411e531d3088'
+            '573f79ee4a677d9f1a306620733a280ac4a2c9588fac73176c355f37e10a005b')
+
+prepare() {
+  mv "${pkgname}-${pkgname}-${pkgver}" "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
+
+  # https://github.com/pkgconf/pkgconf/pull/216
+  patch -p1 -i ${srcdir}/001-no-cygpath-conv.patch
+}
 
 build() {
-  cd $pkgname-$pkgver
-  ./configure --prefix=/usr \
-    --sysconfdir=/etc \
-    --mandir=/usr/share/man \
-    --infodir=/usr/share/info \
-    --localstatedir=/var
-  make
+  mkdir "${srcdir}"/build && cd "${srcdir}"/build
+
+  meson \
+    --buildtype=plain \
+     --prefix=/usr \
+     -Dtests=false \
+    "../${pkgname}-${pkgver}"
+
+  meson compile
 }
 
 package() {
-  cd $pkgname-$pkgver
-  make DESTDIR="$pkgdir" install
+  cd "${srcdir}"/build
+
+  DESTDIR="$pkgdir" meson install
+
+  cp "$pkgdir"/usr/bin/pkgconf "$pkgdir/usr/bin/${MSYSTEM_CHOST}-pkg-config"
   cp "$pkgdir"/usr/bin/pkgconf "$pkgdir"/usr/bin/pkg-config
 }
