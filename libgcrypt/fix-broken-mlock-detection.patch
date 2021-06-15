@@ -1,0 +1,58 @@
+From 709e55f11d7748977063a1ea9cd082777321feb5 Mon Sep 17 00:00:00 2001
+From: Johannes Schindelin <johannes.schindelin@gmx.de>
+Date: Tue, 15 Jun 2021 14:52:20 +0200
+Subject: [PATCH] Fix broken mlock detection
+
+We need to be careful when casting a pointer to a `long int`: the
+highest bit might be set, in which case the result is a negative number.
+
+In this instance, it is fatal: we now take the modulus of that negative
+number with regards to the page size, and subtract it from the page
+size. So what should be a number that is smaller than the page size is
+now larger than the page size.
+
+As a consequence, we do not try to lock a 4096-byte block that is at the
+page size boundary inside a `malloc()`ed block, but we try to do that
+_outside_ the block.
+
+Which means that we are not at all detecting whether `mlock()` is
+broken.
+
+Let's be very careful to case the pointer to an _unsigned_ value
+instead.
+
+Signed-off-by: Johannes Schindelin <johannes.schindelin@gmx.de>
+---
+ acinclude.m4 | 2 +-
+ configure    | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/acinclude.m4 b/acinclude.m4
+index 3c8dfba..4a2a83c 100644
+--- a/acinclude.m4
++++ b/acinclude.m4
+@@ -236,7 +236,7 @@ int main()
+     pool = malloc( 4096 + pgsize );
+     if( !pool )
+         return 2;
+-    pool += (pgsize - ((long int)pool % pgsize));
++    pool += (pgsize - ((unsigned long int)pool % pgsize));
+ 
+     err = mlock( pool, 4096 );
+     if( !err || errno == EPERM || errno == EAGAIN)
+diff --git a/configure b/configure
+index 4722cfb..68b08ee 100755
+--- a/configure
++++ b/configure
+@@ -18028,7 +18028,7 @@ int main()
+     pool = malloc( 4096 + pgsize );
+     if( !pool )
+         return 2;
+-    pool += (pgsize - ((long int)pool % pgsize));
++    pool += (pgsize - ((unsigned long int)pool % pgsize));
+ 
+     err = mlock( pool, 4096 );
+     if( !err || errno == EPERM || errno == EAGAIN)
+-- 
+2.26.2
+
