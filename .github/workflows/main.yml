@@ -17,7 +17,7 @@ jobs:
         run: bash -lc true
       - name: CI-Build
         shell: bash
-        run: .ci/ci-build.sh
+        run: bash -l .ci/ci-build.sh
         env:
           MSYSTEM: MSYS
           MAKEFLAGS: -j5
