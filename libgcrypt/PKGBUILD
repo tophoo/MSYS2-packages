@@ -3,7 +3,7 @@
 pkgbase=libgcrypt
 pkgname=('libgcrypt' 'libgcrypt-devel')
 pkgver=1.9.3
-pkgrel=0
+pkgrel=1
 pkgdesc="General purpose cryptographic library based on the code from GnuPG"
 arch=(i686 x86_64)
 url="https://gnupg.org"
