@@ -1,4 +1,4 @@
-From 8ff2787527d9b93bee5cc6400e75a95951c320d0 Mon Sep 17 00:00:00 2001
+From f3d10601f36859a1c897f36c93a1369a5b3b155f Mon Sep 17 00:00:00 2001
 From: Niko Tyni <ntyni@debian.org>
 Date: Sat, 17 May 2014 14:57:01 +0300
 Subject: [PATCH 7/7] Skip a regeneration check in unrelated git repositories
@@ -13,10 +13,10 @@ Patch-Name: debian/regen-skip.diff
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/regen/lib_cleanup.pl b/regen/lib_cleanup.pl
-index 5c5c4e2..eb39410 100644
+index 3ba86f9..dcec445 100644
 --- a/regen/lib_cleanup.pl
 +++ b/regen/lib_cleanup.pl
-@@ -159,7 +159,7 @@ foreach ('win32/Makefile', 'win32/makefile.mk', 'win32/GNUmakefile') {
+@@ -159,7 +159,7 @@ foreach ('win32/Makefile', 'win32/GNUmakefile') {
  }
  
  # This must come last as it can exit early:

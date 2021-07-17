@@ -1,4 +1,4 @@
-From 58c74c2203bbbadac0a9c7de6dbe89af21ddc01d Mon Sep 17 00:00:00 2001
+From a9786b6f1b3d714ef89dcf2ddec1d6b0e48dab3c Mon Sep 17 00:00:00 2001
 From: Alexey Pavlov <alexpux@gmail.com>
 Date: Tue, 14 Feb 2017 14:45:21 +0300
 Subject: [PATCH 2/7] perl.cygwin-hints
