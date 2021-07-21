@@ -1,3 +1,124 @@
+From c29670181848a37b9281d25746b61f0aec47b013 Mon Sep 17 00:00:00 2001
+From: Alexey Pavlov <alexpux@gmail.com>
+Date: Tue, 5 Nov 2013 00:30:05 +0400
+Subject: [PATCH 6/7] perl-5.32.0-msys2
+
+---
+ Configure                                     |  20 +-
+ Cross/Makefile-cross-SH                       |   8 +-
+ Makefile.SH                                   |   8 +-
+ configpm                                      |   4 +-
+ cpan/Archive-Tar/t/02_methods.t               |   2 +-
+ cpan/CPAN-Meta/t/data-fail/META-1_4.yml       |   3 +
+ cpan/CPAN-Meta/t/data-fixable/META-1_4.yml    |   3 +
+ .../invalid-meta-spec-version.yml             |   3 +
+ .../meta-spec-version-trailing-zeros.yml      |   3 +
+ cpan/CPAN-Meta/t/data-test/META-1_4.yml       |   3 +
+ .../CPAN-Meta/t/data-test/restrictive-1_4.yml |   3 +
+ cpan/CPAN-Meta/t/data-test/unicode.yml        |   3 +
+ cpan/Compress-Raw-Zlib/Makefile.PL            |   2 +-
+ cpan/DB_File/t/db-btree.t                     |   4 +-
+ cpan/DB_File/t/db-hash.t                      |   4 +-
+ cpan/DB_File/t/db-recno.t                     |   4 +-
+ cpan/Digest-SHA/shasum                        |   2 +-
+ cpan/ExtUtils-Install/lib/ExtUtils/Install.pm |   4 +-
+ .../lib/ExtUtils/Liblist/Kid.pm               |   2 +
+ cpan/ExtUtils-MakeMaker/lib/ExtUtils/MM.pm    |   2 +-
+ .../lib/ExtUtils/MM_Cygwin.pm                 |   6 +-
+ cpan/ExtUtils-MakeMaker/t/03-xsstatic.t       |   2 +-
+ cpan/ExtUtils-MakeMaker/t/MM_Cygwin.t         |   2 +-
+ cpan/ExtUtils-MakeMaker/t/MM_Unix.t           |   2 +-
+ cpan/ExtUtils-MakeMaker/t/Mkbootstrap.t       |   2 +-
+ cpan/ExtUtils-MakeMaker/t/eu_command.t        |   4 +-
+ cpan/ExtUtils-Manifest/t/Manifest.t           |   2 +-
+ cpan/File-Path/t/Path.t                       |   2 +-
+ cpan/File-Temp/lib/File/Temp.pm               |   4 +-
+ cpan/IO-Compress/t/cz-14gzopen.t              |   4 +-
+ cpan/IO-Socket-IP/t/11sockopts.t              |   2 +-
+ cpan/IPC-Cmd/t/03_run-forked.t                |   2 +-
+ cpan/IPC-SysV/t/ipcsysv.t                     |   6 +-
+ cpan/Pod-Parser/lib/Pod/Find.pm               | 553 ++++++++++++++++++
+ cpan/Pod-Perldoc/lib/Pod/Perldoc.pm           |   2 +-
+ cpan/Pod-Perldoc/lib/Pod/Perldoc/BaseTo.pm    |   2 +-
+ cpan/Socket/t/socketpair.t                    |   2 +-
+ cpan/Sys-Syslog/t/syslog.t                    |   2 +-
+ cpan/Sys-Syslog/win32/Win32.pm                |   2 +-
+ cpan/Sys-Syslog/win32/compile.pl              |   2 +-
+ cpan/Win32/Makefile.PL                        |   4 +-
+ cpan/Win32/t/GetCurrentThreadId.t             |   2 +-
+ cpan/Win32/t/Unicode.t                        |   2 +-
+ cpan/Win32API-File/File.pm                    |   2 +-
+ cpan/Win32API-File/Makefile.PL                |   2 +-
+ cpan/Win32API-File/t/file.t                   |   8 +-
+ cpan/libnet/lib/Net/Domain.pm                 |   2 +-
+ cpan/libnet/lib/Net/Netrc.pm                  |   1 +
+ cpan/libnet/t/netrc.t                         |   2 +-
+ .../lib/ExtUtils/CBuilder/Platform/msys.pm    |  33 ++
+ dist/IO/t/io_xs.t                             |   2 +
+ dist/Net-Ping/lib/Net/Ping.pm                 |  10 +-
+ dist/Net-Ping/t/001_new.t                     |   2 +-
+ dist/Net-Ping/t/510_ping_udp.t                |   2 +-
+ dist/PathTools/Cwd.pm                         |  13 +-
+ dist/PathTools/lib/File/Spec.pm               |   1 +
+ dist/PathTools/lib/File/Spec/Cygwin.pm        |   4 +-
+ dist/PathTools/lib/File/Spec/Unix.pm          |   2 +-
+ dist/PathTools/t/crossplatform.t              |   2 +-
+ dist/PathTools/t/cwd.t                        |   2 +-
+ dist/PathTools/t/cwd_enoent.t                 |   4 +-
+ dist/Storable/stacksize                       |   2 +-
+ dist/Time-HiRes/Makefile.PL                   |   4 +-
+ dist/Time-HiRes/t/stat.t                      |   2 +-
+ dist/Time-HiRes/t/utime.t                     |   2 +-
+ dist/XSLoader/XSLoader_pm.PL                  |   2 +-
+ ext/DynaLoader/DynaLoader_pm.PL               |   3 +
+ ext/DynaLoader/t/DynaLoader.t                 |   2 +-
+ ext/File-Find/t/find.t                        |   2 +-
+ ext/File-Glob/t/basic.t                       |   2 +-
+ ext/NDBM_File/Makefile.PL                     |   2 +-
+ ext/ODBM_File/Makefile.PL                     |   2 +-
+ ext/POSIX/Makefile.PL                         |   2 +-
+ ext/POSIX/t/sysconf.t                         |   2 +-
+ ext/POSIX/t/time.t                            |   2 +-
+ ext/Win32CORE/t/win32core.t                   |   4 +-
+ ext/XS-APItest/t/call_checker.t               |   2 +-
+ haiku/Haiku/Makefile.PL                       |   2 +-
+ hints/msys.sh                                 |  98 ++++
+ install_lib.pl                                |   2 +-
+ installman                                    |   2 +-
+ lib/AnyDBM_File.t                             |   3 +-
+ lib/ExtUtils/t/Embed.t                        |   4 +-
+ lib/File/Compare.t                            |   2 +-
+ lib/File/Copy.t                               |   2 +-
+ lib/Net/hostent.t                             |   2 +-
+ lib/User/grent.t                              |   2 +-
+ lib/User/pwent.t                              |   4 +-
+ lib/locale.t                                  |   2 +-
+ lib/perl5db.pl                                |   2 +-
+ makedepend.SH                                 |   1 +
+ regen/regen_lib.pl                            |   2 +-
+ symbian/sanity.pl                             |   2 +-
+ t/io/eintr.t                                  |   2 +-
+ t/io/fs.t                                     |   6 +-
+ t/io/tell.t                                   |   4 +-
+ t/lib/cygwin.t                                |   2 +-
+ t/lib/dbmt_common.pl                          |   2 +-
+ t/op/groups.t                                 |   2 +-
+ t/op/magic.t                                  |   2 +-
+ t/op/require_errors.t                         |   4 +-
+ t/op/sigdispatch.t                            |   6 +-
+ t/op/stat.t                                   |   4 +-
+ t/op/taint.t                                  |   2 +-
+ t/op/time.t                                   |   2 +-
+ t/porting/extrefs.t                           |   2 +-
+ t/run/locale.t                                |   2 +-
+ t/test.pl                                     |   2 +-
+ utils/perlbug.PL                              |   2 +-
+ win32/FindExt.pm                              |   2 +-
+ 110 files changed, 875 insertions(+), 136 deletions(-)
+ create mode 100644 cpan/Pod-Parser/lib/Pod/Find.pm
+ create mode 100644 dist/ExtUtils-CBuilder/lib/ExtUtils/CBuilder/Platform/msys.pm
+ create mode 100644 hints/msys.sh
+
 diff --git a/Configure b/Configure
 index 3ae2163..2b91bbd 100755
 --- a/Configure
@@ -2488,3 +2609,6 @@ index 4d46821..210047e 100644
  
      $no = join('|', @no);
      $no = qr/^(?:$no)$/i;
+-- 
+2.32.0
+

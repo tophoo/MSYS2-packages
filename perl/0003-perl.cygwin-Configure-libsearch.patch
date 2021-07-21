@@ -1,3 +1,12 @@
+From 9d78207d7bd280e51459efb15d4e98668488380f Mon Sep 17 00:00:00 2001
+From: Alexey Pavlov <alexpux@gmail.com>
+Date: Tue, 14 Feb 2017 14:45:21 +0300
+Subject: [PATCH 3/7] perl.cygwin-Configure-libsearch
+
+---
+ Configure | 62 ++++++++++++++++++++++++++++++++++---------------------
+ 1 file changed, 39 insertions(+), 23 deletions(-)
+
 diff --git a/Configure b/Configure
 index cef8c3c..1ea8776 100755
 --- a/Configure
@@ -78,3 +87,6 @@ index cef8c3c..1ea8776 100755
  	    if test ! -f "$xxx"; then
  		xxx=$thisdir/lib${thislib}_s$_a
  	        $test -f "$xxx" && eval $libscheck
+-- 
+2.32.0
+
