@@ -185,6 +185,7 @@ sed -ri '/\s+$/s///' $(find . -type f | grep -vE ".aux$|.ico$|.tgz$|.tbz$|.tar$|
 build() {
   cd ${srcdir}/${pkgname}-${pkgver}
 
+  MSYS=winsymlinks:nativestrict \
   ./Configure -des -Dusethreads \
     -Doptimize="${CFLAGS}" \
     -Dprefix=/usr \
