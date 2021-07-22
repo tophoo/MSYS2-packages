@@ -1,0 +1,36 @@
+From 7e3d8e7c22d07d1d6ddb3e065c99fecfd3d74b39 Mon Sep 17 00:00:00 2001
+From: Johannes Schindelin <johannes.schindelin@gmx.de>
+Date: Wed, 21 Jul 2021 19:38:16 +0200
+Subject: [PATCH 4/7] perl.cygwin-Configure-libpth
+
+---
+ Configure | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/Configure b/Configure
+index 67e1c80..97e2f93 100755
+--- a/Configure
++++ b/Configure
+@@ -4866,7 +4866,7 @@ case "$ccname" in
+     gcc)
+ 	realpath=`which realpath 2>/dev/null | sed 's/no realpath in.*//'`
+ 	$echo 'extern int foo;' > try.c
+-	set X `$cppstdin -v try.c 2>&1 | $awk '/^#include </,/^End of search /'|$cppfilter $grep '/include'`
++	set X `$cppstdin -v try.c 2>&1 | $awk '/^#include </,/^End of search /'|$cppfilter $grep '/include$'`
+ 	shift
+ 	inclinpth=""
+ 	if $test $# -gt 0; then
+@@ -4878,6 +4878,10 @@ case "$ccname" in
+ 		j="`$echo $i | $sed 's,/include[^/]*,/lib,'`"
+ 		if $test -d $j; then
+ 		    inclibpth="$inclibpth $j"
++		    case " $inclibpth " in
++		    *" $j "*) ;;
++		    *) inclibpth="$inclibpth $j";;
++		    esac
+ 		fi
+ 	    done
+ 	    incpth="`$echo $incpth | $sed 's/^ //'`"
+-- 
+2.32.0
+
