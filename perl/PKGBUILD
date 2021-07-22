@@ -202,7 +202,7 @@ build() {
     -Dman1ext=1perl -Dman3ext=3perl \
     -Darchname=${ARCH}-msys-threads \
     -Dmyarchname=${ARCH}-msys \
-    -Dlibperl=msys-perl5_32.dll \
+    -Dlibperl=msys-perl"$(echo "${pkgver%.[0-9]*}" | tr . _)".dll \
     -Dcc=gcc -Dld=g++ \
     -Accflags="$CFLAGS -fwrapv"
 
