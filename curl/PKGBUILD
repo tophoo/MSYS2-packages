@@ -9,7 +9,7 @@ arch=('i686' 'x86_64')
 url="https://curl.haxx.se"
 license=('MIT')
 depends=('ca-certificates')
-makedepends=('heimdal-devel' 'libcrypt-devel' 'libidn2-devel' 'libmetalink-devel' 
+makedepends=('heimdal-devel' 'libcrypt-devel' 'libidn2-devel'
              'libnghttp2-devel' 'libpsl-devel' 'libssh2-devel' 'openssl-devel' 'zlib-devel') #  'libcares-devel'
 options=('!libtool' 'strip' '!debug')
 source=("https://curl.haxx.se/download/${pkgname}-${pkgver}.tar.bz2"{,.asc}
@@ -41,7 +41,6 @@ build() {
     --disable-ares \
     --with-gssapi \
     --with-libidn \
-    --with-libmetalink \
     --without-librtmp \
     --with-libssh2 \
     --without-spnego \
@@ -57,7 +56,7 @@ build() {
 }
 
 package_curl() {
-  depends=('ca-certificates' 'libcurl' 'libcrypt' 'libmetalink' 
+  depends=('ca-certificates' 'libcurl' 'libcrypt'
            'libnghttp2' 'libpsl' 'openssl' 'zlib')
   groups=('base')
 
@@ -71,7 +70,7 @@ package_curl() {
 
 package_libcurl() {
   pkgdesc="Multi-protocol file transfer library (runtime)"
-  depends=('ca-certificates' 'heimdal-libs' 'libcrypt' 'libidn2' 'libmetalink'
+  depends=('ca-certificates' 'heimdal-libs' 'libcrypt' 'libidn2'
           'libnghttp2' 'libpsl' 'libssh2' 'openssl' 'zlib') #'libcares'
   groups=('libraries')
 
@@ -81,7 +80,7 @@ package_libcurl() {
 
 package_libcurl-devel() {
   pkgdesc="Libcurl headers and libraries"
-  depends=("libcurl=${pkgver}" 'heimdal-devel' 'libcrypt-devel' 'libidn2-devel' 'libmetalink-devel' 
+  depends=("libcurl=${pkgver}" 'heimdal-devel' 'libcrypt-devel' 'libidn2-devel'
            'libnghttp2-devel' 'libpsl-devel' 'libssh2-devel' 'openssl-devel' 'zlib-devel') #'libcares-devel'
   options=('staticlibs')
   groups=('development')
