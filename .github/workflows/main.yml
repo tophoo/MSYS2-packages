@@ -12,9 +12,9 @@ jobs:
       - uses: git-for-windows/setup-git-for-windows-sdk@v1
         with:
           flavor: full
-      - name: ensure that post-install scripts are run
+      - name: install pactoys (needed for `saneman`)
         shell: bash
-        run: bash -lc true
+        run: bash -lc "pacman -S --noconfirm pactoys"
       - name: CI-Build
         shell: bash
         run: bash -l .ci/ci-build.sh
