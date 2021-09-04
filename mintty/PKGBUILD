@@ -1,8 +1,8 @@
 # Maintainer: Alexey Pavlov <alexpux@gmail.com>
 
 pkgname=mintty
-pkgver=3.5.0
-pkgrel=1
+pkgver=3.5.1
+pkgrel=0
 epoch=1
 pkgdesc="Terminal emulator with native Windows look and feel"
 arch=('i686' 'x86_64')
@@ -12,12 +12,10 @@ depends=('sh')
 url="https://mintty.github.io"
 source=(${pkgname}-${pkgver}.tar.gz::https://github.com/mintty/mintty/archive/${pkgver}.tar.gz
         0001-add-msys2-launcher.patch
-        0002-fix-current-dir-inheritance-for-alt-f2-on-msys2.patch
-        0003-Work-around-a-regression-in-windres.patch)
-sha256sums=('6b3dc3e477a4d321e541ae0fa251d0ba187203c487a1a4333609790f3571b2ca'
-            '3c814f5e8a7013ae579fc7db6893b6c5f8b9ea7922b9bf93c656323cc82362fd'
-            '64e5c008abd700c3ce5dafd93c2f2fc541747f1c065b3e25c453375e0c6a97ff'
-            'c8b0c0e150a88606aea1284ed743096149e6f1823f8e37975006fd152a328fed')
+        0002-fix-current-dir-inheritance-for-alt-f2-on-msys2.patch)
+sha256sums=('cd51f1a042f363adaaf81205deda6b7bca8812bb4dc3502f7c4a1b12183d9dec'
+            '02a235f6ad3043bb3fdbfd9fd58ed37c11a910916f82598806e5b1cc6f96d189'
+            '4b2a2682ca3a97c944e672bc8064c188a81ec1bf4abf78ccd3c8e8bf4f920a11')
 
 del_file_exists() {
   for _fname in "$@"
@@ -33,7 +31,6 @@ prepare() {
   del_file_exists src/launcher.c src/launcher.h
   patch -p1 -i ${srcdir}/0001-add-msys2-launcher.patch
   patch -p1 -i ${srcdir}/0002-fix-current-dir-inheritance-for-alt-f2-on-msys2.patch
-  patch -p1 -i ${srcdir}/0003-Work-around-a-regression-in-windres.patch
 }
 
 build() {
