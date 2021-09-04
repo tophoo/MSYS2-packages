@@ -1,4 +1,4 @@
-From 96048ad5a01ebbada2701b392920fdfdc2996224 Mon Sep 17 00:00:00 2001
+From aaa446efe37c90fc47cec0da1c96461ba6a3cc20 Mon Sep 17 00:00:00 2001
 From: Mihail Konev <k.mvc@ya.ru>
 Date: Sat, 4 Mar 2017 07:43:42 +0500
 Subject: [PATCH 1/2] add msys2 launcher
@@ -30,13 +30,13 @@ least for the current Windows 10.
  src/launcher.h |  12 +++++
  src/res.h      |   4 ++
  src/res.rc     |  16 +++++-
- src/winmain.c  |  35 +++++++++++---
- 6 files changed, 190 insertions(+), 8 deletions(-)
+ src/winmain.c  |  22 ++++++++-
+ 6 files changed, 182 insertions(+), 3 deletions(-)
  create mode 100644 src/launcher.c
  create mode 100644 src/launcher.h
 
 diff --git a/src/appinfo.h b/src/appinfo.h
-index b954bc8..2e6743c 100644
+index 12bfdfb..128381f 100644
 --- a/src/appinfo.h
 +++ b/src/appinfo.h
 @@ -10,7 +10,7 @@
@@ -248,7 +248,7 @@ index 156843b..a329dca 100644
   * The actual VERSIONINFO resource.
   */
 diff --git a/src/winmain.c b/src/winmain.c
-index 7ff1f22..ad7c67e 100644
+index da1dd63..9e95197 100644
 --- a/src/winmain.c
 +++ b/src/winmain.c
 @@ -57,6 +57,9 @@ typedef UINT_PTR uintptr_t;
@@ -261,7 +261,7 @@ index 7ff1f22..ad7c67e 100644
  
  char * home;
  char * cmd;
-@@ -5344,6 +5347,8 @@ main(int argc, char *argv[])
+@@ -5571,6 +5574,8 @@ main(int argc, char *argv[])
      }
    }
  
@@ -270,7 +270,7 @@ index 7ff1f22..ad7c67e 100644
    // The window class.
    class_atom = RegisterClassExW(&(WNDCLASSEXW){
      .cbSize = sizeof(WNDCLASSEXW),
-@@ -5352,7 +5357,7 @@ main(int argc, char *argv[])
+@@ -5579,7 +5584,7 @@ main(int argc, char *argv[])
      .cbClsExtra = 0,
      .cbWndExtra = 0,
      .hInstance = inst,
@@ -279,41 +279,35 @@ index 7ff1f22..ad7c67e 100644
      .hIconSm = small_icon,
      .hCursor = LoadCursor(null, IDC_IBEAM),
      .hbrBackground = null,
-@@ -5725,11 +5730,29 @@ static int dynfonts = 0;
-     }
-   }
+@@ -5985,6 +5990,17 @@ static int dynfonts = 0;
+   */
+   SetFocus(wnd);
  
--  // Create child process.
--  child_create(
--    argv,
--    &(struct winsize){term_rows, term_cols, term_cols * cell_width, term_rows * cell_height}
--  );
-+  {
++  if (argc == 1) {
 +    char **argv1 = argv;
-+
-+    if (argc == 1) {
-+      launcher_init(&argv1);
-+      DialogBox(inst, MAKEINTRESOURCE(IDD_LAUNCHER), NULL, (DLGPROC)launcher_dlgproc);
-+      if (launcher_cancelled) {
-+        exit(1);
-+      }
-+      launcher_setup_env();
-+      launcher_setup_argv();
++    launcher_init(&argv1);
++    DialogBox(inst, MAKEINTRESOURCE(IDD_LAUNCHER), NULL, (DLGPROC)launcher_dlgproc);
++    if (launcher_cancelled) {
++      exit(1);
 +    }
-+
-+    // Create child process.
-+    child_create(
-+      argv1,
-+      &(struct winsize){term_rows, term_cols, term_cols * cell_width, term_rows * cell_height}
-+    );
-+
-+    if (argc == 1) {
-+      launcher_free();
-+    }
++    launcher_setup_env();
++    launcher_setup_argv();
 +  }
++
+   // Create child process.
+   /* We could move this below SetFocus() or win_init_drop_target() 
+      in order to further reduce the delay until window display (#1113) 
+@@ -5998,6 +6014,10 @@ static int dynfonts = 0;
+     &(struct winsize){term_rows, term_cols, term_cols * cell_width, term_rows * cell_height}
+   );
  
-   // Set up clipboard notifications.
-   HRESULT (WINAPI * pAddClipboardFormatListener)(HWND) =
++  if (argc == 1) {
++    launcher_free();
++  }
++
+   // Finally show the window.
+   ShowWindow(wnd, show_cmd);
+   // Cloning fullscreen window
 -- 
-2.30.0
+2.32.0
 

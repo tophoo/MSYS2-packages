@@ -1,18 +1,18 @@
-From 0faa618530ce05823395f29c2ce9403f469baeab Mon Sep 17 00:00:00 2001
+From 212ff0328363476c794070330b3e4515399ddb71 Mon Sep 17 00:00:00 2001
 From: Mihail Konev <k.mvc@ya.ru>
 Date: Sun, 5 Mar 2017 22:58:09 +0500
 Subject: [PATCH 2/2] fix current dir inheritance for alt-f2 on msys2
 
 ---
  src/child.c   |  3 +++
- src/winmain.c | 13 +++++++++++++
- 2 files changed, 16 insertions(+)
+ src/winmain.c | 14 ++++++++++++++
+ 2 files changed, 17 insertions(+)
 
 diff --git a/src/child.c b/src/child.c
-index 06ef1da..d99cd06 100644
+index f1fee3c..934ca9c 100644
 --- a/src/child.c
 +++ b/src/child.c
-@@ -1163,6 +1163,9 @@ do_child_fork(int argc, char *argv[], int moni, bool launch, bool config_size)
+@@ -1189,6 +1189,9 @@ do_child_fork(int argc, char *argv[], int moni, bool launch, bool config_size, b
      if (icon_is_from_shortcut)
        setenv("MINTTY_ICON", cs__wcstoutf(cfg.icon), true);
  
@@ -23,10 +23,10 @@ index 06ef1da..d99cd06 100644
  
  #if CYGWIN_VERSION_DLL_MAJOR >= 1005
 diff --git a/src/winmain.c b/src/winmain.c
-index ad7c67e..e0cc504 100644
+index 9e95197..7b54043 100644
 --- a/src/winmain.c
 +++ b/src/winmain.c
-@@ -4562,6 +4562,12 @@ opts[] = {
+@@ -4782,6 +4782,12 @@ opts[] = {
    {0, 0, 0, 0}
  };
  
@@ -39,20 +39,21 @@ index ad7c67e..e0cc504 100644
  int
  main(int argc, char *argv[])
  {
-@@ -5742,6 +5748,13 @@ static int dynfonts = 0;
-       launcher_setup_env();
-       launcher_setup_argv();
-     }
-+    // Ask /etc/post-install/05-home-dir.post not to "cd ~/" in an Alt-F2 window
-+    {
-+      if (getenvi("MINTTY_IS_CHILD")) {
-+        putenv("CHERE_INVOKING=1");
-+      }
-+      unsetenv("MINTTY_IS_CHILD");
-+    }
+@@ -6001,6 +6007,14 @@ static int dynfonts = 0;
+     launcher_setup_argv();
+   }
  
-     // Create child process.
-     child_create(
++  // Ask /etc/post-install/05-home-dir.post not to "cd ~/" in an Alt-F2 window
++  {
++    if (getenvi("MINTTY_IS_CHILD")) {
++      putenv("CHERE_INVOKING=1");
++    }
++    unsetenv("MINTTY_IS_CHILD");
++  }
++
+   // Create child process.
+   /* We could move this below SetFocus() or win_init_drop_target() 
+      in order to further reduce the delay until window display (#1113) 
 -- 
-2.30.0
+2.32.0
 
