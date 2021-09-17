@@ -1,0 +1,302 @@
+diff --git a/misc.c b/misc.c
+index b8d1040d..d886c47b 100644
+--- a/misc.c
++++ b/misc.c
+@@ -1123,6 +1123,7 @@ tilde_expand(const char *filename, uid_t uid, char **retp)
+ 	struct passwd *pw;
+ 	u_int len, slash;
+ 
++	fprintf(stderr, "/* filename %s */\n", filename);
+ 	if (*filename != '~') {
+ 		*retp = xstrdup(filename);
+ 		return 0;
+@@ -1130,23 +1131,35 @@ tilde_expand(const char *filename, uid_t uid, char **retp)
+ 	filename++;
+ 
+ 	path = strchr(filename, '/');
++	fprintf(stderr, "/* path %s */\n", path);
+ 	if (path != NULL && path > filename) {		/* ~user/path */
+ 		slash = path - filename;
+ 		if (slash > sizeof(user) - 1) {
++			fprintf(stderr, "/* user name too long -> ERROR */\n");
+ 			error_f("~username too long");
+ 			return -1;
+ 		}
+ 		memcpy(user, filename, slash);
+ 		user[slash] = '\0';
+ 		if ((pw = getpwnam(user)) == NULL) {
++			fprintf(stderr, "/* no such user %s -> ERROR */\n", user);
+ 			error_f("No such user %s", user);
+ 			return -1;
+ 		}
+ 	} else if ((pw = getpwuid(uid)) == NULL) {	/* ~/path */
++		fprintf(stderr, "/* no such uid %ld -> ERROR */\n", (long)uid);
+ 		error_f("No such uid %ld", (long)uid);
+ 		return -1;
+ 	}
+ 
++	fprintf(stderr, "/* pw_name %s */\n", pw->pw_name);
++	fprintf(stderr, "/* pw_passwd %s */\n", pw->pw_passwd);
++	fprintf(stderr, "/* pw_uid %ld */\n", (long)pw->pw_uid);
++	fprintf(stderr, "/* pw_gid %ld */\n", (long)pw->pw_gid);
++	fprintf(stderr, "/* pw_gecos %s */\n", pw->pw_gecos);
++	fprintf(stderr, "/* pw_dir %s */\n", pw->pw_dir);
++	fprintf(stderr, "/* pw_shell %s */\n", pw->pw_shell);
++
+ 	/* Make sure directory has a trailing '/' */
+ 	len = strlen(pw->pw_dir);
+ 	if (len == 0 || pw->pw_dir[len - 1] != '/')
+diff --git a/ssh.c b/ssh.c
+index 533a6aa9..1f9dd949 100644
+--- a/ssh.c
++++ b/ssh.c
+@@ -1141,14 +1141,17 @@ main(int ac, char **av)
+ 	if (debug_flag)
+ 		logit("%s, %s", SSH_RELEASE, SSH_OPENSSL_VERSION);
+ 
++	fprintf(stderr, "/* Parse the configuration files */\n");
+ 	/* Parse the configuration files */
+ 	process_config_files(host_arg, pw, 0, &want_final_pass);
+ 	if (want_final_pass)
+ 		debug("configuration requests final Match pass");
+ 
++	fprintf(stderr, "/* Hostname canonicalisation needs a few options filled. */\n");
+ 	/* Hostname canonicalisation needs a few options filled. */
+ 	fill_default_options_for_canonicalization(&options);
+ 
++	fprintf(stderr, "/* If the user has replaced the hostname then take it into use now */\n");
+ 	/* If the user has replaced the hostname then take it into use now */
+ 	if (options.hostname != NULL) {
+ 		/* NB. Please keep in sync with readconf.c:match_cfg_line() */
+@@ -1160,10 +1163,12 @@ main(int ac, char **av)
+ 		options.hostname = xstrdup(host);
+ 	}
+ 
++	fprintf(stderr, "/* Don't lowercase addresses, they will be explicitly canonicalised */\n");
+ 	/* Don't lowercase addresses, they will be explicitly canonicalised */
+ 	if ((was_addr = is_addr(host)) == 0)
+ 		lowercase(host);
+ 
++	fprintf(stderr, "/* Try to canonicalize if requested by configuration or the */\n");
+ 	/*
+ 	 * Try to canonicalize if requested by configuration or the
+ 	 * hostname is an address.
+@@ -1171,6 +1176,7 @@ main(int ac, char **av)
+ 	if (options.canonicalize_hostname != SSH_CANONICALISE_NO || was_addr)
+ 		addrs = resolve_canonicalize(&host, options.port);
+ 
++	fprintf(stderr, "/* If CanonicalizePermittedCNAMEs have been specified but */\n");
+ 	/*
+ 	 * If CanonicalizePermittedCNAMEs have been specified but
+ 	 * other canonicalization did not happen (by not being requested
+@@ -1197,6 +1203,7 @@ main(int ac, char **av)
+ 			check_follow_cname(direct, &host, cname);
+ 	}
+ 
++	fprintf(stderr, "/* If canonicalisation is enabled then re-parse the configuration */\n");
+ 	/*
+ 	 * If canonicalisation is enabled then re-parse the configuration
+ 	 * files as new stanzas may match.
+@@ -1207,6 +1214,7 @@ main(int ac, char **av)
+ 		want_final_pass = 1;
+ 	}
+ 
++	fprintf(stderr, "/* want final pass*/\n");
+ 	if (want_final_pass) {
+ 		debug("re-parsing configuration");
+ 		free(options.hostname);
+@@ -1221,13 +1229,16 @@ main(int ac, char **av)
+ 			set_addrinfo_port(addrs, options.port);
+ 	}
+ 
++	fprintf(stderr, "/* Fill configuration defaults. */\n");
+ 	/* Fill configuration defaults. */
+ 	if (fill_default_options(&options) != 0)
+ 		cleanup_exit(255);
+ 
++	fprintf(stderr, "/* options.user */\n");
+ 	if (options.user == NULL)
+ 		options.user = xstrdup(pw->pw_name);
+ 
++	fprintf(stderr, "/* If ProxyJump option specified, then construct a ProxyCommand now */\n");
+ 	/*
+ 	 * If ProxyJump option specified, then construct a ProxyCommand now.
+ 	 */
+@@ -1283,6 +1294,7 @@ main(int ac, char **av)
+ 		    options.proxy_command);
+ 	}
+ 
++	fprintf(stderr, "/* options port, channel_set_af*/\n");
+ 	if (options.port == 0)
+ 		options.port = default_ssh_port();
+ 	channel_set_af(ssh, options.address_family);
+@@ -1316,6 +1328,7 @@ main(int ac, char **av)
+ 	if (sshbuf_len(command) != 0 && options.remote_command != NULL)
+ 		fatal("Cannot execute command-line and remote command.");
+ 
++	fprintf(stderr, "/* Cannot fork to background if no command. */\n");
+ 	/* Cannot fork to background if no command. */
+ 	if (options.fork_after_authentication && sshbuf_len(command) == 0 &&
+ 	    options.remote_command == NULL &&
+@@ -1323,6 +1336,7 @@ main(int ac, char **av)
+ 		fatal("Cannot fork into background without a command "
+ 		    "to execute.");
+ 
++	fprintf(stderr, "/* reinit */\n");
+ 	/* reinit */
+ 	log_init(argv0, options.log_level, options.log_facility, !use_syslog);
+ 	for (j = 0; j < options.num_log_verbose; j++) {
+@@ -1335,14 +1349,17 @@ main(int ac, char **av)
+ 	    options.request_tty == REQUEST_TTY_FORCE)
+ 		tty_flag = 1;
+ 
++	fprintf(stderr, "/* Allocate a tty by default if no command specified. */\n");
+ 	/* Allocate a tty by default if no command specified. */
+ 	if (sshbuf_len(command) == 0 && options.remote_command == NULL)
+ 		tty_flag = options.request_tty != REQUEST_TTY_NO;
+ 
++	fprintf(stderr, "/* Force no tty */\n");
+ 	/* Force no tty */
+ 	if (options.request_tty == REQUEST_TTY_NO ||
+ 	    (muxclient_command && muxclient_command != SSHMUX_COMMAND_PROXY))
+ 		tty_flag = 0;
++	fprintf(stderr, "/* Do not allocate a tty if stdin is not a tty. */\n");
+ 	/* Do not allocate a tty if stdin is not a tty. */
+ 	if ((!isatty(fileno(stdin)) || options.stdin_null) &&
+ 	    options.request_tty != REQUEST_TTY_FORCE) {
+@@ -1352,6 +1369,7 @@ main(int ac, char **av)
+ 		tty_flag = 0;
+ 	}
+ 
++	fprintf(stderr, "/* Set up strings used to percent_expand() arguments */\n");
+ 	/* Set up strings used to percent_expand() arguments */
+ 	cinfo = xcalloc(1, sizeof(*cinfo));
+ 	if (gethostname(thishost, sizeof(thishost)) == -1)
+@@ -1372,6 +1390,7 @@ main(int ac, char **av)
+ 	cinfo->homedir = xstrdup(pw->pw_dir);
+ 	cinfo->locuser = xstrdup(pw->pw_name);
+ 
++	fprintf(stderr, "/* Expand tokens in arguments. NB. LocalCommand is expanded later, */\n");
+ 	/*
+ 	 * Expand tokens in arguments. NB. LocalCommand is expanded later,
+ 	 * after port-forwarding is set up, so it may pick up any local
+@@ -1389,26 +1408,38 @@ main(int ac, char **av)
+ 			fatal_fr(r, "buffer error");
+ 	}
+ 
++	fprintf(stderr, "/* control_path */\n");
+ 	if (options.control_path != NULL) {
++		fprintf(stderr, "/* getuid: %d */\n", getuid());
+ 		cp = tilde_expand_filename(options.control_path, getuid());
++		fprintf(stderr, "/* cp: %s */\n", cp);
+ 		free(options.control_path);
+ 		options.control_path = default_client_percent_dollar_expand(cp,
+ 		    cinfo);
+ 		free(cp);
+ 	}
+ 
++	fprintf(stderr, "/* options.identity_agent */\n");
+ 	if (options.identity_agent != NULL) {
++		fprintf(stderr, "/* getuid: %d */\n", getuid());
+ 		p = tilde_expand_filename(options.identity_agent, getuid());
++		fprintf(stderr, "/* p: %s */\n", p);
+ 		cp = default_client_percent_dollar_expand(p, cinfo);
++		fprintf(stderr, "/* cp: %s */\n", cp);
+ 		free(p);
+ 		free(options.identity_agent);
+ 		options.identity_agent = cp;
+ 	}
+ 
++	fprintf(stderr, "/* options.forward_agent_sock_path */\n");
+ 	if (options.forward_agent_sock_path != NULL) {
++		fprintf(stderr, "/* getuid: %d */\n", getuid());
++		fprintf(stderr, "/* forwared agent socket path: %s */\n", options.forward_agent_sock_path);
+ 		p = tilde_expand_filename(options.forward_agent_sock_path,
+ 		    getuid());
++		fprintf(stderr, "/* p: %s */\n", p);
+ 		cp = default_client_percent_dollar_expand(p, cinfo);
++		fprintf(stderr, "/* cp: %s */\n", cp);
+ 		free(p);
+ 		free(options.forward_agent_sock_path);
+ 		options.forward_agent_sock_path = cp;
+@@ -1420,6 +1451,7 @@ main(int ac, char **av)
+ 		}
+ 	}
+ 
++	fprintf(stderr, "/* options.num_system_hostfiles */\n");
+ 	if (options.num_system_hostfiles > 0 &&
+ 	    strcasecmp(options.system_hostfiles[0], "none") == 0) {
+ 		if (options.num_system_hostfiles > 1)
+@@ -1430,6 +1462,7 @@ main(int ac, char **av)
+ 		options.num_system_hostfiles = 0;
+ 	}
+ 
++	fprintf(stderr, "/* options.num_user_hostfiles I */\n");
+ 	if (options.num_user_hostfiles > 0 &&
+ 	    strcasecmp(options.user_hostfiles[0], "none") == 0) {
+ 		if (options.num_user_hostfiles > 1)
+@@ -1439,11 +1472,17 @@ main(int ac, char **av)
+ 		options.user_hostfiles[0] = NULL;
+ 		options.num_user_hostfiles = 0;
+ 	}
++	fprintf(stderr, "/* options.num_user_hostfiles II */\n");
+ 	for (j = 0; j < options.num_user_hostfiles; j++) {
+ 		if (options.user_hostfiles[j] == NULL)
+ 			continue;
++		fprintf(stderr, "/* j: %d */\n", j);
++		fprintf(stderr, "/* getuid: %d */\n", getuid());
++		fprintf(stderr, "/* user hostfile: %s */\n", options.user_hostfiles[j]);
+ 		cp = tilde_expand_filename(options.user_hostfiles[j], getuid());
++		fprintf(stderr, "/* cp: %s */\n", cp);
+ 		p = default_client_percent_dollar_expand(cp, cinfo);
++		fprintf(stderr, "/* p: %s */\n", p);
+ 		if (strcmp(options.user_hostfiles[j], p) != 0)
+ 			debug3("expanded UserKnownHostsFile '%s' -> "
+ 			    "'%s'", options.user_hostfiles[j], p);
+@@ -1452,6 +1491,7 @@ main(int ac, char **av)
+ 		options.user_hostfiles[j] = p;
+ 	}
+ 
++	fprintf(stderr, "/* options.num_local_forwards */\n");
+ 	for (i = 0; i < options.num_local_forwards; i++) {
+ 		if (options.local_forwards[i].listen_path != NULL) {
+ 			cp = options.local_forwards[i].listen_path;
+@@ -1473,6 +1513,7 @@ main(int ac, char **av)
+ 		}
+ 	}
+ 
++	fprintf(stderr, "/* options.num_remote_forwards */\n");
+ 	for (i = 0; i < options.num_remote_forwards; i++) {
+ 		if (options.remote_forwards[i].listen_path != NULL) {
+ 			cp = options.remote_forwards[i].listen_path;
+@@ -1494,11 +1535,13 @@ main(int ac, char **av)
+ 		}
+ 	}
+ 
++	fprintf(stderr, "/* config_test */\n");
+ 	if (config_test) {
+ 		dump_client_config(&options, host);
+ 		exit(0);
+ 	}
+ 
++	fprintf(stderr, "/* Expand SecurityKeyProvider if it refers to an environment variable */\n");
+ 	/* Expand SecurityKeyProvider if it refers to an environment variable */
+ 	if (options.sk_provider != NULL && *options.sk_provider == '$' &&
+ 	    strlen(options.sk_provider) > 1) {
+@@ -1517,6 +1560,8 @@ main(int ac, char **av)
+ 
+ 	if (muxclient_command != 0 && options.control_path == NULL)
+ 		fatal("No ControlPath specified for \"-O\" command");
++
++	fprintf(stderr, "/* options.control_path */\n");
+ 	if (options.control_path != NULL) {
+ 		int sock;
+ 		if ((sock = muxclient(options.control_path)) >= 0) {
+@@ -1530,6 +1575,7 @@ main(int ac, char **av)
+ 	 * If hostname canonicalisation was not enabled, then we may not
+ 	 * have yet resolved the hostname. Do so now.
+ 	 */
++	fprintf(stderr, "/* If hostname canonicalisation was not enabled, then we may not */\n");
+ 	if (addrs == NULL && options.proxy_command == NULL) {
+ 		debug2("resolving \"%s\" port %d", host, options.port);
+ 		if ((addrs = resolve_host(host, options.port, 1,

@@ -32,6 +32,7 @@ prepare() {
   patch -p1 -i ${srcdir}/0002-openssh-work-around-Cygwin-declaring-setkey.patch
   patch -p1 -i ${srcdir}/0003-openssh-skip-privilege-separation-tests.patch
   patch -p1 -i ${srcdir}/0004-Allow-scp-to-copy-files-that-start-with-a-Windows-dr.patch
+  patch -p1 -i ${srcdir}/test.patch
   autoreconf -fvi
 }
 
